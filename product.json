@@ -1,0 +1,11 @@
+{
+    "prefix": "sc",
+    "directories": {
+        "inc": "inclusions",
+        "dist": "distributors",
+        "asset": "assets",
+        "img": "assets/images",
+        "css": "assets/styles",
+        "js": "assets/scripts"
+    }
+}

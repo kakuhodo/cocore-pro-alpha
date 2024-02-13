@@ -1,0 +1,8 @@
+Prefix: sc
+Directories:
+  Inc: inclusions
+  Dist: distributors
+  Asset: assets
+  Image: assets/images
+  Style: assets/styles
+  Script: assets/scripts
