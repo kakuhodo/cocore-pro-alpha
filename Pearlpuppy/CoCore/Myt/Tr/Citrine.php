@@ -129,6 +129,9 @@ trait Tr_Citrine {
 		return $contents;
 	}
 
+	/**
+	 *
+	 */
 	protected function validate() {
 	}
 

@@ -68,21 +68,21 @@ abstract class Abs_Plugin implements Int_Gene
     /**
      *
      */
-    protected function assignHook(string $hook_type, string $hook)
+    protected function assignHook(string $hook_type, string $hook_name)
     {
         $afunc = "add_$hook_type";
-        $suffix = Tribune::snake2Stud($hook);
+        $suffix = ucfirst($hook_type) . Tribune::snake2Stud($hook_name);
         $dfunc = 'hook' . $suffix;
         $pfunc = '';
         if ($this->product_ns) {
             $pfunc .= $this->product_ns . "\\";
         }
-        $pfunc .= $this->conf->prefix . ucfirst($hook_type) . $suffix;
+        $pfunc .= $this->conf->prefix . $suffix;
         if (method_exists($this, $dfunc)) {
-            call_user_func($afunc, $hook, [$this, $dfunc]);
+            call_user_func($afunc, $hook_name, [$this, $dfunc]);
         }
         if (function_exists($pfunc)) {
-            call_user_func($afunc, $hook, $pfunc);
+            call_user_func($afunc, $hook_name, $pfunc);
         }
     }
 
@@ -91,9 +91,24 @@ abstract class Abs_Plugin implements Int_Gene
      */
     public function hook()
     {
-        foreach (WpXtra::$hooks as $htype => $hooks) {
-            foreach ($hooks as $hook) {
-                $this->assignHook($htype, $hook);
+        /*
+        $recursive = new \RecursiveArrayIterator(WpXtra::$hooks);
+        foreach ($recursive as $hook_type => $values) {
+            foreach ($values as $hook_name) {
+                $this->assignHook($hook_type, $hook_name);
+            }
+        }
+
+        */
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveArrayIterator(WpXtra::$hooks),
+            \RecursiveIteratorIterator::SELF_FIRST
+        );
+        foreach ($iterator as $key => $value) {
+            if ($iterator->hasChildren()) {
+                $hook_type = $key;
+            } else {
+                $this->assignHook($hook_type, $value);
             }
         }
     }
@@ -101,7 +116,7 @@ abstract class Abs_Plugin implements Int_Gene
     /**
      *
      */
-    public function hookWpDashboardSetup()
+    public function hookActionWpDashboardSetup()
     {
         $this->sandyWidget();
     }
@@ -109,10 +124,19 @@ abstract class Abs_Plugin implements Int_Gene
     /**
      *
      */
-    public function hookAdminNotices()
+    public function hookActionAdminNotices()
     {
         echo '<div class="notice notice-error is-dismissible"><p>Error</p></div>';
         echo '<div class="notice notice-info"><p>Info</p></div>';
+    }
+
+    /**
+     *
+     *
+    public function hookFilterBodyClass($classes)
+    {
+        $classes[] = 'foo';
+        return $classes;
     }
 
     /**
