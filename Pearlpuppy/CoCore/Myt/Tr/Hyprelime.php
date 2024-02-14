@@ -76,7 +76,7 @@ trait Tr_HypreLime {
 	/**
 	 *
 	 */
-	public static $menages = array(
+	public static $lists = array(
 		'ul' => 'li',
 		'ol' => 'li',
 		'dl' => ['div' => ['dt','dd']],

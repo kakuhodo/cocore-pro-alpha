@@ -1,13 +1,27 @@
 <?php
 namespace Kakuhodo\CoCore;
 
+use Pearlpuppy\CoCore\Awp;
+use Pearlpuppy\CoCore\Myt;
 use Pearlpuppy\CoCore\Myt\Lime;
 
 /**
  *  @file   
  *      
  */
- 
+
+/**
+ *
+ */
+$foo = ['banana' => 'yellow', 'strawberry' => 'pink', 'Natto!'];
+
+$cons = new Awp\Consulat($foo);
+$cons[] = 'Peach!!';
+$cons->append('Tomato');
+?>
+<pre>cons: <code><?php print_r($cons); ?></code></pre>
+
+<?php
 /**
  *
  *
@@ -40,7 +54,29 @@ $hoge->expose();
 
 /**
  *
+ *
+$dl = new Lime('dl.foo', ['banana' => 'yellow', 'strawberry' => 'pink', 'Natto!']);
+$dl->expose();
+
+
+/**
+ *
+ *
+?>
+<pre>dl: <code><?php print_r($dl); ?></code></pre>
+<?php
+
+/**
+ *
  */
+
+/**
+ *
+ */
+
+/**
+ *
+ *
 $a = [
     "fruits" => ["apple", "banana", "grape"],
     "colors" => ["red" => "apple", "yellow" => "banana", "purple" => "grape"],
