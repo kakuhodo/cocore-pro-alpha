@@ -28,6 +28,14 @@ This edition based on edition Chic of CoCore (ver. 0.9.0).
     - どこで登録するかによって、一部データが出力されない可能性
         - WPのhookのタイミングに因る？（下記「Consulat入出力タイミング」参照）
 
+### `Iterator | Generator` (なんつーか、Great Pre-trained Teacher ですわ) 
+GTPセンセから `Generator` について教わったときは、
+> Generatorが最後の値をyieldした後、それを再び開始することはできません。全ての値を生成した後、Generatorは終了状態になり、再度イテレートしようとすると何も返しません。この意味で、「使用後に破棄される」と解釈することはできますが、これはGeneratorが一度に1つの値を出力するたびに起こるわけではなく、全ての値が生成された後の話です。
+
+てことで、あとから参照できないなんて不便としか思えず、`Iterator` に軍配を上げたけど、よく考えたら参照したいのは、あとから編集したいというのが主な動機。
+*Consulat* のように入出力を別系統とするケースでは、事後の編集をどうやって反映させるかを検討する際に、*Lemon* タイプの複雑なオブジェクト生成後となると、かなり込み入ったロジックを構築しなきゃなんない。
+そんな不確かなものに手間をかけるくらいなら、`Iterator` よりさらに速い `Generator` の使いどころって、まさにこれじゃね、という感じ。 (2024-02-17)
+
 ### *Consulat*入出力タイミング
 `admin_notices` VS `wp_dashboard_setup`
 従来、*Sandy* は、`wp_dashboard_setup` で `wp_add_dashboard_widget` しているが、ダッシュボードウィジェットは、2-4カラムの構成なので、幅が狭い。
@@ -40,5 +48,5 @@ This edition based on edition Chic of CoCore (ver. 0.9.0).
 ## Guidelines
 ### Namespace
 ```php
-<Production>\<Brand>\<package>
+<Production>\<Brand>\<Package>
 ```

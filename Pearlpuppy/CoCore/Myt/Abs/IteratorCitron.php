@@ -9,7 +9,7 @@ namespace Pearlpuppy\CoCore\Myt;
 /**
  *
  */
-abstract class Abs_IteratorCitron extends \ArrayObject implements Int_PQueue
+abstract class Abs_IteratorCitron extends \ArrayIterator implements Int_PQueue
 {
 
     // Mixins

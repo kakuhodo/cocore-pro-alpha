@@ -92,7 +92,7 @@ trait Tr_CitrineVein {
      */
     private function inner_impose()
     {
-        if ($this->content instanceof self) {
+        if ($this->content instanceof Int_PQueue) {
             $inner = $this->content->impose();
         } elseif (is_iterable($this->content)) {
             $inner = '';

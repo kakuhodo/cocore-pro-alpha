@@ -27,7 +27,7 @@ $product->hook();
 
 /**
  *
- */
+ *
 function note()
 {
     echo '<div class="notice notice-x"><p>This from product file</p><pre>' . print_r(Cons::$data, true) . '</pre></div>';

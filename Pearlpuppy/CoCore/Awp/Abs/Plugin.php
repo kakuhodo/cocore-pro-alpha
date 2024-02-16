@@ -122,9 +122,6 @@ abstract class Abs_Plugin implements Int_Gene
     {
         echo '<div class="notice notice-error is-dismissible"><p>Error</p></div>';
         echo '<div class="notice notice-info"><p>Info</p></div>';
-#        global $cons;
-        \Kakuhodo\CoCore\Cons::$data[] = 'added on hook admin notices';
-        echo '<div class="notice notice-x"><pre>' . print_r(\Kakuhodo\CoCore\Cons::$data, true) . '</pre></div>';
     }
 
     /**
@@ -148,7 +145,7 @@ abstract class Abs_Plugin implements Int_Gene
             'control_callback' => [$this, 'wcbSandyControl'],
             'callback_args' => null,
             'context' => 'normal',
-            'priority' => 'low'
+            'priority' => 'high'
         );
         extract($args);
         wp_add_dashboard_widget($widget_id, $widget_name, $callback, $control_callback, $callback_args, $context, $priority);

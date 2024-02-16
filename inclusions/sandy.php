@@ -12,12 +12,34 @@ use Pearlpuppy\CoCore\Myt\Lime;
 
 /**
  *
- *
+ */
 global $cons;
-$ite = $cons->getIterator();
-$cons[] = ['why', 'not'];
+#$ite = $cons->getIterator();
+$cons['why'] = 'not';
+
+#$cons->expose();
+
+#$cons[] = 'boo';
+
+$cons[] = 777;
+$cons->expose();
+
+echo '<hr>';
+$cons->offsetUnset('natto');
+
+$cons[0] = 'banana';
 
 $cons->expose();
+
+/**
+ *
+ *
+echo '<pre><code>';
+print_r($cons);
+echo '</code></pre>';
+
+
+#$cons->expose();
 
 /**
  *
@@ -42,7 +64,7 @@ $cons->expose();
 
 /**
  *
- */
+ *
 Cons::$data[] = 'added on sandy';
 echo '<pre><code>';
 print_r(Cons::$data);

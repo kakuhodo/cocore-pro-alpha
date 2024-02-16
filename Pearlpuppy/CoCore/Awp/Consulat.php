@@ -36,8 +36,30 @@ class Consulat extends Myt\Abs_IteratorCitron
      */
     public function impose()
     {
-        $this->trans();
+        $this->content = $this->geneCon();
         return parent::impose();
+    }
+
+    /**
+     *  $this (ArrayIterator) の要素が随時変更可能である前提だと、↓では NG
+     *  ならば、$this->content は、やはり Generator とし、impose() の度に生成、
+     *  expose() で破棄するのが順当と考えられる。
+     */
+    public function _trans(): void
+    {
+        $raw_c = $this->count();
+        $done_c = $this->content->count();
+        $chk = $raw_c <=> $done_c;
+        switch ($chk) {
+            case 0:
+                break;
+            case 1:
+                $this->addContents($done_c);
+                break;
+            case -1:
+                $this->reduceContents();
+                break;
+        }
     }
 
     /**
@@ -45,36 +67,44 @@ class Consulat extends Myt\Abs_IteratorCitron
      */
     public function trans(): void
     {
-#        $this->content = $this->transform();
-        foreach ($this as $row) {
-            $div = new Lime('div.row');
-            $dt = new Lime('dt', $row[0]);
-            $dd = new Lime('dd');
-            $pre = new Lime('pre');
-            $code = new Lime('code', print_r($row[1], true));
-            $div->gratify([$dt, $dd]);
-            $dd->gratify($pre);
-            $pre->gratify($code);
-            $this->content[] = $div;
+        $this->content = $this->geneCon();
+    }
+
+    /**
+     *
+     */
+    public function geneCon(): \Generator
+    {
+        $this->rewind();
+        while ($this->valid()) {
+            yield new Myt\DlPair($this->key(), $this->current());
+            $this->next();
         }
     }
 
     /**
-     *  !!![PND] Iterator is better than Generator
      *
-    private function transform(): \Generator
+     */
+    private function addContents(int $offset)
     {
-        foreach ($this as $row) {
-            $div = new Lime('div.row');
-            $dt = new Lime('dt', $row[0]);
-            $dd = new Lime('dd');
-            $pre = new Lime('pre');
-            $code = new Lime('code', print_r($row[1], true));
-            $div->gratify([$dt, $dd]);
-            $dd->gratify($pre);
-            $pre->gratify($code);
-            yield $div;
+        $this->rewind();
+        if ($offset) {
+            $this->seek($offset);
         }
+        while ($this->valid()) {
+#            $this->content->append(new Myt\DlPair($this->key(), $this->current()));
+            $this->content[$this->key()] = new Myt\DlPair($this->key(), $this->current());
+            $this->next();
+        }
+    }
+
+    /**
+     *
+     */
+    private function reduceContents()
+    {
+        $this->content = new \ArrayIterator();
+        $this->addContents(0);
     }
 
     /**
