@@ -28,20 +28,14 @@ This edition based on edition Chic of CoCore (ver. 0.9.0).
     - どこで登録するかによって、一部データが出力されない可能性
         - WPのhookのタイミングに因る？（下記「Consulat入出力タイミング」参照）
 
-> [!NOTE]
-> *Consulat*入出力タイミング
-> 
-> `admin_notices` VS `wp_dashboard_setup`
-> 
-> 従来、*Sandy* は、`wp_dashboard_setup` で `wp_add_dashboard_widget` しているが、ダッシュボードウィジェットは、2-4カラムの構成なので、幅が狭い。
-> 
-> コードビューは基本的に `<pre>` なので、幅は広いほうが好ましい。
-> 
-> `admin_notices` であれば、最大幅を使用できるからこの用途に最適かと思ったけど、検証の結果、どうやら *hook* のタイミングの関係で、*Sandy* で追加したものは、`admin_notices` で *Consulat* を展開してもでは出力されない。
-> 
-> こういうときにPHPの**遅延静的束縛**が有効なのもと思ったけど、こちらも試してみた結果どうやらダメっぽい。
-> 
-> `admin_notices` の `$priority` を下げてみてもやはりダメ。(2024-02-16)
+### *Consulat*入出力タイミング
+`admin_notices` VS `wp_dashboard_setup`
+従来、*Sandy* は、`wp_dashboard_setup` で `wp_add_dashboard_widget` しているが、ダッシュボードウィジェットは、2-4カラムの構成なので、幅が狭い。
+コードビューは基本的に `<pre>` なので、幅は広いほうが好ましい。
+
+`admin_notices` であれば、最大幅を使用できるからこの用途に最適かと思ったけど、検証の結果、どうやら *hook* のタイミングの関係で、*Sandy* で追加したものは、`admin_notices` で *Consulat* を展開してもでは出力されない。
+こういうときにPHPの**遅延静的束縛**が有効なのもと思ったけど、こちらも試してみた結果どうやらダメっぽい。
+`admin_notices` の `$priority` を下げてみてもやはりダメ。(2024-02-16)
 
 ## Guidelines
 ### Namespace
