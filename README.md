@@ -37,7 +37,7 @@ This edition based on edition Chic of CoCore (ver. 0.9.0).
 > 
 > コードビューは基本的に `<pre>` なので、幅は広いほうが好ましい。
 > 
-> `admin_notices` であれば、最大幅を使用できるからこの用途に最適かと思ったけど、検証の結果、どうやら *hook* のタイミングの関係で、*Sandy* で追加したものは、｀admin_notices` で *Consulat* を展開してもでは出力されない。
+> `admin_notices` であれば、最大幅を使用できるからこの用途に最適かと思ったけど、検証の結果、どうやら *hook* のタイミングの関係で、*Sandy* で追加したものは、`admin_notices` で *Consulat* を展開してもでは出力されない。
 > 
 > こういうときにPHPの**遅延静的束縛**が有効なのもと思ったけど、こちらも試してみた結果どうやらダメっぽい。
 > 
