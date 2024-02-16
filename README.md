@@ -41,7 +41,7 @@ This edition based on edition Chic of CoCore (ver. 0.9.0).
 > 
 > こういうときにPHPの**遅延静的束縛**が有効なのもと思ったけど、こちらも試してみた結果どうやらダメっぽい。
 > 
-> `admin_notices` の `$priority` を上げてみてもやはりダメ。(2024-02-16)
+> `admin_notices` の `$priority` を下げてみてもやはりダメ。(2024-02-16)
 
 ## Guidelines
 ### Namespace
