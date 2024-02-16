@@ -27,36 +27,42 @@ abstract class Abs_Plugin implements Int_Gene
     // Properties
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
     protected string $product_file;
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
     protected ?string $product_ns;
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
     public object $conf;
+
+    /**
+     *  @since ver. 0.10.1 (edit. Pierre)
+     */
+    public array $plugin_data;
 
     // Constructor
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
     public function __construct(string $file, ?string $namespace = null)
     {
         $this->product_file = $file;
         $this->product_ns = $namespace;
         $this->configure();
+        $this->plugin_data = WpXtra::pregetPluginData($file);
     }
 
     // Methods
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
     protected function configure()
     {
@@ -66,7 +72,7 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
     protected function assignHook(string $hook_type, string $hook_name)
     {
@@ -87,23 +93,11 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
     public function hook()
     {
-        /*
-        $recursive = new \RecursiveArrayIterator(WpXtra::$hooks);
-        foreach ($recursive as $hook_type => $values) {
-            foreach ($values as $hook_name) {
-                $this->assignHook($hook_type, $hook_name);
-            }
-        }
-
-        */
-        $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveArrayIterator(WpXtra::$hooks),
-            \RecursiveIteratorIterator::SELF_FIRST
-        );
+        $iterator = Tribune::recursivate(WpXtra::$hooks);
         foreach ($iterator as $key => $value) {
             if ($iterator->hasChildren()) {
                 $hook_type = $key;
@@ -114,7 +108,7 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
     public function hookActionWpDashboardSetup()
     {
@@ -122,42 +116,52 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
     public function hookActionAdminNotices()
     {
         echo '<div class="notice notice-error is-dismissible"><p>Error</p></div>';
         echo '<div class="notice notice-info"><p>Info</p></div>';
+#        global $cons;
+        \Kakuhodo\CoCore\Cons::$data[] = 'added on hook admin notices';
+        echo '<div class="notice notice-x"><pre>' . print_r(\Kakuhodo\CoCore\Cons::$data, true) . '</pre></div>';
     }
 
     /**
-     *
-     *
-    public function hookFilterBodyClass($classes)
+     *  @since ver. 0.10.1 (edit. Pierre)
+     */
+    public function hookFilterAdminBodyClass($classes)
     {
-        $classes[] = 'foo';
+        $classes .= ' cocore';
         return $classes;
     }
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
     protected function sandyWidget()
     {
-        wp_add_dashboard_widget('sandy', 'Samdy', [$this, 'wcbSandy'], [$this, 'wcbSandyControl'], null, 'normal', 'high');
+        $args = array(
+            'widget_id' => 'cocore-sandy',
+            'widget_name' => 'Samdy',
+            'callback' => [$this, 'wcbSandy'],
+            'control_callback' => [$this, 'wcbSandyControl'],
+            'callback_args' => null,
+            'context' => 'normal',
+            'priority' => 'low'
+        );
+        extract($args);
+        wp_add_dashboard_widget($widget_id, $widget_name, $callback, $control_callback, $callback_args, $context, $priority);
     }
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
     public function wcbSandy()
     {
-        $dirs = [dirname($this->product_file)];
-        $dirs[] = $this->conf->directories->inc;
-        $dirs[] = 'sandy.php';
-        $file = implode(DIRECTORY_SEPARATOR, $dirs);
+        $file = $this->productIncDir('sandy.php');
         if (!file_exists($file)) {
-            $no_file = new Lime('p', __("There's no sandy.php file."));
+            $no_file = new Lime('p', __("There's no sandy.php file.", $this->plugin_data['TextDomain']));
             $no_file->expose();
             return;
         }
@@ -165,7 +169,7 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
     public function wcbSandyControl()
     {
@@ -173,12 +177,20 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
+    public function productDir(): string
+    {
+        return plugin_dir_path($this->product_file);
+    }
 
     /**
-     *
+     *  @since ver. 0.10.1 (edit. Pierre)
      */
+    public function productIncDir(string $file): string
+    {
+        return $this->productDir() . $this->conf->dir->inc . "/$file";
+    }
 
     /**
      *

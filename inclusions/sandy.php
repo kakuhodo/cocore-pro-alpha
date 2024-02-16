@@ -12,14 +12,67 @@ use Pearlpuppy\CoCore\Myt\Lime;
 
 /**
  *
+ *
+global $cons;
+$ite = $cons->getIterator();
+$cons[] = ['why', 'not'];
+
+$cons->expose();
+
+/**
+ *
  */
-$foo = ['banana' => 'yellow', 'strawberry' => 'pink', 'Natto!'];
+
+/**
+ *
+ */
+
+/**
+ *
+ *
+$foo = [['banana', 'yellow'], ['strawberry', 'pink'], ['bar', 'Natto!']];
 
 $cons = new Awp\Consulat($foo);
-$cons[] = 'Peach!!';
-$cons->append('Tomato');
+$cons[] = ['foo', 'Peach!!'];
+#$cons->trans();
+#$cons->verify('dl');
+
+$cons->expose();
+
+
+/**
+ *
+ */
+Cons::$data[] = 'added on sandy';
+echo '<pre><code>';
+print_r(Cons::$data);
+echo '</code></pre>';
+
+
+/**
+ *
+ *
+global $product;
+echo '<pre><code>';
+print_r($cons);
+echo '</code></pre>';
+
+
+/**
+ *
+ *
+echo '<pre><code>';
+foreach ($cons->content as $row) {
+    print_r($row);
+#    $row->expose();
+}
+echo '</code></pre>';
+
+/**
+ *
+ *
 ?>
-<pre>cons: <code><?php print_r($cons); ?></code></pre>
+<pre>cons: <code><?php print_r($fuga); ?></code></pre>
 
 <?php
 /**

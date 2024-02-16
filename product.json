@@ -1,6 +1,6 @@
 {
     "prefix": "sc",
-    "directories": {
+    "dir": {
         "inc": "inclusions",
         "dist": "distributors",
         "asset": "assets",

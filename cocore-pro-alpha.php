@@ -27,6 +27,31 @@ $product->hook();
 
 /**
  *
+ */
+function note()
+{
+    echo '<div class="notice notice-x"><p>This from product file</p><pre>' . print_r(Cons::$data, true) . '</pre></div>';
+}
+add_action('admin_notices', __NAMESPACE__ . '\note', 999999);
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
  *
 $code = new \Pearlpuppy\Myt\Lime('code', print_r($awp->conf, true));
 $pre = new \Pearlpuppy\Myt\Lime('pre', $code);

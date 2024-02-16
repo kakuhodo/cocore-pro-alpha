@@ -94,10 +94,10 @@ trait Tr_CitrineVein {
     {
         if ($this->content instanceof self) {
             $inner = $this->content->impose();
-        } elseif (is_array($this->content)) {
+        } elseif (is_iterable($this->content)) {
             $inner = '';
-            foreach ($this->content as $index => $content) {
-                $inner .= $content instanceof self ? $content->impose() : $content;
+            foreach ($this->content as $content) {
+                $inner .= $content instanceof Int_PQueue ? $content->impose() : $content;
             }
         } else {
             $inner = $this->content;

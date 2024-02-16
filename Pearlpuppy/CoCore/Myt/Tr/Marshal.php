@@ -139,6 +139,18 @@ trait Tr_Marshal {
 
     /**
      *
+     *  @since ver. 0.10.1 (edit. Pierre)
+     */
+    public static function recursivate(iterable $array): \RecursiveIteratorIterator
+    {
+        return new \RecursiveIteratorIterator(
+            new \RecursiveArrayIterator($array),
+            \RecursiveIteratorIterator::SELF_FIRST
+        );
+    }
+
+    /**
+     *
      */
 
 //[EOT]*/
