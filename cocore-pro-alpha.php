@@ -6,12 +6,12 @@ Plugin Name: CoCore Pro Alpha
 Plugin URI: https://cocore.biz
 Description: Continuous developing environment of CoCore
 Author: princepink
-Version:	0.10.1
+Version:	0.10.2
 Author URI: https://kakuhodo.com
 Text Domain: cocore-pro-alpha
 Domain Path: /languages
 Since: 2024-02-13
-Update: 
+Update: 2024-02-17
 */
 
 /**

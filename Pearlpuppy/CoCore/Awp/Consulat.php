@@ -44,7 +44,7 @@ class Consulat extends Myt\Abs_IteratorCitron
      *  $this (ArrayIterator) の要素が随時変更可能である前提だと、↓では NG
      *  ならば、$this->content は、やはり Generator とし、impose() の度に生成、
      *  expose() で破棄するのが順当と考えられる。
-     */
+     *
     public function _trans(): void
     {
         $raw_c = $this->count();
@@ -77,14 +77,14 @@ class Consulat extends Myt\Abs_IteratorCitron
     {
         $this->rewind();
         while ($this->valid()) {
-            yield new Myt\DlPair($this->key(), $this->current());
+            yield new ConsPair($this->key(), $this->current());
             $this->next();
         }
     }
 
     /**
      *
-     */
+     *
     private function addContents(int $offset)
     {
         $this->rewind();
@@ -100,7 +100,7 @@ class Consulat extends Myt\Abs_IteratorCitron
 
     /**
      *
-     */
+     *
     private function reduceContents()
     {
         $this->content = new \ArrayIterator();

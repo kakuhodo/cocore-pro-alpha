@@ -23,7 +23,7 @@ abstract class Abs_IteratorCitron extends \ArrayIterator implements Int_PQueue
      */
     public function __construct(array|object $array = [], int $flags = 0)
     {
-        $this->content = new \ArrayIterator();
+#        $this->content = new \ArrayIterator();
         parent::__construct($array, $flags);
     }
 

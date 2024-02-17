@@ -1,10 +1,13 @@
 <?php
-namespace Pearlpuppy\CoCore\Myt;
+namespace Pearlpuppy\CoCore\Awp;
+
+use Pearlpuppy\CoCore\Myt;
+use Pearlpuppy\CoCore\Myt\Lime;
 
 /**
  *
  */
-class DlPair extends Abs_Citrus {
+class ConsPair extends Myt\DlPair {
 
     // Properties
  
@@ -19,8 +22,7 @@ class DlPair extends Abs_Citrus {
      */
     public function __construct(string $dt, mixed $dd)
     {
-        $contents = $this->dlContents($dt, $dd);
-        parent::__construct('div.row', $contents);
+        parent::__construct($dt, $dd);
     }
 
     // Methods
@@ -30,7 +32,8 @@ class DlPair extends Abs_Citrus {
      */
     protected function dlContents(string $dt, string $dd): array
     {
-        return ['dt' => new Lime('dt', $dt), 'dd' => new Lime('dd', $dd)];
+#        $contents = ['dt' => new Myt\Lime('dt', $dt), 'dd' => new Myt\Lime('dd', $dd)];
+        return parent::dlContents($dt, $dd);
     }
 
     /**

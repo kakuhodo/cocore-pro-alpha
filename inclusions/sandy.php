@@ -31,9 +31,11 @@ $cons[0] = 'banana';
 
 $cons->expose();
 
+$cons->geneCon();
+
 /**
  *
- *
+ */
 echo '<pre><code>';
 print_r($cons);
 echo '</code></pre>';
