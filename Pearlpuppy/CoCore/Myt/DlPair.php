@@ -28,7 +28,7 @@ class DlPair extends Abs_Citrus {
     /**
      *
      */
-    protected function dlContents(string $dt, string $dd): array
+    protected function dlContents(string $dt, mixed $dd): array
     {
         return ['dt' => new Lime('dt', $dt), 'dd' => new Lime('dd', $dd)];
     }

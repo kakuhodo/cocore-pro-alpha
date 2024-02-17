@@ -167,7 +167,7 @@ trait Tr_CitrineArtery {
     }
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     protected function dListener()
     {

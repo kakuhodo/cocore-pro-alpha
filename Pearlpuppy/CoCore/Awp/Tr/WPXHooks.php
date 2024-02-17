@@ -305,7 +305,7 @@ trait Tr_WPXHooks {
             'attachment_innerHTML',
             'author_edit_pre',
             'body_class',
-            'admin_body_class',     // @since ver. 0.10.1 (edit. Pierre)
+            'admin_body_class',     // @since  ver. 0.10.1 (edit. Pierre)
             'content_edit_pre',
             'content_filtered_edit_pre',
             'excerpt_edit_pre',

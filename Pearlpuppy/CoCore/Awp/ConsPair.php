@@ -30,10 +30,9 @@ class ConsPair extends Myt\DlPair {
     /**
      *
      */
-    protected function dlContents(string $dt, string $dd): array
+    protected function dlContents(string $dt, mixed $dd): array
     {
-#        $contents = ['dt' => new Myt\Lime('dt', $dt), 'dd' => new Myt\Lime('dd', $dd)];
-        return parent::dlContents($dt, $dd);
+        return parent::dlContents($dt, self::consolate($dd));
     }
 
     /**

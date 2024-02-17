@@ -22,16 +22,8 @@ if (file_exists(__DIR__ . '/Product.php')) {
 
 /**
  *
- */
-#$foo = [['banana', 'yellow'], ['strawberry', 'pink'], ['bar', 'Natto!']];
-$foo = [
-    'banana' => 'yellow',
-    'strawberry' => 'pink',
-    'natto' => 'brown',
-];
-
-$cons = new Awp\Consulat($foo);
-$cons[] = 'Peach!!';
+ *
+$CONSL = new Awp\Consulat();
 
 /**
  *

@@ -126,7 +126,7 @@ trait Tr_Marshal {
 
     /**
      *  Checks if $iterator is associative (mapped) or not.
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     public static function isAssoc(iterable $iterator)
     {
@@ -139,7 +139,7 @@ trait Tr_Marshal {
 
     /**
      *
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     public static function recursivate(iterable $array): \RecursiveIteratorIterator
     {

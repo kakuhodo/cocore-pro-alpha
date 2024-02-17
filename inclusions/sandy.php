@@ -1,6 +1,9 @@
 <?php
 namespace Kakuhodo\CoCore;
 
+/**
+ *
+ *
 use Pearlpuppy\CoCore\Awp;
 use Pearlpuppy\CoCore\Myt;
 use Pearlpuppy\CoCore\Myt\Lime;
@@ -13,35 +16,84 @@ use Pearlpuppy\CoCore\Myt\Lime;
 /**
  *
  */
-global $cons;
-#$ite = $cons->getIterator();
-$cons['why'] = 'not';
+global $product;
 
-#$cons->expose();
+/**
+ *
+ *
+$product->consoler('hoge');
+$product->consoler($product);
+#$product->consoler('mage', 1);
 
-#$cons[] = 'boo';
-
-$cons[] = 777;
-$cons->expose();
-
-echo '<hr>';
-$cons->offsetUnset('natto');
-
-$cons[0] = 'banana';
-
-$cons->expose();
-
-$cons->geneCon();
+#$product->consExpose();
 
 /**
  *
  */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ *
+$CONSL[] = $CONSL;
+$CONSL->expose();
+
+/**
+ *
+ *
+Myt\Tribune::peel($CONSL, false, 'hoge', true, false);
+
+/**
+ *
+ *
+$CONSL->expose();
+
+/**
+ *
+ */
+
+/**
+ *
+ *
+#$ite = $CONSL->getIterator();
+$CONSL['why'] = 'not';
+
+#$CONSL->expose();
+
+#$CONSL[] = 'boo';
+
+$CONSL[] = 777;
+$CONSL->expose();
+
+echo '<hr>';
+$CONSL->offsetUnset('natto');
+
+$CONSL[0] = $CONSL;
+
+$CONSL->expose();
+
+$CONSL->geneCon();
+
+/**
+ *
+ *
 echo '<pre><code>';
-print_r($cons);
+print_r($CONSL);
 echo '</code></pre>';
 
 
-#$cons->expose();
+#$CONSL->expose();
 
 /**
  *
@@ -56,12 +108,12 @@ echo '</code></pre>';
  *
 $foo = [['banana', 'yellow'], ['strawberry', 'pink'], ['bar', 'Natto!']];
 
-$cons = new Awp\Consulat($foo);
-$cons[] = ['foo', 'Peach!!'];
-#$cons->trans();
-#$cons->verify('dl');
+$CONSL = new Awp\Consulat($foo);
+$CONSL[] = ['foo', 'Peach!!'];
+#$CONSL->trans();
+#$CONSL->verify('dl');
 
-$cons->expose();
+$CONSL->expose();
 
 
 /**
@@ -78,7 +130,7 @@ echo '</code></pre>';
  *
 global $product;
 echo '<pre><code>';
-print_r($cons);
+print_r($CONSL);
 echo '</code></pre>';
 
 
@@ -86,7 +138,7 @@ echo '</code></pre>';
  *
  *
 echo '<pre><code>';
-foreach ($cons->content as $row) {
+foreach ($CONSL->content as $row) {
     print_r($row);
 #    $row->expose();
 }

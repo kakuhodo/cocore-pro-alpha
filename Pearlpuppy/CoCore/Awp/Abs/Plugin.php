@@ -27,29 +27,34 @@ abstract class Abs_Plugin implements Int_Gene
     // Properties
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     protected string $product_file;
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     protected ?string $product_ns;
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since ver. 0.10.2 (edit. Pierre)
+     */
+    protected Consulat $console;
+
+    /**
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     public object $conf;
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     public array $plugin_data;
 
     // Constructor
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     public function __construct(string $file, ?string $namespace = null)
     {
@@ -57,12 +62,13 @@ abstract class Abs_Plugin implements Int_Gene
         $this->product_ns = $namespace;
         $this->configure();
         $this->plugin_data = WpXtra::pregetPluginData($file);
+        $this->console = new Consulat();
     }
 
     // Methods
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     protected function configure()
     {
@@ -72,7 +78,7 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     protected function assignHook(string $hook_type, string $hook_name)
     {
@@ -93,7 +99,7 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     public function hook()
     {
@@ -108,7 +114,7 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     public function hookActionWpDashboardSetup()
     {
@@ -116,7 +122,7 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     public function hookActionAdminNotices()
     {
@@ -125,7 +131,7 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     public function hookFilterAdminBodyClass($classes)
     {
@@ -134,7 +140,7 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     protected function sandyWidget()
     {
@@ -152,7 +158,8 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
+     *  @update ver. 0.10.2 (edit. Pierre)
      */
     public function wcbSandy()
     {
@@ -163,10 +170,11 @@ abstract class Abs_Plugin implements Int_Gene
             return;
         }
         include_once($file);
+        $this->console->expose();
     }
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     public function wcbSandyControl()
     {
@@ -174,7 +182,7 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     public function productDir(): string
     {
@@ -182,12 +190,32 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *  @since ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     public function productIncDir(string $file): string
     {
         return $this->productDir() . $this->conf->dir->inc . "/$file";
     }
+
+    /**
+     *  @since ver. 0.10.2 (edit. Pierre)
+     */
+    public function consoler(mixed $val, string|int $key = null)
+    {
+        $this->console[$key] = $val;
+    }
+
+    /**
+     *  @since ver. 0.10.2 (edit. Pierre)
+     */
+    public function consExpose()
+    {
+        $this->console->expose();
+    }
+
+    /**
+     *
+     */
 
     /**
      *

@@ -1,6 +1,8 @@
 <?php
 namespace Kakuhodo\CoCore;
 
+use Pearlpuppy\CoCore\Awp;
+
 /*
 Plugin Name: CoCore Pro Alpha
 Plugin URI: https://cocore.biz
