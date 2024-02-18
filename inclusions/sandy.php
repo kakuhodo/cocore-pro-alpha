@@ -20,6 +20,31 @@ global $product;
 
 /**
  *
+ */
+$array = [
+    1,
+    2,
+    [3, 4, 5],
+    6,
+    [7, [8, 9]],
+];
+$rai = new \RecursiveArrayIterator($array);
+
+$rai['hoge'] = ['mage' => 'fuga'];
+
+$product->consoler($rai);
+
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
  *
 $product->consoler('hoge');
 $product->consoler($product);
@@ -41,7 +66,8 @@ $product->consoler($product);
 
 /**
  *
- */
+ *
+RecursiveArrayIterator
 
 /**
  *

@@ -40,6 +40,22 @@ class Product extends Abs_Plugin
     /**
      *
      */
+    public function hookActionAdminNotices()
+    {
+        echo '<div class="notice notice-error is-dismissible"><p>OVERRIDEN via <code>' . __FUNCTION__ . '</code> of <code>' . __CLASS__ . '</code></p></div>';
+    }
+
+    /**
+     *
+     */
+    public function scActionAdminNotices()
+    {
+        echo '<div class="notice notice-info"><p>This info from <code>' . __CLASS__ . '</code></p></div>';
+    }
+
+    /**
+     *
+     */
 
 //[EOC]*/
 }

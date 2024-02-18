@@ -27,6 +27,16 @@ require_once(__DIR__ . '/sesame.php');
 $product = new Product(__FILE__, __NAMESPACE__);
 $product->hook();
 
+
+/**
+ *
+ */
+function scActionAdminNotices()
+{
+    echo '<div class="notice notice-info"><p>This info from <code>' . basename(__FILE__) . '</code></p></div>';
+}
+
+
 /**
  *
  *

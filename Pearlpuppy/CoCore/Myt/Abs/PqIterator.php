@@ -2,18 +2,20 @@
 namespace Pearlpuppy\CoCore\Myt;
 
 /**
- *  @file    IteratorCitron
- *
+ *  @file    PqIterator
  */
 
 /**
  *
  */
-abstract class Abs_IteratorCitron extends \ArrayIterator implements Int_PQueue
+abstract class Abs_PqIterator extends \ArrayIterator implements Int_PqPie
 {
 
     // Mixins
 
+    /**
+     *
+     */
     use Tr_Citrine;
 
     // Constructor
@@ -23,7 +25,6 @@ abstract class Abs_IteratorCitron extends \ArrayIterator implements Int_PQueue
      */
     public function __construct(array|object $array = [], int $flags = 0)
     {
-#        $this->content = new \ArrayIterator();
         parent::__construct($array, $flags);
     }
 

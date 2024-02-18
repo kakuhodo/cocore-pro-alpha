@@ -79,22 +79,29 @@ abstract class Abs_Plugin implements Int_Gene
 
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
+     *  @update  ver. 0.10.2 (edit. Pierre)
      */
     protected function assignHook(string $hook_type, string $hook_name)
     {
         $afunc = "add_$hook_type";
+        $pmeth = 'hook';
+        $cmeth = $this->conf->prefix;
         $suffix = ucfirst($hook_type) . Tribune::snake2Stud($hook_name);
-        $dfunc = 'hook' . $suffix;
-        $pfunc = '';
+        $pmeth .= $suffix;
+        $cmeth .= $suffix;
+        $cfunc = '';
         if ($this->product_ns) {
-            $pfunc .= $this->product_ns . "\\";
+            $cfunc .= $this->product_ns . "\\";
         }
-        $pfunc .= $this->conf->prefix . $suffix;
-        if (method_exists($this, $dfunc)) {
-            call_user_func($afunc, $hook_name, [$this, $dfunc]);
+        $cfunc .= $cmeth;
+        if (method_exists($this, $pmeth)) {
+            call_user_func($afunc, $hook_name, [$this, $pmeth]);
         }
-        if (function_exists($pfunc)) {
-            call_user_func($afunc, $hook_name, $pfunc);
+        if (method_exists($this, $cmeth)) {
+            call_user_func($afunc, $hook_name, [$this, $cmeth]);
+        }
+        if (function_exists($cfunc)) {
+            call_user_func($afunc, $hook_name, $cfunc);
         }
     }
 
@@ -103,7 +110,7 @@ abstract class Abs_Plugin implements Int_Gene
      */
     public function hook()
     {
-        $iterator = Tribune::recursivate(WpXtra::$hooks);
+        $iterator = Tribune::recursiveIterator(WpXtra::$hooks);
         foreach ($iterator as $key => $value) {
             if ($iterator->hasChildren()) {
                 $hook_type = $key;
@@ -126,7 +133,7 @@ abstract class Abs_Plugin implements Int_Gene
      */
     public function hookActionAdminNotices()
     {
-        echo '<div class="notice notice-error is-dismissible"><p>Error</p></div>';
+        echo '<div class="notice notice-error is-dismissible"><p>via <code>' . __FUNCTION__ . '</code> of <code>' . __CLASS__ . '</code></p></div>';
         echo '<div class="notice notice-info"><p>Info</p></div>';
     }
 
@@ -200,9 +207,9 @@ abstract class Abs_Plugin implements Int_Gene
     /**
      *  @since ver. 0.10.2 (edit. Pierre)
      */
-    public function consoler(mixed $val, string|int $key = null)
+    public function consoler(mixed $output, string|int|null $label = null)
     {
-        $this->console[$key] = $val;
+        $this->console[$label] = $output;
     }
 
     /**
@@ -211,6 +218,14 @@ abstract class Abs_Plugin implements Int_Gene
     public function consExpose()
     {
         $this->console->expose();
+    }
+
+    /**
+     *
+     */
+    public static function stac()
+    {
+        return static::class;
     }
 
     /**

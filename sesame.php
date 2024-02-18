@@ -22,20 +22,6 @@ if (file_exists(__DIR__ . '/Product.php')) {
 
 /**
  *
- *
-$CONSL = new Awp\Consulat();
-
-/**
- *
- *
-
-class Cons
-{
-    public static $data = ['foo' => 'bar'];
-}
-
-/**
- *
  */
 
 /**

@@ -4,7 +4,7 @@ namespace Pearlpuppy\CoCore\Myt;
 /**
  *
  */
-class DlPair extends Abs_Citrus {
+class DlPair extends Lime {
 
     // Properties
  

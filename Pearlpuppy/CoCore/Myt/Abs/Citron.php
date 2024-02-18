@@ -4,7 +4,6 @@ namespace Pearlpuppy\CoCore\Myt;
 /**
  *    @file    Citron
  *    @since    2016-12-01
- *    @version    0.3.0
  *    @update    2024-02-13
  */
 abstract class Abs_Citron implements Int_PQueue

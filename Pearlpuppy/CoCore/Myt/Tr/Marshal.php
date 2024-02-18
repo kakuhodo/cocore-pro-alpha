@@ -138,15 +138,15 @@ trait Tr_Marshal {
     }
 
     /**
-     *
-     *  @since  ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.2 (edit. Pierre)
      */
-    public static function recursivate(iterable $array): \RecursiveIteratorIterator
+    public static function recursiveIterator(iterable $recursive): \RecursiveIteratorIterator
     {
-        return new \RecursiveIteratorIterator(
-            new \RecursiveArrayIterator($array),
-            \RecursiveIteratorIterator::SELF_FIRST
-        );
+        $obj = $recursive;
+        if (!$recursive instanceof \RecursiveArrayIterator) {
+            $obj = new \RecursiveArrayIterator($recursive);
+        }
+        return new \RecursiveIteratorIterator($obj, \RecursiveIteratorIterator::SELF_FIRST);
     }
 
     /**
