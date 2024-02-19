@@ -36,6 +36,11 @@ $multiDimArray = [
 ]
 ```
 
+> [!CAUTION]
+> 任意の *notice* 出力は `wp_admin_notice()` で事足りるため、`Awp\Nottingham` については開発中止の方向 (240219)
+>
+> ※ `Myt\Invertor` は引き続き開発
+
 ## Versions
 | version | updated | memo |
 |:---:|:---:|---|

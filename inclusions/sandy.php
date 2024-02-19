@@ -41,6 +41,8 @@ $product->consoler($rai);
 $hoge = new Lime('h1#99', 'Wii!');
 $product->consoler($hoge);
 
+wp_admin_notice('SO WHAT?', ['type' => 'success']);
+
 /**
  *
  */
