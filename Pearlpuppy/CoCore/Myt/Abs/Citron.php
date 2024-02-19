@@ -11,7 +11,17 @@ abstract class Abs_Citron implements Int_PQueue
 
     // Mixins
 
+    /**
+     *
+     */
     use Tr_Citrine;
+
+    // Constants
+
+    /**
+     *
+     */
+    const PAT_ALPHA = "/^[a-zA-Z]/";
 
     // Constructor
 
@@ -22,7 +32,6 @@ abstract class Abs_Citron implements Int_PQueue
      */
     public function __construct(mixed $contents = null, string $tag = 'span', mixed $classes = array(), iterable $attrs = array())
     {
-        $this->initStats();
         $this->tag = $this->clean_tag($tag);
         $this->attributes = $this->clean_attrs($classes, $attrs);
         $this->content = $this->cleanContent($contents);

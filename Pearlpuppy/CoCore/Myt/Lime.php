@@ -13,7 +13,6 @@ class Lime extends Lemon {
      */
     public function __construct(?string $selector = null, mixed $contents = array())
     {
-        $this->initStats();
         if ($selector) {
             $this->cracker($selector);
         }

@@ -13,17 +13,42 @@ interface Int_PQueue {
     // Methods
 
     /**
-     *
+     *  -------------------------------
+     *  Output
+     *  -------------------------------
      */
-    public function impose();
+
+    /**
+     *  Creates outputting HTML markup
+     */
+    public function impose(): string;
+
+    /**
+     *  Outputs HTML markup
+     */
+    public function expose(): void;
+
+    /**
+     *  -------------------------------
+     *  Edit
+     *  -------------------------------
+     */
+
+    public function verify($tag);
+    public function gratify($contents, $overwrite);
+    public function specify(array $attrs);
+    public function identify($id);
+    public function classify($classes, $overwrite);
+    public function declassify($value);
+
+    /**
+     *  -------------------------------
+     *  Inspired by jQuery
+     *  -------------------------------
+     */
 
     /**
      *
-     */
-    public function expose();
-
-    /**
-     *    Inspired by jQuery
      */
     public function addClass();
     public function attr($name_or_map, $value);
@@ -34,6 +59,25 @@ interface Int_PQueue {
     public function removeProp();
     public function toggleClass();
     public function val();
+
+    /**
+     *
+     */
+
+    /**
+     *  -------------------------------
+     *
+     *  -------------------------------
+     */
+
+    /**
+     *  -------------------------------
+     *  -------------------------------
+     */
+
+    /**
+     *
+     */
 
 //[EOI]*/
 }

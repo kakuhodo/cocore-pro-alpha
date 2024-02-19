@@ -1,18 +1,14 @@
 <?php
-namespace Pearlpuppy\CoCore\Awp;
-
-use Pearlpuppy\CoCore\Myt;
-use Pearlpuppy\CoCore\Myt\Lime;
+namespace Pearlpuppy\CoCore\Myt;
 
 /**
- *  @file    Consulat
- *
+ *  @file    Convertor
  */
 
 /**
  *
  */
-class Consulat extends Myt\Convertor
+class Convertor extends Abs_PqIterator
 {
 
     // Mixins
@@ -20,27 +16,28 @@ class Consulat extends Myt\Convertor
     /**
      *
      */
+    use Tr_LemonPie;
 
     // Constructor
 
     /**
      *
      */
-    public function __construct(array|object $array = [], int $flags = 0)
+    public function __construct(?string $selector = null, array|object $array = [], int $flags = 0)
     {
-        parent::__construct('dl.consulat', $array, $flags);
+        parent::__construct($selector, $array, $flags);
     }
 
     // Methods
 
     /**
-     *
+     *  !!![PND]
      */
     public function geneCon(): \Generator
     {
         $this->rewind();
         while ($this->valid()) {
-            yield new ConsPair($this->key(), $this->current());
+            // yield new DlPair($this->key(), $this->current());
             $this->next();
         }
     }

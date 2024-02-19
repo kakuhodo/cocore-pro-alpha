@@ -61,7 +61,7 @@ trait Tr_CitrineOrgan {
             }
         } else {
             if (is_string($id)) {
-                if (preg_match(self::$pat_alpha, $id)) {
+                if (preg_match(self::PAT_ALPHA, $id)) {
                     $this->attributes['id'] = $id;
                     return true;
                 } else {
@@ -94,7 +94,7 @@ trait Tr_CitrineOrgan {
     /**
      *
      */
-    public function specify($attrs = [])
+    public function specify(array $attrs = [])
     {
         $this->attr($attrs);
     }

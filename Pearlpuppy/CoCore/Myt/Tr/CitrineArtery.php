@@ -56,13 +56,6 @@ trait Tr_CitrineArtery {
     /**
      *
      */
-    protected function initStats() {
-        self::$pat_alpha = tribune::pat('alphacap');
-    }
-
-    /**
-     *
-     */
     protected function cracker($selector) {
         $original = $selector;
         $this->crackAttr($selector);        // !!! define screwAttr() to extract attributes from a selector.
@@ -222,7 +215,7 @@ trait Tr_CitrineArtery {
             unset($attrs['class']);
         }
         $classes = array_merge($classes, $attrs['classes']);
-        $classes = array_unique(preg_grep(self::$pat_alpha, $classes));
+        $classes = array_unique(preg_grep(self::PAT_ALPHA, $classes));
         if (!empty($classes)) {
             $attrs['classes'] = $classes;
         }

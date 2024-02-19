@@ -17,6 +17,25 @@ This edition based on edition Chic of CoCore (ver. 0.9.0).
 - *Convertor*: 一次元配列から`ArrayIterator`を生成、これを`Generator`に変換して、HTML出力。
 - *Invertor*: 二(多)次元配列から`RecursiveArrayIterator`を生成、これを`RevursiveIteratorIterator`を介して`Generator`に変換、HTML出力。
 
+```
+$oneDimArray = [
+    'key' => 'value',
+    ...
+];
+
+$multiDimArray = [
+    [
+        'key' => 'value',
+        ...
+    ],
+    [
+        'key' => 'value',
+        ...
+    ],
+    ...
+]
+```
+
 ## Versions
 | version | updated | memo |
 |:---:|:---:|---|
@@ -55,6 +74,8 @@ This edition based on edition Chic of CoCore (ver. 0.9.0).
     - 表示させたいデータのシンプルな登録機能を有し、まとめて（一箇所に）出力
     - どこで登録するかによって、一部データが出力されない可能性
         - WPのhookのタイミングに因る？（下記「Consulat入出力タイミング」参照）
+- Concept AC/DC の導入に伴い、*Myt* に `class Convertor`, `class Invertor` を増設する。(0.10.3)
+    - `Awp\Consulat` は `Convertor`、`Awp\Nottingham` は `Invertor` をそれぞれ継承。
 
 > [!IMPORTANT]
 > (ver. 0.10.1-)
@@ -98,7 +119,7 @@ GTPセンセから `Generator` について教わったときは、
 コードビューは基本的に `<pre>` なので、幅は広いほうが好ましい。
 
 `admin_notices` であれば、最大幅を使用できるからこの用途に最適かと思ったけど、検証の結果、どうやら *hook* のタイミングの関係で、*Sandy* で追加したものは、`admin_notices` で *Consulat* を展開してもでは出力されない。
-こういうときにPHPの**遅延静的束縛**が有効なのもと思ったけど、こちらも試してみた結果どうやらダメっぽい。
+こういうときにPHPの**遅延静的束縛**が有効なのかもと思ったけど、こちらも試してみた結果どうやらダメっぽい。
 `admin_notices` の `$priority` を下げてみてもやはりダメ。(2024-02-16)
 
 ## Guidelines

@@ -19,7 +19,7 @@ trait Tr_CitrineVein {
     /**
      *
      */
-    public function impose()
+    public function impose(): string
     {
         $this->universal_injection();
         $nl = self::$line_breaker;
@@ -45,7 +45,7 @@ trait Tr_CitrineVein {
     /**
      *
      */
-    public function expose()
+    public function expose(): void
     {
         echo $this->impose();
     }

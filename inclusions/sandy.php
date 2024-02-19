@@ -3,7 +3,7 @@ namespace Kakuhodo\CoCore;
 
 /**
  *
- *
+ */
 use Pearlpuppy\CoCore\Awp;
 use Pearlpuppy\CoCore\Myt;
 use Pearlpuppy\CoCore\Myt\Lime;
@@ -38,6 +38,8 @@ $product->consoler($rai);
 /**
  *
  */
+$hoge = new Lime('h1#99', 'Wii!');
+$product->consoler($hoge);
 
 /**
  *

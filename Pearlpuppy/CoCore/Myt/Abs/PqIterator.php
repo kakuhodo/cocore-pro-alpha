@@ -23,8 +23,11 @@ abstract class Abs_PqIterator extends \ArrayIterator implements Int_PqPie
     /**
      *
      */
-    public function __construct(array|object $array = [], int $flags = 0)
+    public function __construct(?string $selector = null, array|object $array = [], int $flags = 0)
     {
+        if ($selector) {
+            $this->cracker($selector);
+        }
         parent::__construct($array, $flags);
     }
 

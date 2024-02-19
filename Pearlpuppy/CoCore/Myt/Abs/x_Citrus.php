@@ -33,7 +33,6 @@ abstract class Abs_Citrus extends Abs_Citron
      */
     public function __construct(?string $selector = null, mixed $contents = array())
     {
-        $this->initStats();
         if ($selector) {
             $this->cracker($selector);
         }

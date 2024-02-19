@@ -37,7 +37,7 @@ trait Tr_Citrine {
 
     /**
      *
-     */
+     *
     private static $pat_alpha;
 
     /**
