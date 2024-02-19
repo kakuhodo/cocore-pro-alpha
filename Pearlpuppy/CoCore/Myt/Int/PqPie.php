@@ -15,6 +15,11 @@ interface Int_PqPie extends Int_PQueue, \Traversable {
     // Methods
 
     /**
+     *  Transforms INPUT data-format (Iterator) to OUTPUT one (Generator)
+     */
+    public function trans(): void;
+
+    /**
      *
      */
 

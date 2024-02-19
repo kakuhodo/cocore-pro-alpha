@@ -6,7 +6,7 @@ namespace Pearlpuppy\CoCore\Myt;
  */
 
 /**
- *  Members to be used on generating instance mainly.
+ *  Members to be used on generating self instance mainly.
  */
 trait Tr_CitrineArtery {
 
@@ -20,6 +20,8 @@ trait Tr_CitrineArtery {
      *    Makes a list for ul|ol|dl|?select
      *
      *        For now, only usable for ul|ol. 181113 v0.2.4
+     *
+     *  @memo   (240219) This concept might be overridden by AC/DC concept.
      */
     public function listen() {
         if (!array_key_exists($this->tag, static::$lists)) {

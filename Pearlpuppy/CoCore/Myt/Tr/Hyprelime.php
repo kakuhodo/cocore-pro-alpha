@@ -179,7 +179,7 @@ trait Tr_HypreLime {
      *    @param    $term    string
      *    @param    $description    string|array
      *    @return    $pair    array    A flat array of Lemon objects - one dt and dd(s).
-     *  @since ver. 0.9.x (edit. Chic)
+     *  @since  ver. 0.9.x (edit. Chic)
      */
     public static function dlPair($term, $description) {
         $dt = new Lemon('dt', null, $term);
@@ -196,11 +196,30 @@ trait Tr_HypreLime {
 
     /**
      *  @return wrapped $content with <pre><code> as Int_PQueue object
-     *  @since ver. 0.10.2 (edit. Pierre)
+     *  @since  ver. 0.10.2 (edit. Pierre)
      */
     public static function consolate(mixed $content = null): Int_PQueue
     {
         return new Lime('pre', new Lime('code', print_r($content, true)));
+    }
+
+    /**
+     *
+     *  @since  ver. 0.10.3 (edit. Pierre)
+     */
+    public static function seed(string|int $key, mixed $val, string $tag = 'ul'): Int_PQueue
+    {
+        $obj = false;
+        switch ($tag) {
+            case 'dl':
+                $obj = new DlPair($key, $val);
+                break;
+            default:
+                $obj = new Lime('li', $val);
+                $obj->specify(['data-cocore-key' => $key]);
+                break;
+        }
+        return $obj;
     }
 
     /**

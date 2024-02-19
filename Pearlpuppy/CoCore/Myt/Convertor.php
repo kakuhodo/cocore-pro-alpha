@@ -31,18 +31,6 @@ class Convertor extends Abs_PqIterator
     // Methods
 
     /**
-     *  !!![PND]
-     */
-    public function geneCon(): \Generator
-    {
-        $this->rewind();
-        while ($this->valid()) {
-            // yield new DlPair($this->key(), $this->current());
-            $this->next();
-        }
-    }
-
-    /**
      *
      */
 

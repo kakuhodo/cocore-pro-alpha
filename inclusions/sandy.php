@@ -41,7 +41,12 @@ $product->consoler($rai);
 $hoge = new Lime('h1#99', 'Wii!');
 $product->consoler($hoge);
 
-wp_admin_notice('SO WHAT?', ['type' => 'success']);
+wp_admin_notice('This UNHOOKED message via <code>' . basename(__FILE__) . '</code>', ['type' => 'success']);
+
+$data = ['apple', 'banana', 'cherry'];
+$ul = new Myt\Convertor('ul', $data);
+$ul->verify('dl');
+$ul->expose();
 
 /**
  *

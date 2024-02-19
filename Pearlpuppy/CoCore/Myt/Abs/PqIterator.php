@@ -18,6 +18,14 @@ abstract class Abs_PqIterator extends \ArrayIterator implements Int_PqPie
      */
     use Tr_Citrine;
 
+    /**
+     *
+     *
+    use Tr_Citrine, Tr_LemonPie {
+        Tr_LemonPie::impose insteadof Tr_Citrine;
+        Tr_Citrine::impose as originalImpose;
+    }
+
     // Constructor
 
     /**

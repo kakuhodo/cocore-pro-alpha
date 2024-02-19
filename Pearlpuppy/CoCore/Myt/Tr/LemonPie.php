@@ -6,7 +6,7 @@ namespace Pearlpuppy\CoCore\Myt;
  */
 
 /**
- *
+ *  Members for PqPie implement
  */
 trait Tr_LemonPie {
 
@@ -42,13 +42,13 @@ trait Tr_LemonPie {
     }
 
     /**
-     *  !!![PND]
+     *
      */
     public function geneCon(): \Generator
     {
         $this->rewind();
         while ($this->valid()) {
-            // yield new ConsPair($this->key(), $this->current());
+            yield static::seed($this->key(), $this->current(), $this->tag);
             $this->next();
         }
     }

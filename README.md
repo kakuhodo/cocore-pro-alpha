@@ -54,7 +54,7 @@ $multiDimArray = [
 - [ ] *SuperCal*
 
 #### AWP
-- [ ] *Nottingham*
+- [ ] ~~*Nottingham*~~
 - [x] *Consulat*
 - [ ] Menu build via JSON
 
