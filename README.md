@@ -44,9 +44,10 @@ $multiDimArray = [
 ## Versions
 | version | updated | memo |
 |:---:|:---:|---|
-| 0.10.1 | 2024-02-13 ||
-| 0.10.2 | 2024-02-17 | Introducing concept Consulat |
 | 0.10.3 | 2024-02-19 | Brushed concept Consulat upto concept AC/DC, Terminated `Abs_Citrus` |
+| 0.10.2 | 2024-02-17 | Began Consulat developement |
+| 0.10.1 | 2024-02-13 | Established this continuous environment |
+| 0.10.0 | 2024-02-06 | Started on another repositry, Introducing concept Consulat |
 
 ## Plans
 
@@ -64,6 +65,16 @@ $multiDimArray = [
 - [ ] Table maker
 
 ##### *Tribune*
+
+##### *SuperCal*
+- 曜日
+- 十干十二支（干支）
+- 月齢
+- 六曜
+- 九星
+- 二十四節気
+- 四柱推命
+- 六星占術
 
 ## Notes
 - AWPに求める機能

@@ -198,7 +198,7 @@ trait Tr_HypreLime {
      *  @return wrapped $content with <pre><code> as Int_PQueue object
      *  @since  ver. 0.10.2 (edit. Pierre)
      */
-    public static function consolate(mixed $content = null): Int_PQueue
+    public static function slap(mixed $content = null): Int_PQueue
     {
         return new Lime('pre', new Lime('code', print_r($content, true)));
     }

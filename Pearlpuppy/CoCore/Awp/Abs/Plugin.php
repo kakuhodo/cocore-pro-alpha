@@ -7,6 +7,7 @@ use Pearlpuppy\CoCore\Myt\Lime;
 /**
  *  @file   Plugin
  *      Automates action and filter hooks.
+ *  @since  ver. 0.10.1 (edit. Pierre)
  */
 
 abstract class Abs_Plugin implements Int_Gene
@@ -27,6 +28,7 @@ abstract class Abs_Plugin implements Int_Gene
     // Properties
 
     /**
+     *  Full path to plugin file
      *  @since  ver. 0.10.1 (edit. Pierre)
      */
     protected string $product_file;
@@ -177,7 +179,9 @@ abstract class Abs_Plugin implements Int_Gene
             return;
         }
         include_once($file);
-        $this->console->expose();
+        $console = new Lime('section#cocore-consulat', new Lime('h3', 'Consulat'));
+        $console->gratify($this->console);
+        $console->expose();
     }
 
     /**
