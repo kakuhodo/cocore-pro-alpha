@@ -150,6 +150,15 @@ trait Tr_Marshal {
     }
 
     /**
+     *  @since  ver. 0.10.4 (edit. Pierre)
+     */
+    public static function jenga(int $int, iterable $array)
+    {
+        $index = $int % count($array);
+        return $array[$index] ?? false;
+    }
+
+    /**
      *
      */
 

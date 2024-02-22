@@ -56,6 +56,19 @@ trait Tr_Survayor {
     }
 
     /**
+     *  @update ver. 0.10.4 (edit. Pierre)
+     */
+    public static function scape(mixed $value, bool $dumpy = false)
+    {
+        $func = $dumpy ? 'var_export' : 'print_r';
+        return $func($value, true);
+    }
+
+    /**
+     *
+     */
+
+    /**
      *
      */
 

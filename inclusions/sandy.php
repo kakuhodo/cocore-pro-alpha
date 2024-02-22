@@ -1,26 +1,71 @@
 <?php
 namespace Kakuhodo\CoCore;
 
-/**
- *
- */
-use Pearlpuppy\CoCore\Awp;
-use Pearlpuppy\CoCore\Myt;
-use Pearlpuppy\CoCore\Myt\Lime;
+use Pearlpuppy\CoCore\{
+    Awp,
+    Myt,
+    Myt\Lime,
+    SuperCal,
+    SuperCal\Cal,
+};
 
 /**
- *  @file   
- *      
- */
-
-/**
- *
+ *  @file   Sandy
  */
 global $product;
 
 /**
  *
  */
+
+/**
+ *
+ */
+
+
+
+/**
+ *
+ */
+$cal = new Cal('1981-12-15');
+$product->slap($cal->format('l'), 'U was born on ');
+$product->slap($cal, 'Cal');
+
+/**
+ *
+ */
+$sexcat = SuperCal\SexagenaryCatalogue::getInstance();
+$product->slap($sexcat, 'SexCat');
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ *
+$product->slap($product, 'Product');
+
+/**
+ *
+ *
+$product->slap($product->doDyna(), 'stac');
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ *
 $array = [
     1,
     2,
@@ -32,14 +77,14 @@ $rai = new \RecursiveArrayIterator($array);
 
 $rai['hoge'] = ['mage' => 'fuga'];
 
-$product->consoler($rai);
+$product->slap($rai, 'test');
 
 
 /**
  *
- */
+ *
 $hoge = new Lime('h1#99', 'Wii!');
-$product->consoler($hoge);
+$product->slap($hoge);
 
 wp_admin_notice('This UNHOOKED message via <code>' . basename(__FILE__) . '</code>', ['type' => 'success']);
 
@@ -55,23 +100,11 @@ $ul->expose();
 /**
  *
  *
-$product->consoler('hoge');
-$product->consoler($product);
-#$product->consoler('mage', 1);
+$product->slap('hoge');
+$product->slap($product);
+#$product->slap('mage', 1);
 
 #$product->consExpose();
-
-/**
- *
- */
-
-/**
- *
- */
-
-/**
- *
- */
 
 /**
  *

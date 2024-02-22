@@ -3,7 +3,6 @@ namespace Pearlpuppy\NittyGritty;
 
 /**
  *  @file   
- *      
  */
 
 class Foo

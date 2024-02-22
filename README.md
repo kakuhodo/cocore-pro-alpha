@@ -53,6 +53,15 @@ $multiDimArray = [
 
 ### CoCore
 - [ ] *SuperCal*
+    - [ ] 曜日
+    - [ ] 十干十二支（干支）
+    - [ ] 12星座
+    - [ ] 月齢
+    - [ ] 六曜
+    - [ ] 九星
+    - [ ] 二十四節気
+    - [ ] 四柱推命
+    - [ ] 六星占術
 
 #### AWP
 - [ ] ~~*Nottingham*~~
@@ -65,16 +74,6 @@ $multiDimArray = [
 - [ ] Table maker
 
 ##### *Tribune*
-
-##### *SuperCal*
-- 曜日
-- 十干十二支（干支）
-- 月齢
-- 六曜
-- 九星
-- 二十四節気
-- 四柱推命
-- 六星占術
 
 ## Notes
 - AWPに求める機能
@@ -118,6 +117,35 @@ $multiDimArray = [
 > namespace Pearlpuppy\CoCore\Awp;
 > use Pearlpuppy\CoCore\Myt;
 > ```
+
+### 二十四節気 ほか、算出式
+@ref    https://www.nishishi.com/blog/2022/06/calc_equinoxday.html
+
+```
+// 以下、各日付の "日" の整数値を算出
+# 春分(March)
+vernal_equinox =int(20.8431+0.242194*($year-1980)-int(($year-1980)/4))
+# 秋分(September)
+automnal_equinox =int(23.2488+0.242194*($year-1980)-int(($year-1980)/4))
+# 夏至(June)
+summer_solstice =int(22.2747+0.24162603*($year-1900)-int(($year-1900)/4))
+# 冬至(December)
+winter_solstice =int(22.6587+0.24274049*($year-1900)-int(($year-1900)/4))
+# 節分(February) - 立春の前日
+spring_commences_eve =int(4.8693+0.242713*($year-1901)-int(($year-1901)/4))-1
+
+// 上記の int($val) は、PHP の (int) floor($val) に相当
+```
+
+### その他、算出式
+
+```
+# 六十干支
+0: 甲子
+1: 乙丑
+...
+N = (Y - 4) % 60
+```
 
 ### `Iterator | Generator` (なんつーか、*Great Pre-trained Teacher* ですわ) 
 GTPセンセから `Generator` について教わったときは、
@@ -168,3 +196,32 @@ Productに設定される案件（ユースケースや企画等）を指す。
 
 ### *Lemon* object
 *Myt* が具備する HTML element 生成オブジェクトの総称。*PQueue* インターフェイスを実装。
+
+## References
+
+- 暦計算室 / 国立天文台  https://eco.mtk.nao.ac.jp/koyomi/
+- 六十干支 / 日本の暦  https://www.ndl.go.jp/koyomi/chapter3/s1.html
+- Solar System Dynamics / NASA Jet Propulsion Laboratory    https://ssd.jpl.nasa.gov
+
+## Sample codes
+
+### Singleton pattern
+
+```php
+class Singleton {
+    private static $instance = null;
+
+    private function __construct() {
+        // something initialise
+    }
+
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+}
+
+$solo = Singleton::getInstance();
+```

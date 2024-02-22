@@ -21,6 +21,12 @@ class Consulat extends Myt\Convertor
      *
      */
 
+    // Properties
+ 
+    /**
+     *
+     */
+
     // Constructor
 
     /**

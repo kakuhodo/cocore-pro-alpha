@@ -42,7 +42,7 @@ class Product extends Abs_Plugin
      */
     public function hookActionAdminNotices()
     {
-        echo '<div class="notice notice-error is-dismissible"><p>OVERRIDEN via <code>' . __FUNCTION__ . '</code> of <code>' . __CLASS__ . '</code></p></div>';
+        echo '<div class="notice notice-success is-dismissible"><p>OVERRIDEN via <code>' . __FUNCTION__ . '</code> of <code>' . __CLASS__ . '</code></p></div>';
     }
 
     /**
@@ -50,7 +50,7 @@ class Product extends Abs_Plugin
      */
     public function scActionAdminNotices()
     {
-        echo '<div class="notice notice-info"><p>This info from <code>' . __CLASS__ . '</code></p></div>';
+        // echo '<div class="notice notice-info"><p>This info from <code>' . __CLASS__ . '</code></p></div>';
     }
 
     /**

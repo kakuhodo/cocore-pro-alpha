@@ -10,7 +10,7 @@ use Pearlpuppy\CoCore\Myt\Lime;
  *  @since  ver. 0.10.1 (edit. Pierre)
  */
 
-abstract class Abs_Plugin implements Int_Gene
+abstract class Abs_Plugin extends Abs_Core implements Int_Scheme
 {
 
 	// Mixins
@@ -60,6 +60,7 @@ abstract class Abs_Plugin implements Int_Gene
      */
     public function __construct(string $file, ?string $namespace = null)
     {
+        parent::__construct();
         $this->product_file = $file;
         $this->product_ns = $namespace;
         $this->configure();
@@ -135,8 +136,7 @@ abstract class Abs_Plugin implements Int_Gene
      */
     public function hookActionAdminNotices()
     {
-        echo '<div class="notice notice-error is-dismissible"><p>via <code>' . __FUNCTION__ . '</code> of <code>' . __CLASS__ . '</code></p></div>';
-        echo '<div class="notice notice-info"><p>Info</p></div>';
+        echo '<div class="notice notice-sccess is-dismissible"><p>via <code>' . __FUNCTION__ . '</code> of <code>' . __CLASS__ . '</code></p></div>';
     }
 
     /**
@@ -149,12 +149,31 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
+     *  @ref    https://developer.wordpress.org/reference/hooks/admin_enqueue_scripts/
+     *  @param $hook_suffix string  The current admin page.
+     *  @since  ver. 0.10.4 (edit. Pierre)
+     */
+    public function hookActionAdminEnqueueScripts($hook_suffix = null)
+    {
+        $handle = $this->nice('brand');
+        $css = "$handle.css";
+        $file = $this->productDir('path', 'css', $css);
+        if (!file_exists($file)) {
+            return;
+        }
+        $src = $this->productStyleUri($css);
+        $deps = [];
+        $ver = $this->plugin_data['Version'];
+        wp_enqueue_style($handle, $src, $deps, $ver);
+    }
+
+    /**
      *  @since  ver. 0.10.1 (edit. Pierre)
      */
     protected function sandyWidget()
     {
         $args = array(
-            'widget_id' => 'cocore-sandy',
+            'widget_id' => $this->nice('brand') . '-sandy',
             'widget_name' => 'Samdy',
             'callback' => [$this, 'wcbSandy'],
             'control_callback' => [$this, 'wcbSandyControl'],
@@ -172,7 +191,7 @@ abstract class Abs_Plugin implements Int_Gene
      */
     public function wcbSandy()
     {
-        $file = $this->productIncDir('sandy.php');
+        $file = $this->productIncPath('sandy.php');
         if (!file_exists($file)) {
             $no_file = new Lime('p', __("There's no sandy.php file.", $this->plugin_data['TextDomain']));
             $no_file->expose();
@@ -193,25 +212,62 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *  @since  ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.4 (edit. Pierre)
      */
-    public function productDir(): string
+    public function productDir(string $prot, ?string $dir = null, ?string $file = null): string
     {
-        return plugin_dir_path($this->product_file);
+        $func = "plugin_dir_$prot";
+        $responce = $func($this->product_file);
+        $responce .= $dir ? $this->conf->dir->$dir . '/' : null;
+        return $responce . $file;
     }
 
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
      */
-    public function productIncDir(string $file): string
+    public function productPath(): string
     {
-        return $this->productDir() . $this->conf->dir->inc . "/$file";
+        return $this->productDir('path');
     }
 
     /**
+     *  @since  ver. 0.10.4 (edit. Pierre)
+     */
+    public function productUri(): string
+    {
+        return $this->productDir('url');
+    }
+
+    /**
+     *  @since  ver. 0.10.1 (edit. Pierre)
+     *  @update  ver. 0.10.4 (edit. Pierre)
+     */
+    public function productIncPath(string $file = null): string
+    {
+        return $this->productDir('path', 'inc', $file);
+    }
+
+    /**
+     *  @since  ver. 0.10.4 (edit. Pierre)
+     */
+    public function productAssetUri(string $file = null): string
+    {
+        return $this->productDir('url', 'asset', $file);
+    }
+
+    /**
+     *  @since  ver. 0.10.4 (edit. Pierre)
+     */
+    public function productStyleUri(string $file = null): string
+    {
+        return $this->productDir('url', 'css', $file);
+    }
+
+    /**
+     *  Pushes data into Consulat stream
      *  @since ver. 0.10.2 (edit. Pierre)
      */
-    public function consoler(mixed $output, string|int|null $label = null)
+    public function slap(mixed $output, string|int|null $label = null)
     {
         $this->console[$label] = $output;
     }
@@ -225,16 +281,21 @@ abstract class Abs_Plugin implements Int_Gene
     }
 
     /**
-     *
+     *  Do test something
      */
-    public static function stac()
+    public function doDyna()
     {
-        return static::class;
+        $reflector = new \ReflectionClass(static::class);
+        return $reflector->getNamespaceName();
     }
 
     /**
-     *
+     *  Do test something
      */
+    public static function doStat()
+    {
+        
+    }
 
     /**
      *

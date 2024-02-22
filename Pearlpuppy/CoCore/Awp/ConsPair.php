@@ -32,7 +32,8 @@ class ConsPair extends Myt\DlPair {
      */
     protected function dlContents(string $dt, mixed $dd): array
     {
-        return parent::dlContents($dt, self::slap($dd));
+        $dumpy = substr($dt, 0, 1) == '_';
+        return parent::dlContents($dt, self::consolate($dd, $dumpy));
     }
 
     /**
