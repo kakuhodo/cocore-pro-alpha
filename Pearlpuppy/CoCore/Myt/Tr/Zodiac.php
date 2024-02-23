@@ -69,7 +69,10 @@ trait Tr_Zodiac {
         'みず',
     );
 
-    puclic static $dome_branches = array(
+    /**
+     *  @since  ver. 0.10.4 (edit. Pierre)
+     */
+    public static $dome_branches = array(
         'ね',
         'うし',
         'とら',
