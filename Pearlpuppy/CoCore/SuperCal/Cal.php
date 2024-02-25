@@ -37,13 +37,13 @@ class Cal extends \DateTimeImmutable
 
     /**
      *
-     */
+     *
     public int $y;
 
     /**
      *
      */
-    public array $data = [];
+    public Crystal $data;
 
     // Constructor
 
@@ -54,8 +54,8 @@ class Cal extends \DateTimeImmutable
     {
         parent::__construct($datetime, $timezone);
         $this->integrate();
-        $this->calDayOfWeek();
-        $this->calSexagenary();
+        // $this->calDayOfWeek();
+        // $this->calSexagenary();
     }
 
     // Methods
@@ -65,7 +65,10 @@ class Cal extends \DateTimeImmutable
      */
     private function integrate()
     {
-        $this->y = (int) $this->format('Y');
+        $this->data = new Crystal;
+        $this->data->y = (int) $this->format('Y');
+        $this->data->m = (int) $this->format('n');
+        $this->data->d = (int) $this->format('j');
     }
 
     /**
@@ -97,7 +100,7 @@ class Cal extends \DateTimeImmutable
      */
     public function test()
     {
-        return $this->y;
+        // return $this->y;
     }
 
     /**

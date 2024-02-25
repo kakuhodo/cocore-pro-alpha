@@ -94,8 +94,10 @@ $multiDimArray = [
 - SuperCal の構成
     - `Cal`
         - 個別の日付に対応、`DateTimeImmutable` の拡張
-    - `Cristal`
+    - `Crystal`
         - **年、月、日、その他 に分けるか、要検討**
+            - 分けるなら、`ArrayIterator`、統合型なら `RecursiveArrayIterator`
+                - → **一旦統合型で** (2024-02-25)
     - `Integrator`
         - エンコーダ、静的メソッドのライブラリ
         - 日付を各要素（サブセット）を生成するための値 (int) に変換

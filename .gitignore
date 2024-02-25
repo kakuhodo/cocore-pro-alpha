@@ -2,6 +2,7 @@
 #   for CoCore
 # -------------
 .nova
+.sass-cache
 
 # -------------
 #   Typical patterns

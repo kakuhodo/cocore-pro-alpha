@@ -16,7 +16,9 @@ global $product;
 
 /**
  *
- */
+ *
+$hoge = new \DateTimeImmutable;
+$product->slap($hoge, 'Hoge');
 
 /**
  *
@@ -42,11 +44,12 @@ $cal = new Cal('-0006-12-15');
 $product->slap($cal->test(), '_Test');
 $product->slap($cal->format('l'), 'U was born on ');
 $product->slap($cal, 'Cal');
-$product->slap($cal->getTimezone(), 'TZ');
 
 /**
  *
  *
+$product->slap($cal->getTimezone(), 'TZ');
+
 $sexcat = SuperCal\SexagenaryCatalogue::getInstance();
 $product->slap($sexcat, 'SexCat');
 
