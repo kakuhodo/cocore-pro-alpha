@@ -91,8 +91,8 @@ trait Tr_Zodiac {
      *  @since  ver. 0.10.4 (edit. Pierre)
      */
     public static $yinyang_dome_format = array(
-        '%sのえ%s',
-        '%sのと%s',
+        'yang' => '%sのえ%s',
+        'yin' => '%sのと%s',
     );
 
     /**
@@ -110,7 +110,7 @@ trait Tr_Zodiac {
 
     /**
      *    The nine stars.
-     *        Each star has a pair of index number for colour and wuxing.
+     *        Each star has a pair of index number for colour and Wu Xing element.
      */
     public static $nine_stars = array(
         array(0, 4),

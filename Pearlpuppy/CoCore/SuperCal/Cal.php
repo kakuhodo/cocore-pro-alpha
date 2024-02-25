@@ -38,6 +38,11 @@ class Cal extends \DateTimeImmutable
     /**
      *
      */
+    public int $y;
+
+    /**
+     *
+     */
     public array $data = [];
 
     // Constructor
@@ -48,7 +53,9 @@ class Cal extends \DateTimeImmutable
     public function __construct(string $datetime = "now", ?\DateTimeZone $timezone = null)
     {
         parent::__construct($datetime, $timezone);
+        $this->integrate();
         $this->calDayOfWeek();
+        $this->calSexagenary();
     }
 
     // Methods
@@ -56,7 +63,31 @@ class Cal extends \DateTimeImmutable
     /**
      *
      */
-    protected function calDayOfWeek()
+    private function integrate()
+    {
+        $this->y = (int) $this->format('Y');
+    }
+
+    /**
+     *
+     */
+
+    /**
+     *
+     */
+    private function calSexagenary()
+    {
+        $i = ($this->y - 4) % 60;
+        if ($i < 0) {
+            $i += 60;
+        }
+        $this->data['sexage'] = $i;
+    }
+
+    /**
+     *
+     */
+    private function calDayOfWeek()
     {
         $this->data['dow'] = (int) $this->format('w');
     }
@@ -64,6 +95,10 @@ class Cal extends \DateTimeImmutable
     /**
      *
      */
+    public function test()
+    {
+        return $this->y;
+    }
 
     /**
      *

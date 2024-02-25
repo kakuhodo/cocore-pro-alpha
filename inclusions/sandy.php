@@ -20,20 +20,33 @@ global $product;
 
 /**
  *
- */
+ *
+class Fruits extends \RecursiveArrayIterator
+{
+    public $jamable = true;
+}
 
+$fruits = [
+    'red' => ['apple', 'strawberry']
+];
+$i_fruits = new Fruits($fruits);
 
+$i_fruits['jamable'] = false;
+
+$product->slap($i_fruits->red, 'ite fruits');
 
 /**
  *
  */
-$cal = new Cal('1981-12-15');
+$cal = new Cal('-0006-12-15');
+$product->slap($cal->test(), '_Test');
 $product->slap($cal->format('l'), 'U was born on ');
 $product->slap($cal, 'Cal');
+$product->slap($cal->getTimezone(), 'TZ');
 
 /**
  *
- */
+ *
 $sexcat = SuperCal\SexagenaryCatalogue::getInstance();
 $product->slap($sexcat, 'SexCat');
 

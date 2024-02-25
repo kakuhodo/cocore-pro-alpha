@@ -3,7 +3,7 @@ namespace Pearlpuppy\CoCore\Myt;
 
 /**
  *    @file
- *    Methods library built statically.
+ *    Methods library, non-constructible, non-extendible
  */
 
 final class Tribune
