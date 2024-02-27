@@ -44,6 +44,7 @@ $multiDimArray = [
 ## Versions
 | version | updated | memo |
 |:---:|:---:|---|
+| 0.10.4 | 2024-02-26 | Introducing package SuperCal |
 | 0.10.3 | 2024-02-19 | Brushed concept Consulat upto concept AC/DC, Terminated `Abs_Citrus` |
 | 0.10.2 | 2024-02-17 | Began Consulat developement |
 | 0.10.1 | 2024-02-13 | Established this continuous environment |
@@ -131,6 +132,10 @@ $multiDimArray = [
 > use Pearlpuppy\CoCore\Myt;
 > ```
 
+### Subsets for _SuperCal_
+- 二十四節気と十二宮（西洋占星術）には一定の相関性があるため、可能なかぎり共通の計算式を使用する
+    - 月の干支等も同様
+
 ### 二十四節気 ほか、算出式
 @ref    https://www.nishishi.com/blog/2022/06/calc_equinoxday.html
 
@@ -209,6 +214,10 @@ Productに設定される案件（ユースケースや企画等）を指す。
 
 ### _Lemon_ object
 _Myt_ が具備する HTML element 生成オブジェクトの総称。_PQueue_ インターフェイスを実装。
+
+## Memo
+### 二十四節気 (Solar terms)
+> 赤道を境に正反対になる（例：北半球が大暑のとき南半球は大寒である）。
 
 ## References
 

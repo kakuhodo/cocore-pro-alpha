@@ -65,10 +65,13 @@ class Cal extends \DateTimeImmutable
      */
     private function integrate()
     {
-        $this->data = new Crystal;
+        // $this->data = new Crystal(['year' => [], 'month' => [], 'day' => []]);
+        $this->data = new Crystal();
         $this->data->y = (int) $this->format('Y');
         $this->data->m = (int) $this->format('n');
         $this->data->d = (int) $this->format('j');
+        $this->data->dow = (int) $this->format('w');
+        Integrator::penetrate($this->data);
     }
 
     /**

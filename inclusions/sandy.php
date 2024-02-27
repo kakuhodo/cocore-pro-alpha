@@ -17,6 +17,44 @@ global $product;
 /**
  *
  *
+for ($i = 0; $i < 24; $i++) {
+    $l = ($i + 21) % 24 * 15;
+    $m = floor(($i + 2) % 24 / 2) + 1;
+    $s = SuperCal\Integrator::stGetSign($i);
+    echo "<pre>i = $i, mon = $m, λ = $l, sign = $s</pre>";
+}
+
+/**
+ *
+ */
+$lc = SuperCal\Integrator::annualTermDays(2, 1968);
+$product->slap($lc, '_term');
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+$y = 100;
+$z = 100;
+$product->slap($y--, 'Y--');
+$product->slap(--$z, '--Z');
+$product->slap($y, 'Y');
+$product->slap($z, 'Z');
+
+/**
+ *
+ */
+$cal = new Cal('1968-06-25');
+$product->slap(intval(abs(-4.2)), '_-4.2');
+$product->slap($cal->format('l'), 'was born on ');
+$product->slap($cal, 'Cal');
+
+/**
+ *
+ *
 $hoge = new \DateTimeImmutable;
 $product->slap($hoge, 'Hoge');
 
@@ -36,14 +74,6 @@ $i_fruits = new Fruits($fruits);
 $i_fruits['jamable'] = false;
 
 $product->slap($i_fruits->red, 'ite fruits');
-
-/**
- *
- */
-$cal = new Cal('-0006-12-15');
-$product->slap($cal->test(), '_Test');
-$product->slap($cal->format('l'), 'U was born on ');
-$product->slap($cal, 'Cal');
 
 /**
  *

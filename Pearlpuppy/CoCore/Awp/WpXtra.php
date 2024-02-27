@@ -20,7 +20,7 @@ final class WpXtra
     /**
      *
      */
-    use Myt\Tr_Static;
+    use Myt\Tr_Inconstructible;
 
     // Constants
 

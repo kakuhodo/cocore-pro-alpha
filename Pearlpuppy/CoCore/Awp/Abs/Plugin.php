@@ -169,12 +169,13 @@ abstract class Abs_Plugin extends Abs_Core implements Int_Scheme
 
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
+     *  @update ver. 0.10.5 (edit. Pierre)
      */
     protected function sandyWidget()
     {
         $args = array(
             'widget_id' => $this->nice('brand') . '-sandy',
-            'widget_name' => 'Samdy',
+            'widget_name' => 'Sandy',
             'callback' => [$this, 'wcbSandy'],
             'control_callback' => [$this, 'wcbSandyControl'],
             'callback_args' => null,

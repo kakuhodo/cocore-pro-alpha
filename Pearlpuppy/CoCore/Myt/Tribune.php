@@ -27,7 +27,7 @@ final class Tribune
     /**
      *
      */
-    use Tr_Static;
+    use Tr_Inconstructible;
 
     // Constants
 

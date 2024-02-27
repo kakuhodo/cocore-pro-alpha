@@ -48,6 +48,7 @@ trait Tr_Zodiac {
 
     /**
      *    The Wu Xing, also known as the Five Elements, Five Phases, the Five Agents ...
+     *  @since  ver. 0.7.0 (edit. Sovereign)
      */
     public static $wu_xing = array(
         'wood'    => '木',
@@ -97,6 +98,7 @@ trait Tr_Zodiac {
 
     /**
      *    The seven colours for stars.
+     *  @since  ver. 0.7.0 (edit. Sovereign)
      */
     public static $star_colours = array(
         'white'        => '白',
@@ -110,7 +112,8 @@ trait Tr_Zodiac {
 
     /**
      *    The nine stars.
-     *        Each star has a pair of index number for colour and Wu Xing element.
+     *        Each star has a pair of index number for colour and Wu Xing phase.
+     *  @since  ver. 0.7.0 (edit. Sovereign)
      */
     public static $nine_stars = array(
         array(0, 4),
@@ -173,7 +176,7 @@ trait Tr_Zodiac {
     );
 
     /**
-     *    
+     *  @since  ver. 0.7.0 (edit. Sovereign)
      */
     public static $hexaster_destinies = array(
         'seed'            => '種子',
@@ -191,7 +194,7 @@ trait Tr_Zodiac {
     );
 
     /**
-     *
+     *  @since  ver. 0.7.0 (edit. Sovereign)
      */
     public static $zodiac_signs = array(
         'Aries',
@@ -210,7 +213,7 @@ trait Tr_Zodiac {
 
     /**
      *
-     */
+     *
     public static $zodiac_elements = array(
         'fire',
         'earth',
@@ -220,7 +223,7 @@ trait Tr_Zodiac {
 
     /**
      *
-     */
+     *
     public static $zodiac_modalities = array(
         'cardinal',
         'fixed',
@@ -228,7 +231,7 @@ trait Tr_Zodiac {
     );
 
     /**
-     *
+     *  @since  ver. 0.7.0 (edit. Sovereign)
      */
     public static $astro_formats = array(
         'star'        => '%s星',
@@ -292,10 +295,122 @@ trait Tr_Zodiac {
         ),
     );
 
+    /**
+     *  Solar term (24 terms of seasons)
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    public static $solar_terms = array(
+        'Lichun' => 'Spring commences',
+        'Yushui' => 'Rain water',
+        'Jingzhe' => 'Insects waken',
+        'Chunfen' => 'Vernal equinox',
+        'Qingming' => 'Bright and clear',
+        'Guyu' => 'Corn rain',
+        'Lixia' => 'Summer commences',
+        'Xiaoman' => 'Corn forms',
+        'Mangzhong' => 'Corn on ear',
+        'Xiazhi' => 'Summer solstice',
+        'Xiaoshu' => 'Moderate heat',
+        'Dashu' => 'Great heat',
+        'Liqiu' => 'Autumn commences',
+        'Chushu' => 'End of heat',
+        'Bailu' => 'White dew',
+        'Qiufen' => 'Autumnal equinox',
+        'Hanlu' => 'Cold dew',
+        'Shuangjiang' => 'Frost',
+        'Lidong' => 'Winter commences',
+        'Xiaoxue' => 'Light snow',
+        'Daxue' => 'Heavy snow',
+        'Dongzhi' => 'Winter solstice',
+        'Xiaohan' => 'Moderate cold',
+        'Dahan' => 'Severe cold',
+    );
+
+    /**
+     *  Operands numbers (float) to get the day (number) of month, each Solar term.
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    public static $solterm_operands = array(
+        [4.8693, 0.242713],         // Lichun
+        [19.7062, 0.242627],        // Yushui
+        [6.3968, 0.242512],         // Jingzhe
+        [21.4471, 0.242377],        // Chunfen
+        [5.628, 0.242231],          // Qingming
+        [20.9375, 0.242083],        // Guyu
+        [6.3771, 0.241945],         // Lixia
+        [21.93, 0.241825],          // Xiaoman
+        [6.5733, 0.241731],         // Mangzhong
+        [22.2747, 0.241669],        // Xiazhi
+        [8.0091, 0.241642],         // Xiaoshu
+        [23.7317, 0.241654],        // Dashu
+        [8.4102, 0.241703],         // Liqiu
+        [24.0125, 0.241786],        // Chushu
+        [8.5186, 0.241898],         // Bailu
+        [23.8896, 0.242032],        // Qiufen
+        [9.1414, 0.242179],         // Hanlu
+        [24.2487, 0.242328],        // Shuangjiang
+        [8.2396, 0.242469],         // Lidong
+        [23.1189, 0.242592],        // Xiaoxue
+        [7.9152, 0.242689],         // Daxue
+        [22.6587, 0.242752],        // Dongzhi
+        [6.3811, 0.242778],         // Xiaohan
+        [21.1046, 0.242765],        // Dahan
+    );
+
+    /**
+     *  Astrological signs
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     *
+    public static $astro_signs = array(
+        'Aries',
+        'Taurus',
+        'Gemini',
+        'Cancer',
+        'Leo',
+        'Virgo',
+        'Libra',
+        'Scorpio',
+        'Sagittarius',
+        'Capricorn',
+        'Aquarius',
+        'Pisces',
+    );
+
+    /**
+     *  Astrological signs modalities
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    public static $sign_modality = array(
+        'Cardinal',
+        'Fixed',
+        'Mutable',
+    );
+
+    /**
+     *  Astrological signs triplicities
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    public static $sign_triplicity = array(
+        'Fire',
+        'Earth',
+        'Air',
+        'Water',
+    );
+
+    /**
+     *  Astrological signs polarities
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    public static $sign_polarity = array(
+        'Positive',
+        'Negative',
+    );
+
     // Methods
 
     /**
      *    @param    $key    integer|string
+     *  @since  ver. 0.7.0 (edit. Sovereign)
      */
     public static function wxPhase($key) {
         return \tribune::elbowDrop($key, self::$wu_xing);
@@ -303,6 +418,7 @@ trait Tr_Zodiac {
 
     /**
      *    @param    $key    integer|string
+     *  @since  ver. 0.7.0 (edit. Sovereign)
      */
     public static function starColour($key) {
         return \tribune::elbowDrop($key, self::$star_colours);
@@ -310,6 +426,7 @@ trait Tr_Zodiac {
 
     /**
      *    @param    $number    integer    1-9
+     *  @since  ver. 0.7.0 (edit. Sovereign)
      */
     public static function num2star9($number, $shorty = false) {
         if ($number > 9 || $number < 1) {
@@ -328,6 +445,7 @@ trait Tr_Zodiac {
 
     /**
      *    @param    $number    integer    1-60: The star number.
+     *  @since  ver. 0.7.0 (edit. Sovereign)
      */
     public static function num2star6($number, $shorty = false) {
         if ($number > 60 || $number < 1) {
@@ -343,6 +461,7 @@ trait Tr_Zodiac {
 
     /**
      *
+     *  @since  ver. 0.7.0 (edit. Sovereign)
      */
     public static function sufAstro(&$string, $type) {
         $format = self::$astro_formats[$type];
@@ -354,6 +473,7 @@ trait Tr_Zodiac {
      *
      *    @param    $year    (int)
      *    @return    $dom    (int)    3|4|5, the day of February
+     *  @since  ver. 0.7.0 (edit. Sovereign)
      */
     public static function lichunDay($year) {
         $dom = floor(4.8693 + (0.242713 * ($year - 1901)) - floor(($year - 1901) / 4));

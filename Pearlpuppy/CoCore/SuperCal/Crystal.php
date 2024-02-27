@@ -25,7 +25,7 @@ class Crystal extends \RecursiveArrayIterator
     /**
      *
      */
-    public int $y, $m, $d;
+    public int $y, $m, $d, $dow;
 
     // Constructor
 
