@@ -4,7 +4,7 @@ namespace Pearlpuppy\CoCore\Awp;
 /**
  *
  */
-trait Tr_WPXHooks {
+trait Tr_WpxHooks {
 
     // Mixins
 

@@ -11,7 +11,7 @@ use Pearlpuppy\CoCore\Myt\Lime;
 /**
  *
  */
-trait Tr_WPXLime {
+trait Tr_WpxLime {
 
     // Properties
 

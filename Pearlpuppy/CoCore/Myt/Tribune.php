@@ -20,7 +20,6 @@ final class Tribune
     use Tr_Marshal;        // Iterators
     use Tr_Bough;        // File system and Namespaces
     use Tr_Loca;        // Time and locale
-#    use Tr_WPXtra;        // extended WordPress
     use Tr_Kilter;        // Sanitizers and cleansers
     use Tr_Survayor;    // Debugs and Errors
 

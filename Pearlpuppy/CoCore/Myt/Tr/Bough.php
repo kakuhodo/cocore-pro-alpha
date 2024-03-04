@@ -20,11 +20,17 @@ trait Tr_Bough {
     // Properties
 
     /**
-     *
+     *  @since  ver. 0.1.x (edit. Sovereign)
+     *  @update ver. 0.10.5 (edit. Pierre)
      */
     public static $resourse_extensions = array(
         'style' => 'css',
         'script' => 'js',
+        'image' => array(
+            'png',
+            'jpg',
+            'gif',
+        ),
     );
 
     // Methods

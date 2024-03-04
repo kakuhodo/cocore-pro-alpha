@@ -42,19 +42,17 @@ abstract class Abs_Plugin extends Abs_Scheme implements Int_Wheeler
     public function __construct(string $file)
     {
         parent::__construct($file);
-        $this->configure();
-        $this->plugin_data = WpXtra::pregetPluginData($file);
+        $this->inform();
     }
 
     // Methods
 
     /**
-     *  @since  ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.10.5 (edit. Pierre)
      */
-    protected function configure()
+    protected function inform()
     {
-        $dir = dirname($this->product_file);
-        $this->conf = Tribune::parseJsonFile("$dir/product.json");
+        $this->info = Whip::pregetPluginData($this->product_file);
     }
 
     /**
@@ -97,7 +95,7 @@ abstract class Abs_Plugin extends Abs_Scheme implements Int_Wheeler
         }
         $src = $this->productStyleUri($css);
         $deps = [];
-        $ver = $this->plugin_data['Version'];
+        $ver = $this->info['Version'];
         wp_enqueue_style($handle, $src, $deps, $ver);
     }
 
@@ -128,7 +126,7 @@ abstract class Abs_Plugin extends Abs_Scheme implements Int_Wheeler
     {
         $file = $this->productIncPath('sandy.php');
         if (!file_exists($file)) {
-            $no_file = new Lime('p', __("There's no sandy.php file.", $this->plugin_data['TextDomain']));
+            $no_file = new Lime('p', __("There's no sandy.php file.", $this->info['TextDomain']));
             $no_file->expose();
             return;
         }

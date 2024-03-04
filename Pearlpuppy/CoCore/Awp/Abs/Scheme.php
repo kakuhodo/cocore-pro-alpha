@@ -51,12 +51,12 @@ abstract class Abs_Scheme implements Int_Tuner
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
      */
-    public object $conf;
+    protected object $awp_settings;
 
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
      */
-    public array $plugin_data;
+    protected object|array $info;
 
     /**
      *
@@ -71,13 +71,30 @@ abstract class Abs_Scheme implements Int_Tuner
     {
         $this->bapt();
         $this->assignProduct($file);
+        $this->inform();
+        $this->configure();
         $this->console = new Consulat();
     }
 
     // Methods
 
     /**
-     *
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    abstract protected function inform();
+
+    /**
+     *  @since  ver. 0.10.1 (edit. Pierre)
+     *  @update ver. 0.10.5 (edit. Pierre)
+     */
+    protected function configure()
+    {
+        $dir = dirname($this->product_file);
+        $this->awp_settings = Tribune::parseJsonFile("$dir/product.json");
+    }
+
+    /**
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     protected function bapt(): void
     {
@@ -91,7 +108,7 @@ abstract class Abs_Scheme implements Int_Tuner
     }
 
     /**
-     *
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     protected function assignProduct(string $file): void
     {
@@ -101,7 +118,7 @@ abstract class Abs_Scheme implements Int_Tuner
     }
 
     /**
-     *
+     *  @since  ver. 0.10.1 (edit. Pierre)
      */
     public function nice(string $key): string
     {
@@ -110,13 +127,13 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
-     *  @update  ver. 0.10.2 (edit. Pierre)
+     *  @update ver. 0.10.2 (edit. Pierre)
      */
     protected function assignHook(string $hook_type, string $hook_name)
     {
         $afunc = "add_$hook_type";
         $pmeth = 'hook';
-        $cmeth = $this->conf->prefix;
+        $cmeth = $this->awp_settings->prefix;
         $suffix = ucfirst($hook_type) . Tribune::snake2Stud($hook_name);
         $pmeth .= $suffix;
         $cmeth .= $suffix;
@@ -141,7 +158,7 @@ abstract class Abs_Scheme implements Int_Tuner
      */
     public function hook()
     {
-        $iterator = Tribune::recursiveIterator(WpXtra::$hooks);
+        $iterator = Tribune::recursiveIterator(Whip::$hooks);
         foreach ($iterator as $key => $value) {
             if ($iterator->hasChildren()) {
                 $hook_type = $key;
@@ -158,7 +175,7 @@ abstract class Abs_Scheme implements Int_Tuner
     {
         $func = "plugin_dir_$prot";
         $responce = $func($this->product_file);
-        $responce .= $dir ? $this->conf->dir->$dir . '/' : null;
+        $responce .= $dir ? $this->awp_settings->dir->$dir . '/' : null;
         return $responce . $file;
     }
 
@@ -180,7 +197,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
-     *  @update  ver. 0.10.4 (edit. Pierre)
+     *  @update ver. 0.10.4 (edit. Pierre)
      */
     public function productIncPath(string $file = null): string
     {

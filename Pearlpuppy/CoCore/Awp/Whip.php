@@ -6,7 +6,7 @@ use Pearlpuppy\CoCore\Myt;
 /**
  *
  */
-final class WpXtra
+final class Whip
 {
 
     // Mixins
@@ -14,8 +14,8 @@ final class WpXtra
     /**
      *
      */
-    use Tr_WPXLime;
-    use Tr_WPXHooks;
+    use Tr_WpxLime;
+    use Tr_WpxHooks;
 
     /**
      *
@@ -61,6 +61,37 @@ final class WpXtra
         '_sitewide'   => 'Site Wide Only',
     );
 
+    /**
+     *  @since ver. 0.10.5 (edit. Pierre)
+     */
+    public static $theme_gens = array(
+        'template',
+        'stylesheet',
+    );
+
+    /**
+     *  @since ver. 0.10.5 (edit. Pierre)
+     */
+    public static $enqueue_arg_keys = array(
+        'handle',
+        'src',
+        'deps',
+        'ver',
+        '_plus',
+    );
+
+    /**
+     *  @since ver. 0.10.5 (edit. Pierre)
+     */
+    public static $enqueues = array(
+        'style',
+        'script',
+    );
+
+    /**
+     *  @since ver. 0.10.5 (edit. Pierre)
+     */
+
     // Methods
 
     /**
@@ -68,7 +99,7 @@ final class WpXtra
      */
     public static function greet()
     {
-        echo 'Hi! This is ' . __CLASS__ . ".\n";
+        echo 'Hi! This is ' . __CLASS__ . PHP_EOL;
     }
 
     /**

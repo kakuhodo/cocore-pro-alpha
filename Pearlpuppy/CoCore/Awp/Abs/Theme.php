@@ -14,7 +14,7 @@ use Pearlpuppy\CoCore\Myt\Tribune;
 abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
 {
 
-	// Mixins
+    // Mixins
 
     /**
      *
@@ -33,39 +33,69 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
      */
     public iterable $test;
 
+    /**
+     *
+     */
+    protected iterable $supports;
+
+    /**
+     *
+     */
+    public array $menu_positions;
+
     // Constructor
 
     /**
-     *  @since  ver. 0.9.1 (edit. Quartz)
+     *  @since  ver. 0.10.5 (edit. Pierre)
      */
     public function __construct(string $file)
     {
         parent::__construct($file);
+        $this->setDefaults();
+        $this->assignSupports();
         $this->support();
     }
 
     // Methods
 
     /**
-     *
+     *  @since  ver. 0.10.5 (edit. Pierre)
      */
-    protected function support()
+    protected function inform()
     {
-        $file = dirname($this->product_file) . '/support.conf';
-        $sups = new \RecursiveArrayIterator(parse_ini_file($file, true, INI_SCANNER_TYPED));
-        $this->validate($sups);
-        $supports = Tribune::recursiveIterator($sups);
-        $this->doSupport($supports);
+        $this->info = wp_get_theme();
     }
 
     /**
-     *
+     *  @since  ver. 0.10.5 (edit. Pierre)
      */
-    protected function validate(iterable &$iterator)
+    protected function setDefaults()
+    {
+        $this->menu_positions = array(
+            'header' => __('Header', PROD_TXD),
+            'footer' => __('Footer', PROD_TXD),
+        );
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    protected function assignSupports()
+    {
+        $file = dirname($this->product_file) . '/support.ini';
+        $sups = new \RecursiveArrayIterator(parse_ini_file($file, true, INI_SCANNER_TYPED));
+        $this->validateArgs($sups);
+        $this->supports = $sups;
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    protected function validateArgs(iterable &$iterator)
     {
         foreach ($iterator as &$arg) {
             if (is_iterable($arg)) {
-                $this->validate($arg);
+                $this->validateArgs($arg);
             } elseif (is_string($arg)) {
                 $this->validateStr($arg);
             }
@@ -73,10 +103,11 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
     }
 
     /**
-     *
+     *  @since  ver. 0.10.5 (edit. Pierre)
      */
-    protected function doSupport(iterable $supports)
+    protected function support()
     {
+        $supports = Tribune::recursiveIterator($this->supports);
         foreach ($supports as $feat => $arg) {
             if ($supports->hasChildren()) {
                 if ($supports->getDepth() > 0) {
@@ -90,7 +121,7 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
     }
 
     /**
-     *
+     *  @since  ver. 0.10.5 (edit. Pierre)
      */
     protected function validateStr(string &$str)
     {
@@ -105,12 +136,78 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
     }
 
     /**
-     *
+     *  @since  ver. 0.10.5 (edit. Pierre)
      */
     protected function argIsPath(string $str)
     {
         return preg_match('/^\/.+\.\w+$/', $str);
     }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    public function hookActionAdminHead()
+    {
+        $fa = $this->awp_settings->fontawesome ?? null;
+        if ($fa && $fa->admin) {
+            $this->enableFontawesome($fa->id);
+        }
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    public function hookActionAfterSetupTheme()
+    {
+        $this->navMenus();
+        if (isset($this->supports['editor-styles']) && $this->supports['editor-styles']) {
+            $this->enableEditorStyle();
+        }
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    public function hookActionWpEnqueueScripts()
+    {
+        // wp_enqueue_style('dashicons');
+        wp_enqueue_script('jquery');
+        // aquamonte_queue_assets();
+        // if (is_child_theme()) {
+        //     aquamonte_queue_assets(get_stylesheet());
+        // }
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    protected function enableEditorStyle()
+    {
+        if (is_child_theme()) {
+            add_editor_style(get_template_directory_uri() . '/editor-style.css');
+        }
+        add_editor_style('editor-style.css');
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    protected function enableFontawesome(string $id)
+    {
+        echo '<script src="https://kit.fontawesome.com/' . $id . '.js" crossorigin="anonymous"></script>' . PHP_EOL;
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    protected function navMenus()
+    {
+        register_nav_menus($this->menu_positions);
+    }
+
+    /**
+     *
+     */
 
     /**
      *
