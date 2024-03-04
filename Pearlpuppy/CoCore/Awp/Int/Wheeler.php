@@ -2,11 +2,14 @@
 namespace Pearlpuppy\CoCore\Awp;
 
 /**
- *  @file   Scheme
- *      
+ *  @file   Wheeler
+ *  @since  ver. 0.10.5 (edit. Pierre)
  */
 
-interface Int_Scheme
+/**
+ *  Blueprint for product Plugin
+ */
+interface Int_Wheeler
 {
 
     // Constants

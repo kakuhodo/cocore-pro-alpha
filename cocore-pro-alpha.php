@@ -24,7 +24,7 @@ require_once(__DIR__ . '/sesame.php');
 /**
  *
  */
-$product = new Product(__FILE__, __NAMESPACE__);
+$product = new Product(__FILE__);
 $product->hook();
 
 

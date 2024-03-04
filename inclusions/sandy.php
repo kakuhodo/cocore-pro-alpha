@@ -16,6 +16,31 @@ global $product;
 
 /**
  *
+ */
+$product->slap($product, 'Product');
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
  *
 for ($i = 0; $i < 24; $i++) {
     $l = ($i + 21) % 24 * 15;
@@ -26,7 +51,7 @@ for ($i = 0; $i < 24; $i++) {
 
 /**
  *
- */
+ *
 $lc = SuperCal\Integrator::annualTermDays(2, 1968);
 $product->slap($lc, '_term');
 
@@ -36,7 +61,7 @@ $product->slap($lc, '_term');
 
 /**
  *
- */
+ *
 $y = 100;
 $z = 100;
 $product->slap($y--, 'Y--');
@@ -46,7 +71,7 @@ $product->slap($z, 'Z');
 
 /**
  *
- */
+ *
 $cal = new Cal('1968-06-25');
 $product->slap(intval(abs(-4.2)), '_-4.2');
 $product->slap($cal->format('l'), 'was born on ');

@@ -41,7 +41,7 @@ $multiDimArray = [
 >
 > ※ `Myt\Invertor` は引き続き開発
 
-## Versions
+### Versions
 | version | updated | memo |
 |:---:|:---:|---|
 | 0.10.4 | 2024-02-26 | Introducing package SuperCal |
@@ -49,6 +49,23 @@ $multiDimArray = [
 | 0.10.2 | 2024-02-17 | Began Consulat developement |
 | 0.10.1 | 2024-02-13 | Established this continuous environment |
 | 0.10.0 | 2024-02-06 | Started on another repositry, Introducing concept Consulat |
+
+### Environments
+#### Local
+- MAMP Pro
+    - PHP 8.1.x
+
+#### Remote
+- Xrea plus
+    - PHP 8.1.x
+    - SuperCal (Live)
+        - https://cal.rosypink.com
+
+> [!WARNING]
+> どうやら Xrea の PHP 8.2.x では、現状標準で MySQL (MariaDB) が使えないため、ローカルも含め、8.1.x に落とす。(2024-02-28)
+
+> [!WARNING]
+> どうやら、Xrea の CATCH ALL機能 (default.rosypink.com) では、無料SSLを設定できない模様。本番用のサブドメは、ドメインとサイトを新規作成して、サイト設定でメインドメインに同期させる必要あり。(2024-02-28)
 
 ## Plans
 
@@ -118,9 +135,9 @@ $multiDimArray = [
 > - **Myt** 汎用コンポーネント
 > - **Awp** WP環境拡張コンポーネント
 >
-> _Myt_は特定の環境に依存せず利用可能とする必要がある。したがって、_Myt_から_Awp_等、**他のコンポーネントの参照は不可**。
+> _Myt_ は特定の環境に依存せず利用可能とする必要がある。したがって、 _Myt_ から _Awp_ 等、**他のコンポーネントの参照は不可**。
 >
-> _Myt_は、いわば_CoCore_の基底コンポーネントなので、他のコンポーネントからの_Myt_の参照は随時可能。
+> _Myt_ は、いわば _CoCore_ の基底コンポーネントなので、他のコンポーネントからの _Myt_ の参照は随時可能。
 >
 > ```
 > // これは NG
@@ -180,7 +197,7 @@ _Consulat_ のように入出力を別系統とするケースでは、事後の
 従来、_Sandy_ は、`wp_dashboard_setup` で `wp_add_dashboard_widget` しているが、ダッシュボードウィジェットは、2-4カラムの構成なので、幅が狭い。
 コードビューは基本的に `<pre>` なので、幅は広いほうが好ましい。
 
-`admin_notices` であれば、最大幅を使用できるからこの用途に最適かと思ったけど、検証の結果、どうやら _hook_ のタイミングの関係で、_Sandy_ で追加したものは、`admin_notices` で _Consulat_ を展開してもでは出力されない。
+`admin_notices` であれば、最大幅を使用できるからこの用途に最適かと思ったけど、検証の結果、どうやら _hook_ のタイミングの関係で、 _Sandy_ で追加したものは、`admin_notices` で _Consulat_ を展開してもでは出力されない。
 こういうときにPHPの**遅延静的束縛**が有効なのかもと思ったけど、こちらも試してみた結果どうやらダメっぽい。
 `admin_notices` の `$priority` を下げてみてもやはりダメ。(2024-02-16)
 

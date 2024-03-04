@@ -7,5 +7,7 @@
         "img": "assets/images",
         "css": "assets/styles",
         "js": "assets/scripts"
-    }
+    },
+    "dum_number": 369,
+    "dum_str": "this is dummy"
 }
