@@ -69,6 +69,18 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
      */
+    public function productDir(bool $uri = false, ?string $dir = null, ?string $file = null): string
+    {
+        $func = 'get_stylesheet_directory';
+        $func .= $uri ? '_uri' : '';
+        $responce = $func();
+        $responce .= $dir ? '/' . $this->awp_settings->dir->$dir . '/' : null;
+        return $responce . $file;
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
     protected function setDefaults()
     {
         $this->menu_positions = array(
@@ -168,14 +180,10 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
      */
-    public function hookActionWpEnqueueScripts()
+    public function hookActionWpEnqueueScripts($hook_suffix = null)
     {
-        // wp_enqueue_style('dashicons');
-        wp_enqueue_script('jquery');
-        // aquamonte_queue_assets();
-        // if (is_child_theme()) {
-        //     aquamonte_queue_assets(get_stylesheet());
-        // }
+        parent::hookActionWpEnqueueScripts($hook_suffix);
+        $this->optEnqueues();
     }
 
     /**
@@ -204,6 +212,29 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
     {
         register_nav_menus($this->menu_positions);
     }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    protected function optEnqueues()
+    {
+        foreach ($this->awp_settings->front_use as $handle => $do) {
+            if (!$do) {
+                continue;
+            }
+            $asset = Whip::$optional_enqueues[$handle];
+            $func = "wp_enqueue_$asset";
+            $func($handle);
+        }
+    }
+
+    /**
+     *
+     */
+
+    /**
+     *
+     */
 
     /**
      *

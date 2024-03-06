@@ -52,7 +52,19 @@ abstract class Abs_Plugin extends Abs_Scheme implements Int_Wheeler
      */
     protected function inform()
     {
-        $this->info = Whip::pregetPluginData($this->product_file);
+        $this->info = new WpxPlugin(Whip::pregetPluginData($this->product_file));
+    }
+
+    /**
+     *  @since  ver. 0.10.4 (edit. Pierre)
+     */
+    public function productDir(bool $uri = false, ?string $dir = null, ?string $file = null): string
+    {
+        $prot = $uri ? 'url' : 'path';
+        $func = "plugin_dir_$prot";
+        $responce = $func($this->product_file);
+        $responce .= $dir ? $this->awp_settings->dir->$dir . '/' : null;
+        return $responce . $file;
     }
 
     /**
@@ -84,8 +96,28 @@ abstract class Abs_Plugin extends Abs_Scheme implements Int_Wheeler
      *  @ref    https://developer.wordpress.org/reference/hooks/admin_enqueue_scripts/
      *  @param $hook_suffix string  The current admin page.
      *  @since  ver. 0.10.4 (edit. Pierre)
-     */
+     *
     public function hookActionAdminEnqueueScripts($hook_suffix = null)
+    {
+        $handle = $this->nice('brand');
+        $css = "$handle.css";
+        $file = $this->productDir(false, 'css', $css);
+        if (!file_exists($file)) {
+            return;
+        }
+        $src = $this->productStyleUri($css);
+        $deps = [];
+        $ver = $this->info->get('Version');
+        wp_enqueue_style($handle, $src, $deps, $ver);
+        // if (wp_style_is($handle)) {
+        //     static::$dependencies[] = $handle;
+        // }
+    }
+
+    /**
+     *  JUST TEST !!! REMOVE ON LIVE
+     *
+    public function hookActionWpEnqueueScripts($hook_suffix = null)
     {
         $handle = $this->nice('brand');
         $css = "$handle.css";
@@ -143,6 +175,22 @@ abstract class Abs_Plugin extends Abs_Scheme implements Int_Wheeler
     {
         
     }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     *
+    protected function enqueueAssets(array $deps = [], mixed $plus = null)
+    {
+        
+    }
+
+    /**
+     *
+     */
+
+    /**
+     *
+     */
 
     /**
      *

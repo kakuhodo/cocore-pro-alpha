@@ -4,6 +4,11 @@ namespace Pearlpuppy\CoCore\Awp;
 use Pearlpuppy\CoCore\Myt;
 
 /**
+ *  @file   Whip
+ *      renamed from 'WPXtra' (ver. 0.10.5)
+ */
+
+/**
  *
  */
 final class Whip
@@ -77,7 +82,7 @@ final class Whip
         'src',
         'deps',
         'ver',
-        '_plus',
+        '_plus',        // for style (string) $media, for script (array) $args ['strategy' => (str) 'async'|'defer', 'in_footer' =>(bool)] (default: [])
     );
 
     /**
@@ -89,8 +94,13 @@ final class Whip
     );
 
     /**
+     *  WP builtin assets
      *  @since ver. 0.10.5 (edit. Pierre)
      */
+    public static $optional_enqueues = array(
+        'dashicons' => 'style',
+        'jquery' => 'script',
+    );
 
     // Methods
 
@@ -133,7 +143,8 @@ final class Whip
      */
     public static function wpx_path2uri($file) {
         $uri_pre = home_url('/');
-        $path_pre = \get_home_path();
+        // $path_pre = \get_home_path();
+        $path_pre = ABSPATH;
         return esc_url(str_replace($path_pre, $uri_pre, $file));
     }
 
@@ -313,6 +324,14 @@ final class Whip
             $index += 1;
             return rtrim($dirs[$index], 's');
         }
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    public static function enqueue(string $asset_type, array $args)
+    {
+        return call_user_func_array("wp_enqueue_$asset_type", $args);
     }
 
     /**

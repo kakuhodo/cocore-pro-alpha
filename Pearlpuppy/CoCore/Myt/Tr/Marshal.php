@@ -159,6 +159,26 @@ trait Tr_Marshal {
     }
 
     /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    public static function sliceArrayCombine(array $keys, array $values): array
+    {
+        $ck = count($keys);
+        $cv = count($values);
+        switch ($ck <=> $cv) {
+            case 1:
+                $keys = array_slice($keys, 0, $cv);
+                break;
+            case -1:
+                break;
+                $values = array_slice($values, 0, $ck);
+            default:
+                break;
+        }
+        return array_combine($keys, $values);
+    }
+
+    /**
      *
      */
 

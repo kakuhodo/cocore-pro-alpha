@@ -2,7 +2,7 @@
 namespace Pearlpuppy\CoCore\Awp;
 
 /**
- *
+ *  @since  ver. 0.8.7 (edit. Chiffon)
  */
 trait Tr_WpxHooks {
 
@@ -20,6 +20,9 @@ trait Tr_WpxHooks {
 
     // Properties
 
+    /**
+     *  @since  ver. 0.8.7 (edit. Chiffon)
+     */
     public static $hooks = array(
         'action' => array(
             'muplugins_loaded',
@@ -710,7 +713,7 @@ trait Tr_WpxHooks {
     // Methods
 
     /**
-     *
+     *  @since  ver. 0.8.7 (edit. Chiffon)
      */
     public static function wpxHookType(string $hookname) {
         $type = null;

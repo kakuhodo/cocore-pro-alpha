@@ -5,6 +5,7 @@ use Pearlpuppy\CoCore\{
     Awp,
     Myt,
     Myt\Lime,
+    Myt\Tribune,
     SuperCal,
     SuperCal\Cal,
 };
@@ -17,7 +18,11 @@ global $product;
 /**
  *
  */
+
+// $product->slap($product::$dependencies, 'deps');
+$product->slap(Awp\Whip::wpx_path2uri(__FILE__), 'uri');
 $product->slap($product, 'Product');
+$product->slap(wp_style_is('cocore'), '_EQ');
 
 /**
  *

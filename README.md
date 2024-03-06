@@ -122,11 +122,20 @@ $multiDimArray = [
     - `Diviner`
         - デコーダ、シングルトン
 
+> [!INFORMATION]
+> `enqueue` の `deps` については、直系の Brand-Product 間のみ設定する。 
+>
+> ```
+> // e.g. ⬇️以外は $deps = []
+> cocore > cocore-pro-alpha, aquamonte > aquamonte-pro-alpha
+> ```
+>
+> `-admin` や `-front` の実装は稀なうえ、テーマからプラグインの参照はあまり現実的でないし、実質的にも意味はほとんどないと考えられる。そのため、これらを実装する場合も依存関係は考慮しない。 (2024-03-06)
 
 > [!IMPORTANT]
 > (ver. 0.10.1-)
 >
-> _CoCore_が備える個別機能群の単位として、従来_package_等、複数の呼称が混在しているが、以後**component**に統一する。
+> _CoCore_ が備える個別機能群の単位として、従来_package_等、複数の呼称が混在しているが、以後**component**に統一する。
 
 > [!WARNING]
 > (ver. 0.10.1-)
@@ -182,12 +191,12 @@ spring_commences_eve =int(4.8693+0.242713*($year-1901)-int(($year-1901)/4))-1
 N = (Y - 4) % 60
 ```
 
-### `Iterator | Generator` (なんつーか、*Great Pre-trained Teacher* ですわ) 
+### `Iterator | Generator` (なんつーか、 _Great Pre-trained Teacher_ ですわ) 
 GTPセンセから `Generator` について教わったときは、
 > Generatorが最後の値をyieldした後、それを再び開始することはできません。全ての値を生成した後、Generatorは終了状態になり、再度イテレートしようとすると何も返しません。この意味で、「使用後に破棄される」と解釈することはできますが、これはGeneratorが一度に1つの値を出力するたびに起こるわけではなく、全ての値が生成された後の話です。
 
 てことで、あとから参照できないなんて不便としか思えず、`Iterator` に軍配を上げたけど、よく考えたら参照したいのは、あとから編集したいというのが主な動機。
-_Consulat_ のように入出力を別系統とするケースでは、事後の編集をどうやって反映させるかを検討する際に、_Lemon_ タイプの複雑なオブジェクト生成後となると、かなり込み入ったロジックを構築しなきゃなんない。
+_Consulat_ のように入出力を別系統とするケースでは、事後の編集をどうやって反映させるかを検討する際に、 _Lemon_ タイプの複雑なオブジェクト生成後となると、かなり込み入ったロジックを構築しなきゃなんない。
 そんな不確かなものに手間をかけるくらいなら、`Iterator` よりさらに速い `Generator` の使いどころって、まさにこれじゃね、という感じ。
 
 そんなわけで、入力 = `Iterator`, 出力 = `Generator` で決着（？） (2024-02-17)
@@ -218,10 +227,10 @@ _Consulat_ のように入出力を別系統とするケースでは、事後の
 ## Glossaries
 
 ### Component
-_CoCore_が具備する機能群の単位。`namespace`の3ブロック目に相当。
+_CoCore_ が具備する機能群の単位。`namespace`の3ブロック目に相当。
 
 ### Scheme
-_CoCore_内部で、WordPress の Theme と Plugin を総称。
+_CoCore_ 内部で、WordPress の Theme と Plugin を総称。
 
 ### Product
 Scheme自身（主にプラグインを想定）の代名詞。当プラグインなら、cocore-pro-alpha を指す。
@@ -230,7 +239,7 @@ Scheme自身（主にプラグインを想定）の代名詞。当プラグイ�
 Productに設定される案件（ユースケースや企画等）を指す。
 
 ### _Lemon_ object
-_Myt_ が具備する HTML element 生成オブジェクトの総称。_PQueue_ インターフェイスを実装。
+_Myt_ が具備する HTML element 生成オブジェクトの総称。 _PQueue_ インターフェイスを実装。
 
 ## Memo
 ### 二十四節気 (Solar terms)

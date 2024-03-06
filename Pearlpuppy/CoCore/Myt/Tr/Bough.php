@@ -33,6 +33,15 @@ trait Tr_Bough {
         ),
     );
 
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    public static $name_sectors = array(
+        'production',
+        'brand',
+        'component',
+    );
+
     // Methods
 
     /**
@@ -83,6 +92,15 @@ trait Tr_Bough {
     {
         $json = file_get_contents($file);
         return json_decode($json, $associative, $depth, $flags);
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    public static function typify(string $namespace): array
+    {
+        $names = explode("\\", $namespace);
+        return self::sliceArrayCombine(self::$name_sectors, $names);
     }
 
     /**

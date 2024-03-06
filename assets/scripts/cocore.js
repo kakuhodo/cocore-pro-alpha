@@ -1,0 +1,3 @@
+/**
+ *  @file   CoCore.js
+ */
