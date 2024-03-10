@@ -21,7 +21,7 @@ final class Tribune
     use Tr_Bough;        // File system and Namespaces
     use Tr_Loca;        // Time and locale
     use Tr_Kilter;        // Sanitizers and cleansers
-    use Tr_Survayor;    // Debugs and Errors
+    use Tr_Survayor;    // Security, Debugs and Errors
 
     /**
      *

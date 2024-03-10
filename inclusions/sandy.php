@@ -13,20 +13,26 @@ use Pearlpuppy\CoCore\{
 /**
  *  @file   Sandy
  */
-global $product;
+global $cocore;
 
 /**
  *
  */
 
-// $product->slap($product::$dependencies, 'deps');
-$product->slap(Awp\Whip::wpx_path2uri(__FILE__), 'uri');
-$product->slap($product, 'Product');
-$product->slap(wp_style_is('cocore'), '_EQ');
+// $cocore->slap($cocore::$dependencies, 'deps');
+$cocore->slap(Awp\Whip::wpx_path2uri(__FILE__), 'uri');
+$cocore->slap($cocore, 'Product');
+$cocore->slap(wp_style_is('cocore'), '_EQ');
 
 /**
  *
  */
+$caller = 'hookActionWpEnqueueScripts';
+$caller2 = 'hookFilterAdminEnqueueScripts';
+$matched = preg_match('/(Action|Filter)([A-Z][^A-Z]+)[A-Z]/', $caller, $matches);
+$matched2 = preg_match('/(Action|Filter)([A-Z][^A-Z]+)[A-Z]/', $caller2, $matches2);
+$cocore->slap($matches, 'matches:');
+$cocore->slap($matches2, 'matches2:');
 
 /**
  *
@@ -58,7 +64,7 @@ for ($i = 0; $i < 24; $i++) {
  *
  *
 $lc = SuperCal\Integrator::annualTermDays(2, 1968);
-$product->slap($lc, '_term');
+$cocore->slap($lc, '_term');
 
 /**
  *
@@ -69,24 +75,24 @@ $product->slap($lc, '_term');
  *
 $y = 100;
 $z = 100;
-$product->slap($y--, 'Y--');
-$product->slap(--$z, '--Z');
-$product->slap($y, 'Y');
-$product->slap($z, 'Z');
+$cocore->slap($y--, 'Y--');
+$cocore->slap(--$z, '--Z');
+$cocore->slap($y, 'Y');
+$cocore->slap($z, 'Z');
 
 /**
  *
  *
 $cal = new Cal('1968-06-25');
-$product->slap(intval(abs(-4.2)), '_-4.2');
-$product->slap($cal->format('l'), 'was born on ');
-$product->slap($cal, 'Cal');
+$cocore->slap(intval(abs(-4.2)), '_-4.2');
+$cocore->slap($cal->format('l'), 'was born on ');
+$cocore->slap($cal, 'Cal');
 
 /**
  *
  *
 $hoge = new \DateTimeImmutable;
-$product->slap($hoge, 'Hoge');
+$cocore->slap($hoge, 'Hoge');
 
 /**
  *
@@ -103,15 +109,15 @@ $i_fruits = new Fruits($fruits);
 
 $i_fruits['jamable'] = false;
 
-$product->slap($i_fruits->red, 'ite fruits');
+$cocore->slap($i_fruits->red, 'ite fruits');
 
 /**
  *
  *
-$product->slap($cal->getTimezone(), 'TZ');
+$cocore->slap($cal->getTimezone(), 'TZ');
 
 $sexcat = SuperCal\SexagenaryCatalogue::getInstance();
-$product->slap($sexcat, 'SexCat');
+$cocore->slap($sexcat, 'SexCat');
 
 /**
  *
@@ -124,12 +130,12 @@ $product->slap($sexcat, 'SexCat');
 /**
  *
  *
-$product->slap($product, 'Product');
+$cocore->slap($cocore, 'Product');
 
 /**
  *
  *
-$product->slap($product->doDyna(), 'stac');
+$cocore->slap($cocore->doDyna(), 'stac');
 
 /**
  *
@@ -153,14 +159,14 @@ $rai = new \RecursiveArrayIterator($array);
 
 $rai['hoge'] = ['mage' => 'fuga'];
 
-$product->slap($rai, 'test');
+$cocore->slap($rai, 'test');
 
 
 /**
  *
  *
 $hoge = new Lime('h1#99', 'Wii!');
-$product->slap($hoge);
+$cocore->slap($hoge);
 
 wp_admin_notice('This UNHOOKED message via <code>' . basename(__FILE__) . '</code>', ['type' => 'success']);
 
@@ -176,11 +182,11 @@ $ul->expose();
 /**
  *
  *
-$product->slap('hoge');
-$product->slap($product);
-#$product->slap('mage', 1);
+$cocore->slap('hoge');
+$cocore->slap($cocore);
+#$cocore->slap('mage', 1);
 
-#$product->consExpose();
+#$cocore->consExpose();
 
 /**
  *
@@ -272,7 +278,7 @@ echo '</code></pre>';
 /**
  *
  *
-global $product;
+global $cocore;
 echo '<pre><code>';
 print_r($CONSL);
 echo '</code></pre>';

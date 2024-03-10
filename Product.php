@@ -48,9 +48,9 @@ class Product extends Abs_Plugin
     /**
      *
      */
-    public function scActionAdminNotices()
+    public function cpaActionAdminNotices()
     {
-        // echo '<div class="notice notice-info"><p>This info from <code>' . __CLASS__ . '</code></p></div>';
+        echo '<div class="notice notice-info"><p>This info from <code>' . __CLASS__ . '</code></p></div>';
     }
 
     /**

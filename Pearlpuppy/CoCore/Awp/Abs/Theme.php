@@ -29,9 +29,10 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
     // Properties
 
     /**
-     *
+     *  Whether the stream via child theme or not.
+     *  @since  ver. 0.10.6 (edit. Pierre)
      */
-    public iterable $test;
+    public bool $streamJunior;
 
     /**
      *
@@ -50,15 +51,89 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
      */
     public function __construct(string $file)
     {
+        $this->streamJunior = is_child_theme();
         parent::__construct($file);
         $this->setDefaults();
         $this->assignSupports();
         $this->support();
     }
 
+    /**
+     *  ---------------------------
+     *  Hooks
+     *  ---------------------------
+     */
+
+    /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     */
+    public function hookActionWpHead()
+    {
+        $fa = $this->vox('fontawesome') ?? null;
+        if ($fa && $fa->front) {
+            $this->enableFontawesome($fa->id);
+        }
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    public function hookActionAfterSetupTheme()
+    {
+        $this->navMenus();
+        if (isset($this->supports['editor-styles']) && $this->supports['editor-styles']) {
+            $this->enableEditorStyle();
+        }
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     *
+    public function hookActionWpEnqueueScripts($hook_suffix = null)
+    {
+        parent::hookActionWpEnqueueScripts($hook_suffix);
+        $this->optEnqueues();
+    }
+
+    /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     */
+    public function hookFilterWpNavMenuArgs(array $args)
+    {
+        $slug = is_string($args['menu']) ? $args['menu'] : null;
+        $args['container'] = 'nav';
+        $args['container_id'] = $slug;
+        $args['container_class'] = 'menu';
+        $args['items_wrap'] = '<ul>%3$s</ul>';
+        return $args;
+    }
+
+    /**
+     *  Cleans builtin lengthy class.
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     */
+    public function hookFilterNavMenuCssClass(array $classes, \WP_Post $menu_item, \stdClass $args, int $depth)
+    {
+        $classes = ['menu-item'];
+        return $classes;
+    }
+
+    /**
+     *  @raf    https://developer.wordpress.org/reference/hooks/body_class/
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     */
+    public function hookFilterBodyClass(array $classes, array $css_class)
+    {
+        $this->modeClassy($classes);
+        $this->layout($classes);
+        return $classes;
+    }
+
     // Methods
 
     /**
+     *  In case called from child theme, this returns the child theme object
+     *      which contains parent object inside.
      *  @since  ver. 0.10.5 (edit. Pierre)
      */
     protected function inform()
@@ -71,7 +146,7 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
      */
     public function productDir(bool $uri = false, ?string $dir = null, ?string $file = null): string
     {
-        $func = 'get_stylesheet_directory';
+        $func = 'get_template_directory';
         $func .= $uri ? '_uri' : '';
         $responce = $func();
         $responce .= $dir ? '/' . $this->awp_settings->dir->$dir . '/' : null;
@@ -158,37 +233,6 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
      */
-    public function hookActionAdminHead()
-    {
-        $fa = $this->awp_settings->fontawesome ?? null;
-        if ($fa && $fa->admin) {
-            $this->enableFontawesome($fa->id);
-        }
-    }
-
-    /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
-     */
-    public function hookActionAfterSetupTheme()
-    {
-        $this->navMenus();
-        if (isset($this->supports['editor-styles']) && $this->supports['editor-styles']) {
-            $this->enableEditorStyle();
-        }
-    }
-
-    /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
-     */
-    public function hookActionWpEnqueueScripts($hook_suffix = null)
-    {
-        parent::hookActionWpEnqueueScripts($hook_suffix);
-        $this->optEnqueues();
-    }
-
-    /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
-     */
     protected function enableEditorStyle()
     {
         if (is_child_theme()) {
@@ -218,7 +262,7 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
      */
     protected function optEnqueues()
     {
-        foreach ($this->awp_settings->front_use as $handle => $do) {
+        foreach ($this->vox('front_use') as $handle => $do) {
             if (!$do) {
                 continue;
             }
@@ -229,8 +273,24 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
     }
 
     /**
-     *
+     *  @since  ver. 0.10.6 (edit. Pierre)
      */
+    protected function modeClassy(array &$classes)
+    {
+        if ($this->sound('dev_mode')) {
+            $classes[] = 'mode-dev';
+        }
+    }
+
+    /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     */
+    protected function layout(array &$classes)
+    {
+        if ($this->sound('layout')) {
+            $classes[] = 'layout-' . $this->vox('layout');
+        }
+    }
 
     /**
      *

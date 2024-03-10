@@ -30,6 +30,16 @@ interface Int_Tuner extends Int_Gene
     /**
      *
      */
+    public function hook();
+
+    /**
+     *
+     */
+    public function vox(string $prop): mixed;
+
+    /**
+     *
+     */
 
 //[EOI]*/
 }

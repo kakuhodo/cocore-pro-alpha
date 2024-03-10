@@ -2,7 +2,7 @@
 namespace Pearlpuppy\CoCore\Myt;
 
 /**
- *    Utilities for developement like debugs, errors.
+ *    Utilities for security and development.
  */
 trait Tr_Survayor {
 
@@ -65,8 +65,17 @@ trait Tr_Survayor {
     }
 
     /**
-     *
+     *  @update ver. 0.10.6 (edit. Pierre)
      */
+    public static function isLocal(): bool
+    {
+        $dom = $_SERVER['SERVER_NAME'] ?? $_SERVER['HTTP_HOST'] ?? false;
+        if (!$dom) {
+            return false;
+        } else {
+            return (bool) preg_match('/\.local$/', $dom);
+        }
+    }
 
     /**
      *

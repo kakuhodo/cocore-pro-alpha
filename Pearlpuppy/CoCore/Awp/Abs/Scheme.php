@@ -18,6 +18,7 @@ abstract class Abs_Scheme implements Int_Tuner
     /**
      *
      */
+    use Tr_Enq;
 
     // Constants
 
@@ -61,7 +62,7 @@ abstract class Abs_Scheme implements Int_Tuner
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
      */
-    protected object|array $info;
+    protected object $info;
 
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
@@ -171,14 +172,52 @@ abstract class Abs_Scheme implements Int_Tuner
         }
         $cfunc .= $cmeth;
         if (method_exists($this, $pmeth)) {
-            call_user_func($afunc, $hook_name, [$this, $pmeth]);
+            call_user_func($afunc, $hook_name, [$this, $pmeth], 10, 999);
         }
         if (method_exists($this, $cmeth)) {
-            call_user_func($afunc, $hook_name, [$this, $cmeth]);
+            call_user_func($afunc, $hook_name, [$this, $cmeth], 10, 999);
         }
         if (function_exists($cfunc)) {
-            call_user_func($afunc, $hook_name, $cfunc);
+            call_user_func($afunc, $hook_name, $cfunc, 10, 999);
         }
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    protected function screen(string $caller)
+    {
+        $matched = preg_match('/(Action|Filter)([A-Z][^A-Z]+)[A-Z]/', $caller, $matches);
+        if (!$matched) {
+            return $matched;
+        }
+        switch ($matches[2]) {
+            case 'Admin':
+                $screen = strtolower($matches[1]);
+                break;
+            case 'Wp':
+                $screen = 'front';
+                break;
+            default:
+                $screen = null;
+        }
+        return $screen;
+    }
+
+    /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     */
+    protected function sound(string $prop)
+    {
+        return isset($this->awp_settings->$prop) && $this->awp_settings->$prop;
+    }
+
+    /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     */
+    public function vox(string $prop): mixed
+    {
+        return $this->awp_settings->$prop;
     }
 
     /**
@@ -261,61 +300,6 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
-     *
-    protected function enqueue(string $caller, string $handle)
-    {
-        $screen = $this->screen($caller);
-    }
-
-    /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
-     */
-    protected function screen(string $caller)
-    {
-        $matched = preg_match('/Action(\w+)Enqueue/', $caller, $matches);
-        if (!$matched) {
-            return $matched;
-        }
-        switch ($matches[1]) {
-            case 'Admin':
-                $screen = strtolower($matches[1]);
-                break;
-            case 'Wp':
-                $screen = 'front';
-                break;
-            default:
-                $screen = null;
-        }
-        return $screen;
-    }
-
-    /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
-     */
-    protected function enqueueVia(string $caller)
-    {
-        $brand = null;
-        $suffix = '-';
-        $screen = $this->screen($caller);
-        if ($this->isCross($screen)) {
-            $suffix .= $screen;
-        } else {
-            $suffix = '';
-        }
-        foreach ($this->phases as $phase => $handle) {
-            $handle .= $suffix;
-            if ($phase == 'brand') {
-                $brand = $handle;
-                $asc = null;
-            } else {
-                $asc = $brand;
-            }
-            $this->enqueueAssets($handle, $asc);
-        }
-    }
-
-    /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
      */
     protected function assignPhases()
     {
@@ -340,89 +324,6 @@ abstract class Abs_Scheme implements Int_Tuner
                 break;
         }
         return $ans;
-    }
-
-    /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
-     */
-    protected function enqueueAssets(string $handle, ?string $asc = null)
-    {
-        foreach (Whip::$enqueues as $asset) {
-            $callback = "wp_enqueue_$asset";
-            $args = $this->enqArgue($asset, $handle, $asc);
-            if (!$args) {
-                continue;
-            }
-            call_user_func_array($callback, $args);
-        }
-    }
-
-    /**
-     *  @return file path if alive, else false
-     *  @since  ver. 0.10.5 (edit. Pierre)
-     */
-    protected function assetFileAlive(string $asset, string $handle)
-    {
-        $xt = $this->assetXtens($asset);
-        $file = "$handle.$xt";
-        $file_path = $this->productDir(false, $xt, $file);
-        return file_exists($file_path) ? $file_path : false;
-    }
-
-    /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
-     */
-    protected function enqArgue(string $asset, string $handle, ?string $asc = null)
-    {
-        $file = $this->assetFileAlive($asset, $handle);
-        if (!$file) {
-            return false;
-        }
-        $src = Whip::wpx_path2uri($file);
-        $deps = $this->assetDepsArgue($asset, $asc);
-        $ver = $this->info->get('Version');
-        $_plus = $this->assetPlusArgue($asset);
-        $_args = compact(Whip::$enqueue_arg_keys);
-        $re_plus = array_pop($_args);
-        $args = array_values($_args);
-        $args[] = $re_plus;
-        return $args;
-    }
-
-    /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
-     */
-    protected function assetPlusArgue(string $asset)
-    {
-        switch ($asset) {
-            case 'style':
-                $p = 'all';
-                break;
-            case 'script':
-                $p = array(
-                    'strategy' => 'defer',
-                    'in_footer' => true,
-                );
-                break;
-            default:
-                $p = false;
-                break;
-        }
-        return $p;
-    }
-
-    /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
-     */
-    protected function assetDepsArgue(string $asset, ?string $asc)
-    {
-        $chk_funk = "wp_{$asset}_is";
-        if ($asc && $chk_funk($asc)) {
-            $deps = [$asc];
-        } else {
-            $deps = [];
-        }
-        return $deps;
     }
 
     /**

@@ -44,6 +44,7 @@ $multiDimArray = [
 ### Versions
 | version | updated | memo |
 |:---:|:---:|---|
+| 0.10.5 | 2024-03-06 | Connecting theme, assets autoload |
 | 0.10.4 | 2024-02-26 | Introducing package SuperCal |
 | 0.10.3 | 2024-02-19 | Brushed concept Consulat upto concept AC/DC, Terminated `Abs_Citrus` |
 | 0.10.2 | 2024-02-17 | Began Consulat developement |
@@ -122,7 +123,7 @@ $multiDimArray = [
     - `Diviner`
         - デコーダ、シングルトン
 
-> [!INFORMATION]
+> [!NOTE]
 > `enqueue` の `deps` については、直系の Brand-Product 間のみ設定する。 
 >
 > ```
@@ -201,7 +202,7 @@ _Consulat_ のように入出力を別系統とするケースでは、事後の
 
 そんなわけで、入力 = `Iterator`, 出力 = `Generator` で決着（？） (2024-02-17)
 
-### _Consulat_入出力タイミング
+### _Consulat_ 入出力タイミング
 `admin_notices` VS `wp_dashboard_setup`
 従来、_Sandy_ は、`wp_dashboard_setup` で `wp_add_dashboard_widget` しているが、ダッシュボードウィジェットは、2-4カラムの構成なので、幅が狭い。
 コードビューは基本的に `<pre>` なので、幅は広いほうが好ましい。
