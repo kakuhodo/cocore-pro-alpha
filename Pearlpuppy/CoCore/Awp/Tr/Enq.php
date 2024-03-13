@@ -57,10 +57,6 @@ trait Tr_Enq
                 $asc = $this->phases['brand'];
             }
             $this->enqueueAssets($handle, $asc);
-            # !!!
-            // if ($handle == 'cocore') {
-                $this->slap($screen, '_' . $handle);
-            // }
         }
     }
 
@@ -83,11 +79,15 @@ trait Tr_Enq
      *  @return file path if alive, else false
      *  @since  ver. 0.10.5 (edit. Pierre)
      */
-    protected function assetFileAlive(string $asset, string $handle)
+    protected function assetFileAlive(string $asset, string $handle, ?string $asc = null)
     {
         $xt = $this->assetXtens($asset);
         $file = "$handle.$xt";
-        $file_path = $this->productDir(false, $xt, $file);
+        if ($asc && $this->isScheme('theme') && $this->substream) {
+            $file_path = $this->subProductDir(false, $xt, $file);
+        } else {
+            $file_path = $this->productDir(false, $xt, $file);
+        }
         return file_exists($file_path) ? $file_path : false;
     }
 
@@ -96,7 +96,7 @@ trait Tr_Enq
      */
     protected function enqArgue(string $asset, string $handle, ?string $asc = null)
     {
-        $file = $this->assetFileAlive($asset, $handle);
+        $file = $this->assetFileAlive($asset, $handle, $asc);
         if (!$file) {
             return false;
         }

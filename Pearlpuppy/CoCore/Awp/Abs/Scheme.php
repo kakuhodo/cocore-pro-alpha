@@ -193,7 +193,7 @@ abstract class Abs_Scheme implements Int_Tuner
         }
         switch ($matches[2]) {
             case 'Admin':
-                $screen = strtolower($matches[1]);
+                $screen = strtolower($matches[2]);
                 break;
             case 'Wp':
                 $screen = 'front';
@@ -300,11 +300,15 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
+     *  @update ver. 0.10.6 (edit. Pierre)
      */
     protected function assignPhases()
     {
-        $this->phases['brand'] = $this->nice('brand', true);
-        $this->phases['product'] = $this->info->get('TextDomain');
+        $brand = $this->nice('brand', true);
+        $this->phases['brand'] = $brand;
+        $brand .= '-';
+        $product = $this->info->get('TextDomain');
+        $this->phases['product'] = strpos($product, $brand) === 0 ? str_replace($brand, '', $product) : $product;
     }
 
     /**
@@ -324,6 +328,14 @@ abstract class Abs_Scheme implements Int_Tuner
                 break;
         }
         return $ans;
+    }
+
+    /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     *
+    protected function dirJunction()
+    {
+        
     }
 
     /**
@@ -360,10 +372,9 @@ abstract class Abs_Scheme implements Int_Tuner
     /**
      *  Do test something
      */
-    public function doDyna()
+    public function doDyna($arg = null)
     {
-        $reflector = new \ReflectionClass(static::class);
-        return $reflector->getNamespaceName();
+        return $this->screen($arg);
     }
 
     /**

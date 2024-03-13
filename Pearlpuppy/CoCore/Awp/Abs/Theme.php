@@ -25,6 +25,7 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
     /**
      *
      */
+    const DDARGKEYS = ['gen', 'uri', 'dir', 'file'];
 
     // Properties
 
@@ -32,7 +33,7 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
      *  Whether the stream via child theme or not.
      *  @since  ver. 0.10.6 (edit. Pierre)
      */
-    public bool $streamJunior;
+    public bool $substream;
 
     /**
      *
@@ -51,7 +52,7 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
      */
     public function __construct(string $file)
     {
-        $this->streamJunior = is_child_theme();
+        $this->substream = is_child_theme();
         parent::__construct($file);
         $this->setDefaults();
         $this->assignSupports();
@@ -146,7 +147,28 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
      */
     public function productDir(bool $uri = false, ?string $dir = null, ?string $file = null): string
     {
-        $func = 'get_template_directory';
+        $gen = 'template';
+        $args = compact(self::DDARGKEYS);
+        return $this->dressertDir($args);
+    }
+
+    /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     */
+    public function subProductDir(bool $uri = false, ?string $dir = null, ?string $file = null): string
+    {
+        $gen = 'stylesheet';
+        $args = compact(self::DDARGKEYS);
+        return $this->dressertDir($args);
+    }
+
+    /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     */
+    public function dressertDir(array $args): string
+    {
+        extract($args);
+        $func = "get_{$gen}_directory";
         $func .= $uri ? '_uri' : '';
         $responce = $func();
         $responce .= $dir ? '/' . $this->awp_settings->dir->$dir . '/' : null;

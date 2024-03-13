@@ -68,6 +68,17 @@ $multiDimArray = [
 > [!WARNING]
 > どうやら、Xrea の CATCH ALL機能 (default.rosypink.com) では、無料SSLを設定できない模様。本番用のサブドメは、ドメインとサイトを新規作成して、サイト設定でメインドメインに同期させる必要あり。(2024-02-28)
 
+## Substream studies
+### Info
+* そのまま子テーマの情報を取得
+* 親テーマの情報にアクセスしたい場合は、 `$info->parent`
+
+### Supports
+* デフォルトは親テーマの設定を**原則上書き(?)**
+
+### AWP Settings
+* デフォルトは親テーマの設定を**原則上書き(?)**
+
 ## Plans
 
 ### CoCore

@@ -26,7 +26,7 @@ $cocore->slap(wp_style_is('cocore'), '_EQ');
 
 /**
  *
- */
+ *
 $caller = 'hookActionWpEnqueueScripts';
 $caller2 = 'hookFilterAdminEnqueueScripts';
 $matched = preg_match('/(Action|Filter)([A-Z][^A-Z]+)[A-Z]/', $caller, $matches);
@@ -36,7 +36,18 @@ $cocore->slap($matches2, 'matches2:');
 
 /**
  *
- */
+ *
+$headers = [];
+for ($i = 1; $i <= 6; $i++) {
+    $n = 4 - $i;
+    if ($n < 0) {
+        $a = $n * 2 + 24;
+    } else {
+        $a = $n * 5 + 25;
+    }
+    $headers["H$i"] = $a * 5;
+}
+$cocore->slap($headers, 'headers');
 
 /**
  *
