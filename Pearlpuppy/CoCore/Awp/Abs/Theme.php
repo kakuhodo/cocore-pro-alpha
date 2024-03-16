@@ -2,6 +2,7 @@
 namespace Pearlpuppy\CoCore\Awp;
 
 use Pearlpuppy\CoCore\Myt\Tribune;
+use Pearlpuppy\CoCore\Myt\Lime;
 
 /**
  *  @file   Theme
@@ -74,6 +75,10 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
         if ($fa && $fa->front) {
             $this->enableFontawesome($fa->id);
         }
+        $cc = $this->vox('theme_color') ?? null;
+        if ($cc) {
+            $this->metaThemeColor($cc);
+        }        
     }
 
     /**
@@ -89,11 +94,31 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
 
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
-     *
+     */
     public function hookActionWpEnqueueScripts($hook_suffix = null)
     {
         parent::hookActionWpEnqueueScripts($hook_suffix);
         $this->optEnqueues();
+    }
+
+    /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     *
+    public function hookFilterPreWpNavMenu(?string $output, \stdClass $args)
+    {
+        // $this->slap($output, 'pre_wpnm');
+        // $output .= '<p><b>foo</b></p>';
+        return $output;
+    }
+
+    /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     *
+    public function hookFilterWpNavMenu(string $nav_menu, \stdClass $args)
+    {
+        // $nav_menu .= '<hr>';
+        $this->slap($args);
+        return $nav_menu;
     }
 
     /**
@@ -105,7 +130,8 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
         $args['container'] = 'nav';
         $args['container_id'] = $slug;
         $args['container_class'] = 'menu';
-        $args['items_wrap'] = '<ul>%3$s</ul>';
+        $args['items_wrap'] = $slug == 'gnb' ? '<label for="burger"><i>Burger</i><input type="checkbox" id="burger" /></label>' : '';
+        $args['items_wrap'] .= '<ul>%3$s</ul>';
         return $args;
     }
 
@@ -115,8 +141,16 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
      */
     public function hookFilterNavMenuCssClass(array $classes, \WP_Post $menu_item, \stdClass $args, int $depth)
     {
-        $classes = ['menu-item'];
-        return $classes;
+        $_classes = [];
+        if (in_array('menu-item-home', $classes))  {
+            $_classes[] = 'home';
+        }
+        if (in_array('current-menu-item', $classes)) {
+            $_classes[] = 'on';
+        }
+        $_classes[] = 'menu-item';
+        // $this->slap($menu_item, $menu_item->post_name);
+        return $_classes;
     }
 
     /**
@@ -268,7 +302,18 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
      */
     protected function enableFontawesome(string $id)
     {
-        echo '<script src="https://kit.fontawesome.com/' . $id . '.js" crossorigin="anonymous"></script>' . PHP_EOL;
+        $src = "https://kit.fontawesome.com/$id.js";
+        $fa = new Lime("script[src=$src][crossorigin=anonymous]");
+        $fa->expose();
+    }
+
+    /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     */
+    protected function metaThemeColor(string $colorcode)
+    {
+        $meta = new Lime("meta[name=theme-color][content=$colorcode]");
+        $meta->expose();
     }
 
     /**

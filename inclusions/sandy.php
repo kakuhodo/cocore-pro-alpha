@@ -26,6 +26,53 @@ $cocore->slap(wp_style_is('cocore'), '_EQ');
 
 /**
  *
+ */
+$selector = 'hoge.mage.fuga#foo[attr1=val1][attr2=val2]';
+$selector2 = 'hoge.mage.fuga#foo[attr1=val1]';
+$matched = preg_match_all("/\[([^\]]*)\]/", $selector, $matches, PREG_SET_ORDER);
+$matched2 = preg_match_all("/\[([^\]]*)\]/", $selector2, $matches2, PREG_SET_ORDER);
+$cocore->slap($matches, 'matches');
+$cocore->slap($matches2, 'matches2');
+
+$strs = ['nonglue', '=openglue', 'closeglue=', 'glued=both'];
+foreach ($strs as $str) {
+    $cocore->slap(explode('=', $str));
+}
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
  *
 $caller = 'hookActionWpEnqueueScripts';
 $caller2 = 'hookFilterAdminEnqueueScripts';
@@ -48,18 +95,6 @@ for ($i = 1; $i <= 6; $i++) {
     $headers["H$i"] = $a * 5;
 }
 $cocore->slap($headers, 'headers');
-
-/**
- *
- */
-
-/**
- *
- */
-
-/**
- *
- */
 
 /**
  *

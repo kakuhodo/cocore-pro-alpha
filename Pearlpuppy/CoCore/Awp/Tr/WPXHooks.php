@@ -609,6 +609,8 @@ trait Tr_WpxHooks {
             'single_template',
             'shortcut_link',
             'template_include',
+            'pre_wp_nav_menu',
+            'wp_nav_menu',
             'wp_nav_menu_args',
             'wp_nav_menu_items',
             'nav_menu_css_class',

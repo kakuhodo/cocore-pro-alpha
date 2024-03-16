@@ -70,31 +70,27 @@ trait Tr_CitrineArtery {
      *  Attribution selector shouldn't have double-quote `"`.
      *      e.g.)
      *          tag[attr=val] -> OK, tag[attr="val"] -> NG
+     *  @update ver. 0.10.6 (edit. Pierre)
      */
-    protected function crackAttr(&$selector) {
+    protected function crackAttr(&$selector)
+    {
         // check
-        $matched = preg_match_all("/\[(.*)\]/", $selector, $matches);
+        $matched = preg_match_all("/\[([^\]]*)\]/", $selector, $matches, PREG_SET_ORDER);
         // exclude
         if (!$matched) {
             return;
         }
         // prep
         $attrs = array();
-        $glue = '=';
-        // sweep
-        $selector = str_replace($matches[0], '', $selector);
-        // store
-        foreach ($matches[1] as $match) {
-            $eqs = substr_count($match, $glue);
-            $pos = strpos($match, $glue);
-            if ($eqs > 1 || !$match || $pos === 0) {
+        foreach ($matches as $vals) {
+            // sweep
+            $selector = str_replace($vals[0], '', $selector);
+            // store
+            $pair = explode('=', $vals[1]);
+            if (!$pair[0]) {
                 continue;
-            } elseif ($pos === false) {
-                $pos = strlen($match);
             }
-            $key = substr($match, 0, $pos);
-            $value = substr($match, $pos + 1);
-            $attrs[$key] = $value;
+            $attrs[$pair[0]] = $pair[1] ?? null;
         }
         $this->specify($attrs);
     }
