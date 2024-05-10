@@ -74,7 +74,7 @@ trait Tr_WpxHooks {
             'wp_after_admin_bar_render',
             'shutdown',
             'auth_redirect',
-            '_admin_menu',
+#            '_admin_menu',     // !!! DO NOT USE THIS
             'admin_menu',
             'admin_init',
             'current_screen',

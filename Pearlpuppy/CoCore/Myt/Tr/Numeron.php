@@ -63,7 +63,7 @@ trait Tr_Numeron {
 	 */
 	public static function hasP2sum(int $number, int $sum) {
 		$div = intdiv($sum, $number);
-		return isOdd($div);
+		return self::isOdd($div);
 	}
 
 	/**

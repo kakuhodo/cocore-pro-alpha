@@ -18,15 +18,30 @@ global $cocore;
 /**
  *
  */
-
-// $cocore->slap($cocore::$dependencies, 'deps');
-$cocore->slap(Awp\Whip::wpx_path2uri(__FILE__), 'uri');
-$cocore->slap($cocore, 'Product');
-$cocore->slap(wp_style_is('cocore'), '_EQ');
+$cocore->slap($cocore);
 
 /**
  *
  */
+
+/**
+ *
+ */
+
+/**
+ *
+ *
+$theme = wp_get_theme();
+$cocore->slap($theme);
+
+
+/**
+ *
+ *
+// $cocore->slap($cocore::$dependencies, 'deps');
+$cocore->slap(Awp\Whip::wpx_path2uri(__FILE__), 'uri');
+$cocore->slap($cocore, 'Product');
+$cocore->slap(wp_style_is('cocore'), '_EQ');
 $selector = 'hoge.mage.fuga#foo[attr1=val1][attr2=val2]';
 $selector2 = 'hoge.mage.fuga#foo[attr1=val1]';
 $matched = preg_match_all("/\[([^\]]*)\]/", $selector, $matches, PREG_SET_ORDER);

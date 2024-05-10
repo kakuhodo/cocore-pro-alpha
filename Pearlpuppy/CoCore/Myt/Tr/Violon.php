@@ -110,6 +110,7 @@ trait Tr_Violon {
         $exceptions = array(
             'child' => 'children',
             'medium' => 'media',
+            'datum' => 'data',
         );
         $handle = strtolower($word);
         if (array_key_exists($handle, $exceptions)) {

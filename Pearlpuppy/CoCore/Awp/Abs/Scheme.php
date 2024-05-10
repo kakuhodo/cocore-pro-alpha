@@ -266,6 +266,14 @@ abstract class Abs_Scheme implements Int_Tuner
     }
 
     /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     */
+    public function productImgPath(string $file = null): string
+    {
+        return $this->productDir(false, 'img', $file);
+    }
+
+    /**
      *  @since  ver. 0.10.4 (edit. Pierre)
      */
     public function productAssetUri(string $file = null): string

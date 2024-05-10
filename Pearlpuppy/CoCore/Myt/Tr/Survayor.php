@@ -56,7 +56,7 @@ trait Tr_Survayor {
     }
 
     /**
-     *  @update ver. 0.10.4 (edit. Pierre)
+     *  @since  ver. 0.10.4 (edit. Pierre)
      */
     public static function scape(mixed $value, bool $dumpy = false)
     {
@@ -65,7 +65,7 @@ trait Tr_Survayor {
     }
 
     /**
-     *  @update ver. 0.10.6 (edit. Pierre)
+     *  @since  ver. 0.10.6 (edit. Pierre)
      */
     public static function isLocal(): bool
     {

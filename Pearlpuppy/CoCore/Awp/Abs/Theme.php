@@ -78,7 +78,7 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
         $cc = $this->vox('theme_color') ?? null;
         if ($cc) {
             $this->metaThemeColor($cc);
-        }        
+        }
     }
 
     /**

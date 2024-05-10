@@ -23,6 +23,11 @@ final class Whip
     use Tr_WpxHooks;
 
     /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     */
+    use Tr_WpxLabels;
+
+    /**
      *
      */
     use Myt\Tr_Inconstructible;
@@ -333,6 +338,18 @@ final class Whip
     {
         return call_user_func_array("wp_enqueue_$asset_type", $args);
     }
+
+    /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     */
+    public static function adminPageHooked(string $page_slug): bool
+    {
+        return !empty($GLOBALS['admin_page_hooks'][$page_slug]);
+    }
+
+    /**
+     *
+     */
 
     /**
      *

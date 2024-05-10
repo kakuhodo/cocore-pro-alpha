@@ -44,6 +44,7 @@ $multiDimArray = [
 ### Versions
 | version | updated | memo |
 |:---:|:---:|---|
+| 0.10.6 | 2024-05-10 | Begining of CoCore Entities |
 | 0.10.5 | 2024-03-06 | Connecting theme, assets autoload |
 | 0.10.4 | 2024-02-26 | Introducing package SuperCal |
 | 0.10.3 | 2024-02-19 | Brushed concept Consulat upto concept AC/DC, Terminated `Abs_Citrus` |
@@ -143,6 +144,11 @@ $multiDimArray = [
 > ```
 >
 > `-admin` や `-front` の実装は稀なうえ、テーマからプラグインの参照はあまり現実的でないし、実質的にも意味はほとんどないと考えられる。そのため、これらを実装する場合も依存関係は考慮しない。 (2024-03-06)
+
+> [!IMPORTANT]
+> (2024-05-10)
+>
+> _Hook_ のオブジェクト化を検討。実行するなら、バージョンを ver. 0.11.x とする。
 
 > [!IMPORTANT]
 > (ver. 0.10.1-)
@@ -252,6 +258,9 @@ Productに設定される案件（ユースケースや企画等）を指す。
 
 ### _Lemon_ object
 _Myt_ が具備する HTML element 生成オブジェクトの総称。 _PQueue_ インターフェイスを実装。
+
+### Entity
+_CoCore_ を介して登録する _Custom Post Type_ や _Custom Taxonomy_ の総称。
 
 ## Memo
 ### 二十四節気 (Solar terms)
