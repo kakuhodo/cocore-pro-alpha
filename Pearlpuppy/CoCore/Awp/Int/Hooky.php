@@ -2,15 +2,14 @@
 namespace Pearlpuppy\CoCore\Awp;
 
 /**
- *  @file   Tuner
- *  @since  ver. 0.10.1 (edit. Pierre)
- *  @update ver. 0.10.5 (edit. Pierre)
+ *  @file   Hooky
+ *  @since  ver. 0.11.0 (edit. Pierre)
  */
 
 /**
- *  Blueprint for Scheme
+ *  Blueprint for Hook
  */
-interface Int_Tuner extends Int_Gene
+interface Int_Hooky extends Int_Gene
 {
 
     // Constants
@@ -28,19 +27,22 @@ interface Int_Tuner extends Int_Gene
     // Methods
 
     /**
-     *
-     *
+     *  @since  ver. 0.11.0 (edit. Pierre)
+     */
     public function hook();
 
     /**
      *  @since  ver. 0.11.0 (edit. Pierre)
      */
-    public function roll();
+    public function punk();
 
     /**
      *
      */
-    public function vox(string $prop): mixed;
+
+    /**
+     *
+     */
 
     /**
      *

@@ -44,6 +44,7 @@ $multiDimArray = [
 ### Versions
 | version | updated | memo |
 |:---:|:---:|---|
+| 0.11.0 | 2024-05-12 | Introducing Hook objects |
 | 0.10.6 | 2024-05-10 | Begining of CoCore Entities |
 | 0.10.5 | 2024-03-06 | Connecting theme, assets autoload |
 | 0.10.4 | 2024-02-26 | Introducing package SuperCal |
@@ -134,6 +135,8 @@ $multiDimArray = [
         - 日付を各要素（サブセット）を生成するための値 (int) に変換
     - `Diviner`
         - デコーダ、シングルトン
+- _Hook_ オブジェクト
+    - `Filter` および `Action` を導入 (0.11.0)
 
 > [!NOTE]
 > `enqueue` の `deps` については、直系の Brand-Product 間のみ設定する。 

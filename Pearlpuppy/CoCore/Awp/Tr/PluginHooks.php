@@ -24,31 +24,28 @@ trait Tr_PluginHooks {
     // Properties
 
     /**
-     *
+     *  @since  ver. 0.11.0 (edit. Pierre)
      */
+    protected static $scheme_actions = array(
+        'wp_dashboard_setup' => [
+            'sandyWidget',
+        ],
+    );
 
-    // Methods
+    /**
+     *  @since  ver. 0.11.0 (edit. Pierre)
+     */
+    protected static $scheme_filters = array(
+        'admin_body_class' => [
+            'styleAdminScreen',
+        ],
+    );
 
     /**
      *  ---------------------------
      *  Hooks
      *  ---------------------------
      */
-
-    /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
-     *
-    public function hookActionWpEnqueueScripts($hook_suffix = null)
-    {
-    }
-
-    /**
-     *  @since  ver. 0.10.1 (edit. Pierre)
-     */
-    public function hookActionWpDashboardSetup()
-    {
-        $this->sandyWidget();
-    }
 
     /**
      *  @since  ver. 0.10.6 (edit. Pierre)
@@ -60,24 +57,6 @@ trait Tr_PluginHooks {
     }
 
     /**
-     *  @since  ver. 0.10.1 (edit. Pierre)
-     */
-    public function hookActionAdminNotices()
-    {
-        echo '<div class="notice notice-sccess is-dismissible"><p>via <code>' . __FUNCTION__ . '</code> of <code>' . __CLASS__ . '</code></p></div>';
-    }
-
-    /**
-     *  @since  ver. 0.10.1 (edit. Pierre)
-     */
-    public function hookFilterAdminBodyClass($classes)
-    {
-        $classes .= ' ' . $this->nice('brand');
-        $this->styleAdminScreen($classes);
-        return $classes;
-    }
-
-    /**
      *  @since  ver. 0.10.6 (edit. Pierre)
      */
     public function hookActionInit()
@@ -86,11 +65,13 @@ trait Tr_PluginHooks {
 #        $this->registerCoCoreTax();
     }
 
+    // Methods
+
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
      *  @update ver. 0.10.5 (edit. Pierre)
      */
-    protected function sandyWidget()
+    public function sandyWidget()
     {
         $args = array(
             'widget_id' => $this->nice('brand') . '-sandy',
@@ -231,9 +212,10 @@ trait Tr_PluginHooks {
     /**
      *
      */
-    protected function styleAdminScreen(&$classes)
+    public function styleAdminScreen($classes)
     {
-#        print_r($classes);
+        $classes .= ' ' . $this->nice('brand');
+        return $classes;
     }
 
     /**

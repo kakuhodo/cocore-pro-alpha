@@ -15,10 +15,17 @@ use Pearlpuppy\CoCore\{
  */
 global $cocore;
 
+$cocore->slap($cocore);
 /**
  *
- */
-$cocore->slap($cocore);
+ *
+function fuga()
+{
+    add_management_page('Coco Test', 'Coco test menu', 'edit_posts', 'coco_test');
+}
+
+$a = new Awp\Action('admin_menu', ['Kakuhodo\CoCore\fuga']);
+$cocore->slap($a);
 
 /**
  *

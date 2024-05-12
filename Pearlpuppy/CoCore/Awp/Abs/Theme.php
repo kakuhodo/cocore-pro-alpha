@@ -20,6 +20,7 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
     /**
      *
      */
+    use Tr_ThemeHooks;
 
     // Constants
 
@@ -68,8 +69,9 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
 
     /**
      *  @since  ver. 0.10.6 (edit. Pierre)
+     *  @update ver. 0.11.0 (edit. Pierre)
      */
-    public function hookActionWpHead()
+    public function frontHead()
     {
         $fa = $this->vox('fontawesome') ?? null;
         if ($fa && $fa->front) {
@@ -83,8 +85,9 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
 
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
+     *  @update ver. 0.11.0 (edit. Pierre)
      */
-    public function hookActionAfterSetupTheme()
+    public function setup()
     {
         $this->navMenus();
         if (isset($this->supports['editor-styles']) && $this->supports['editor-styles']) {
@@ -94,10 +97,11 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
 
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
+     *  @update ver. 0.11.0 (edit. Pierre)
      */
-    public function hookActionWpEnqueueScripts($hook_suffix = null)
+    public function queue($hook_suffix = null)
     {
-        parent::hookActionWpEnqueueScripts($hook_suffix);
+        parent::queue($hook_suffix);
         $this->optEnqueues();
     }
 

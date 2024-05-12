@@ -2,7 +2,8 @@
 namespace Pearlpuppy\CoCore\Myt;
 
 /**
- *    Utilities for arrays and iterators.
+ *  Utilities for arrays and iterators.
+ *  @since ver. 0.5.3 (edit. Sovereign)
  */
 trait Tr_Marshal {
 
@@ -31,12 +32,18 @@ trait Tr_Marshal {
     }
 
     /**
-     *    Merges 2D arrays recursively, but each unique.
+     *  Merges  2D arrays recursively.
+     *  @since  ver. 0.5.3 (edit. Sovereign)
+     *  @update ver. 0.11.0 (edit. Pierre)
      */
-    public static function frankensteiner(&$array1, $array2) {
+    public static function frankensteiner(&$array1, $array2, $unique = false) {
         foreach ($array2 as $key => $val) {
             if (is_array($val) && isset($array1[$key]) && is_array($array1[$key])) {
-                $array1[$key] = array_merge($array1[$key], $val);
+                if ($unique) {
+                    $array1[$key] = array_unique(array_merge($array1[$key], $val));
+                } else {
+                    $array1[$key] = array_merge($array1[$key], $val);
+                }
             } else {
                 $array1[$key] = $val;
             }
@@ -177,6 +184,18 @@ trait Tr_Marshal {
         }
         return array_combine($keys, $values);
     }
+
+    /**
+     *
+     */
+
+    /**
+     *
+     */
+
+    /**
+     *
+     */
 
     /**
      *

@@ -19,6 +19,7 @@ abstract class Abs_Scheme implements Int_Tuner
      *
      */
     use Tr_Enq;
+    use Tr_SchemeHooks;
 
     // Constants
 
@@ -70,8 +71,9 @@ abstract class Abs_Scheme implements Int_Tuner
     public array $phases = [];
 
     /**
-     *
+     *  @since  ver. 0.11.0 (edit. Pierre)
      */
+    protected \Generator $hooks;
 
     // Constructor
 
@@ -86,22 +88,25 @@ abstract class Abs_Scheme implements Int_Tuner
         $this->configure();
         $this->assignPhases();
         $this->console = new Consulat();
+        $this->troop();
     }
 
     // Methods
 
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
+     *  @update ver. 0.11.0 (edit. Pierre)
      */
-    public function hookActionWpEnqueueScripts($hook_suffix = null)
+    public function queue($hook_suffix = null)
     {
         $this->enqueueVia(__FUNCTION__);
     }
 
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
+     *  @update ver. 0.11.0 (edit. Pierre)
      */
-    public function hookActionAdminEnqueueScripts($hook_suffix = null)
+    public function adminQueue($hook_suffix = null)
     {
         $this->enqueueVia(__FUNCTION__);
     }
@@ -119,6 +124,31 @@ abstract class Abs_Scheme implements Int_Tuner
     {
         $dir = dirname($this->product_file);
         $this->awp_settings = Tribune::parseJsonFile("$dir/product.json");
+    }
+
+    /**
+     *  @since  ver. 0.11.0 (edit. Pierre)
+     */
+    protected function troop(): void
+    {
+        // Tribune::frankensteiner(static::$scheme_actions, self::$universal_actions, true);
+        // Tribune::frankensteiner(static::$scheme_filters, self::$universal_filters, true);
+        $this->hooks = $this->genHooks(static::$scheme_filters, static::$scheme_actions);
+    }
+
+    /**
+     *  @since  ver. 0.11.0 (edit. Pierre)
+     */
+    protected function genHooks($filters, $actions)
+    {
+        Tribune::frankensteiner($filters, self::$universal_filters, true);
+        Tribune::frankensteiner($actions, self::$universal_actions, true);
+        foreach ($filters as $hook_name => $methods) {
+            yield new Filter($this, $hook_name, $methods);
+        }
+        foreach ($actions as $hook_name => $methods) {
+            yield new Action($this, $hook_name, $methods);
+        }
     }
 
     /**
@@ -184,8 +214,17 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
+     *  @update ver. 0.11.0 (edit. Pierre)
      */
-    protected function screen(string $caller)
+    public function screen(string $caller): string
+    {
+        return stripos($caller, 'admin') === false ? 'front' : 'admin';
+    }
+
+    /**
+     *  @since  ver. 0.10.5 (edit. Pierre)
+     */
+    protected function _screen(string $caller)
     {
         $matched = preg_match('/(Action|Filter)([A-Z][^A-Z]+)[A-Z]/', $caller, $matches);
         if (!$matched) {
@@ -221,8 +260,36 @@ abstract class Abs_Scheme implements Int_Tuner
     }
 
     /**
-     *  @since  ver. 0.10.1 (edit. Pierre)
+     *  @since  ver. 0.11.0 (edit. Pierre)
      */
+    public function roll()
+    {
+        foreach ($this->hooks as $hook) {
+            $hook->hook();
+        }
+        // foreach ($this->filters as $hook_name => $methods) {
+        //     $filter = new Filter($this, $hook_name, $methods);
+        //     $filter->hook();
+        // }
+        // foreach ($this->actions as $hook_name => $methods) {
+        //     $action = new Action($this, $hook_name, $methods);
+        //     $action->hook();
+        // }
+    }
+
+    /**
+     *  @since  ver. 0.11.0 (edit. Pierre)
+     */
+    protected function roller(array $hooks)
+    {
+        foreach ($hooks as $hook_name => $meth) {
+            
+        }
+    }
+
+    /**
+     *  @since  ver. 0.10.1 (edit. Pierre)
+     *
     public function hook()
     {
         $iterator = Tribune::recursiveIterator(Whip::$hooks);
@@ -397,5 +464,5 @@ abstract class Abs_Scheme implements Int_Tuner
      *
      */
 
-//[EOC]*/
+//[EOAC]*/
 }
