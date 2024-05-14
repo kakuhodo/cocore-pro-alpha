@@ -25,7 +25,7 @@ final class Whip
     /**
      *  @since  ver. 0.10.6 (edit. Pierre)
      */
-    use Tr_WpxLabels;
+    use Tr_EntityArgs;
 
     /**
      *
@@ -106,6 +106,11 @@ final class Whip
         'dashicons' => 'style',
         'jquery' => 'script',
     );
+
+    /**
+     *  @since ver. 0.11.1 (edit. Pierre)
+     */
+    public static $b64_prefix = 'data:image/svg+xml;base64,';
 
     // Methods
 

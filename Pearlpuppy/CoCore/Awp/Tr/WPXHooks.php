@@ -21,6 +21,14 @@ trait Tr_WpxHooks {
     // Properties
 
     /**
+     *  List of $accepted_args number, in case of >= 2.
+     *  @since  ver. 0.11.1 (edit. Pierre)
+     */
+    public static $hook_aas = array(
+        # e.g. '{hook_name}' => 2,
+    );
+
+    /**
      *  @since  ver. 0.8.7 (edit. Chiffon)
      */
     public static $hooks = array(

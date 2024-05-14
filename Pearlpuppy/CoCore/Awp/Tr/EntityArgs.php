@@ -6,7 +6,7 @@ use Pearlpuppy\CoCore\Myt\Tribune;
 /**
  *  @since  ver. 0.10.6 (edit. Pierre)
  */
-trait Tr_WpxLabels {
+trait Tr_EntityArgs {
 
     // Mixins
 
@@ -131,6 +131,48 @@ trait Tr_WpxLabels {
     );
 
     /**
+     *  @since  ver. 0.11.1 (edit. Pierre)
+     */
+    public static $mutual_args = array(
+        # 'labels' => ['array'],
+        'description' => ['string'],
+        'public' => ['boolean'],
+        'hierarchical' => ['boolean'],
+        # 'publicly_queryable' => ['bool'],
+        'show_ui' => ['boolean'],
+        # 'show_in_menu' => ['bool'],
+        # 'show_in_nav_menus' => ['bool'],
+        # 'show_in_rest' => ['bool'],
+        # 'rest_base' => ['string'],
+        # 'rest_controller_class' => ['string'],
+        # 'capabilities' => ['array'],
+        # 'rewrite' => ['bool|array'],
+        # 'query_var' => ['string|bool'],
+        # '_builtin' => ['bool'],
+    );
+
+    /**
+     *  @since  ver. 0.11.1 (edit. Pierre)
+     */
+    public static $post_type_args = array(
+        # 'label' => ['string'],
+        # 'exclude_from_search' => ['bool'],
+        # 'show_in_admin_bar' => ['bool'],
+        'menu_position' => ['integer'],
+        # 'menu_icon' => ['string'],
+        # 'capability_type' => ['string'],
+        # 'map_meta_cap' => ['bool'],
+        'supports' => ['array'],
+        # 'register_meta_box_cb' => ['callable'],
+        # 'taxonomies' => ['array'],
+        # 'has_archive' => ['bool|string'],
+        # 'can_export' => ['bool'],
+        # 'delete_with_user' => ['bool'],
+        # '_edit_link' => ['string'],
+    );
+
+    /**
+     *  hierarchical(1), non-hierarchic(2), capital(4), plural(8)
      *  @since  ver. 0.10.6 (edit. Pierre)
      */
     public static $mutual_labels = array(
@@ -189,16 +231,18 @@ trait Tr_WpxLabels {
 
     /**
      *  @since  ver. 0.10.6 (edit. Pierre)
+     *  @update ver. 0.11.1 (edit. Pierre)
      */
-    public static function ptLabels(bool $hierarchical, string $singular_name, ?string $name = null, array $ovwrites = []): array
+    public static function ptLabels(string $singular_name, array $ovwrites = [], bool $hierarchical = false, ?string $name = null): array
     {
         return self::labels('post_type', $hierarchical, $singular_name, $name, $ovwrites);
     }
 
     /**
      *  @since  ver. 0.10.6 (edit. Pierre)
+     *  @update ver. 0.11.1 (edit. Pierre)
      */
-    public static function taxLabels(bool $hierarchical, string $singular_name, ?string $name = null, array $ovwrites = []): array
+    public static function taxLabels(string $singular_name, array $ovwrites = [], bool $hierarchical = false, ?string $name = null): array
     {
         return self::labels('taxonomy', $hierarchical, $singular_name, $name, $ovwrites);
     }

@@ -10,7 +10,7 @@ use Pearlpuppy\CoCore\Myt\Tribune;
 /**
  *  @since  ver. 0.11.0 (edit. Pierre)
  */
-abstract class Abs_Hook implements Int_Hooky
+abstract class Abs_Hook implements Int_Cast
 {
 
 	// Mixins

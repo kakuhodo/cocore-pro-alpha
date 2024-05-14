@@ -30,6 +30,17 @@ trait Tr_PluginHooks {
         'wp_dashboard_setup' => [
             'sandyWidget',
         ],
+        'admin_menu' => [
+            'mainMenu',
+        ],
+        'init' => [
+            'registerCoreType',
+            'registerCoreTax',
+            'registerCoreTypeMeta',
+            'boostTypes',
+        ],
+        'widgets_init' => [
+        ],
     );
 
     /**
@@ -37,7 +48,7 @@ trait Tr_PluginHooks {
      */
     protected static $scheme_filters = array(
         'admin_body_class' => [
-            'styleAdminScreen',
+            'adminScreenCssClass',
         ],
     );
 
@@ -133,62 +144,91 @@ trait Tr_PluginHooks {
 
     /**
      *  @since  ver. 0.10.6 (edit. Pierre)
+     *  @ref    https://developer.wordpress.org/reference/functions/register_taxonomy/
+     */
+    public function registerCoreTax()
+    {
+        $args = [];
+        $taxonomy = $this->nice('brand') . '_tax';
+        $object_type = $this->nice('brand') . '_type';
+        $singular_name = 'Tax';
+        $menu_name = $this->moniker('brand') . " Taxes";
+        $args['labels'] = Whip::taxLabels($singular_name, ['name' => $menu_name]);
+        $args['show_ui'] = true;
+        $args['show_in_rest'] = true;
+#        $args['show_in_menu'] = $this->nice('brand');
+#        $args['public'] = true;
+        register_taxonomy($taxonomy, $object_type, $args);
+    }
+
+    /**
+     *  @since  ver. 0.10.6 (edit. Pierre)
+     *  @update ver. 0.11.1 (edit. Pierre)
      *  @ref    https://developer.wordpress.org/reference/functions/register_post_type/
      */
-    protected function registerCoCoreEntities()
+    public function registerCoreType()
     {
-        $args = array(
-            'labels' => [
-                'name' => 'CoCore Types',
-                'singular_name' => 'Type',
-                'add_new' => 'Add New Type',
-                'add_new_item' => 'Add New Type',
-                'edit_item' => 'Edit Type',
-                'new_item' => 'New Type',
-                'view_item' => 'View Type',
-                'view_items' => 'View Types',
-                'search_items' => 'Search Types',
-                'not_found' => 'No types found',
-                'not_found_in_trash' => 'No types found in Trash',
-                #'parent_item_colon' => 'Parent Page:',
-                'all_items' => 'All Types',
-                'archives' => 'Type Archives',
-                'attributes' => 'Type Attributes',
-                'insert_into_item' => 'Insert into type',
-                'uploaded_to_this_item' => 'Uploaded to this type',
-                #'featured_image' => 'Featured image',
-                #'set_featured_image' => 'Set featured image',
-                #'remove_featured_image' => 'Remove featured image',
-                #'use_featured_image' => 'Use as featured image',
-                #'menu_name' => (same as 'name'),
-                'filter_items_list' => 'Filter types list',
-                #'filter_by_date' => 'Filter by date',
-                'items_list_navigation' => 'Types list navigation',
-                'items_list' => 'Types list',
-                'item_published' => 'Type published.',
-                'item_published_privately' => 'Type published privately.',
-                'item_reverted_to_draft' => 'Type reverted to draft.',
-                'item_trashed' => 'Type trashed.',
-                'item_scheduled' => 'Type scheduled.',
-                'item_updated' => 'Type updated.',
-                'item_link' => 'Type Link',
-                'item_link_description' => 'A link to a type.',
-            ],
-            'public' => true,
+        $args = [];
+        $post_type = $this->nice('brand') . '_type';
+        $singular_name = 'Type';
+        $menu_name = $this->moniker('brand') . " Types";
+        $args['labels'] = Whip::ptLabels($singular_name, ['name' => $menu_name]);
+        $args['show_ui'] = true;
+        $args['show_in_rest'] = true;
+        $args['supports'] = [
+            'title',
+            #'editor',
+            #'comments',
+            'revisions',
+            #'trackbacks',
+            'author',
+            'excerpt',
+            #'page-attributes',
+            #'thumbnail',
+            'custom-fields',
+            #'post-formats',
+        ];
+        register_post_type($post_type, $args);
+    }
+
+    /**
+     *  @update ver. 0.11.1 (edit. Pierre)
+     */
+    public function registerCoreTypeMeta()
+    {
+        $object_type = $this->nice('brand') . '_type';
+        $labels_keys = array(
+            'name',
+            'singular_name',
         );
-        register_post_type('cocore_type', $args);
+        $a = array(
+            'type' => 'string',
+            'single' => true,
+            'show_in_rest' => true,
+        );
+        register_meta($object_type, 'cty:post_type', $a);
+        foreach ($labels_keys as $k) {
+            register_meta($object_type, "cty:labels:$k", $a);
+        }
+        foreach (Whip::$mutual_args as $key => $data) {
+            $args = [];
+            $meta_key = 'cty:args:' . $key;
+            $args['type'] = $data[0];
+            $args['single'] = $data[0] == 'array' ? false : true;
+            $args['show_in_rest'] = true;
+            register_meta($object_type, $meta_key, $args);
+        }
     }
 
     /**
      *  @since  ver. 0.10.6 (edit. Pierre)
      *  @ref    https://developer.wordpress.org/reference/functions/add_menu_page/
      */
-    protected function mainMenu()
+    public function mainMenu()
     {
-        $menu_slug = 'cocore';
-        $svg = file_get_contents($this->productImgPath('icon-cocore.svg'));
-        $b64 = base64_encode($svg);
-        add_menu_page('CoCore Settings', 'CoCore', 'manage_options', $menu_slug, [$this, 'wcbMainPage'], 'data:image/svg+xml;base64,' . $b64);
+        $menu_slug = $this->nice('brand');
+        $svgb64 = $this->svgB64Code('icon-cocore.svg');
+        add_menu_page('CoCore Settings', 'CoCore', 'manage_options', $menu_slug, [$this, 'wcbMainPage'], $svgb64);
     }
 
     /**
@@ -210,17 +250,68 @@ trait Tr_PluginHooks {
     }
 
     /**
-     *
+     *  @since  ver. 0.10.1 (edit. Pierre)
+     *  @update ver. 0.11.1 (edit. Pierre)
      */
-    public function styleAdminScreen($classes)
+    public function adminScreenCssClass($classes)
     {
         $classes .= ' ' . $this->nice('brand');
         return $classes;
     }
 
     /**
-     *
+     *  @since  ver. 0.11.1 (edit. Pierre)
+     *  @ref    https://developer.wordpress.org/reference/functions/register_post_type/
      */
+    public function registerEntities()
+    {
+        
+    }
+
+    /**
+     *  @update ver. 0.11.1 (edit. Pierre)
+     */
+    public function boostTypes()
+    {
+        $_post_type = $this->nice('brand') . '_type';
+        $_args['post_type'] = $_post_type;
+        $ctypes = get_posts($_args);
+        if (empty($ctypes)) {
+            return;
+        }
+        $meta_keys = get_registered_meta_keys($_post_type);
+        foreach ($ctypes as $ctype) {
+            $args = ['labels' => ['singular_name' => $ctype->post_title]];
+            $_meta = get_metadata('post', $ctype->ID);
+            $meta = array_filter($_meta, function($k){
+                return strpos($k, 'cty:') === 0;
+            }, ARRAY_FILTER_USE_KEY);
+            foreach ($meta as $key => $data) {
+                $keys = explode(':', $key);
+                array_shift($keys);
+                if (count($keys) == 1) {
+                    $pa = array_combine($keys, $data);
+                    extract($pa);
+                } else {
+                    $val = $data[0];
+                    switch ($meta_keys[$key]['type']) {
+                        case 'boolean':
+                            $val = (bool) $val;
+                            break;
+                        case 'integer':
+                            $val = (int) $val;
+                            break;
+                    }
+                    if ($keys[0] == 'args') {
+                        $args[$keys[1]] = $val;
+                    } elseif ($keys[0] == 'labels') {
+                        $args['labels'][$keys[1]] = $val;
+                    }
+                }
+            }
+            register_post_type($post_type, $args);
+        }
+    }
 
     /**
      *

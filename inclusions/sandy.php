@@ -10,10 +10,33 @@ use Pearlpuppy\CoCore\{
     SuperCal\Cal,
 };
 
+
+?>
+
+<pre><code><?php var_dump(get_metadata('post', 39)); ?></code>
+
+<?php
+
 /**
  *  @file   Sandy
  */
 global $cocore;
+
+$mks = get_registered_meta_keys('cocore_type');
+
+$meta = get_metadata('post', 39);
+
+$cocore->slap($meta);
+
+$cocore->slap(array_filter($meta, function($k){
+    return strpos($k, 'cty:') === 0;
+}, ARRAY_FILTER_USE_KEY));
+
+$cocore->slap($mks);
+
+$cocore->slap(get_post_types());
+
+$cocore->slap(get_posts(['post_type' => 'cocore_type']));
 
 $cocore->slap($cocore);
 /**

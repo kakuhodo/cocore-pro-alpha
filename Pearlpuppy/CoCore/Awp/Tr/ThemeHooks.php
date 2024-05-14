@@ -33,10 +33,6 @@ trait Tr_ThemeHooks {
         'after_setup_theme' => [
             'setup',
         ],
-        'wp_enqueue_scripts' => [
-            'queue',
-            'adminQueue',
-        ]
     );
 
     /**

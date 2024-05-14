@@ -95,24 +95,6 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
-     *  @update ver. 0.11.0 (edit. Pierre)
-     */
-    public function queue($hook_suffix = null)
-    {
-        $this->enqueueVia(__FUNCTION__);
-    }
-
-    /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
-     *  @update ver. 0.11.0 (edit. Pierre)
-     */
-    public function adminQueue($hook_suffix = null)
-    {
-        $this->enqueueVia(__FUNCTION__);
-    }
-
-    /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
      */
     abstract protected function inform();
 
@@ -127,28 +109,54 @@ abstract class Abs_Scheme implements Int_Tuner
     }
 
     /**
+     *  Assigns hooks generator
      *  @since  ver. 0.11.0 (edit. Pierre)
      */
     protected function troop(): void
     {
-        // Tribune::frankensteiner(static::$scheme_actions, self::$universal_actions, true);
-        // Tribune::frankensteiner(static::$scheme_filters, self::$universal_filters, true);
         $this->hooks = $this->genHooks(static::$scheme_filters, static::$scheme_actions);
     }
 
     /**
+     *  Provides hooks generator
      *  @since  ver. 0.11.0 (edit. Pierre)
      */
-    protected function genHooks($filters, $actions)
+    protected function genHooks($filters, $actions): \Generator
     {
         Tribune::frankensteiner($filters, self::$universal_filters, true);
         Tribune::frankensteiner($actions, self::$universal_actions, true);
-        foreach ($filters as $hook_name => $methods) {
-            yield new Filter($this, $hook_name, $methods);
+        $hks = array(
+            'Filter' => $filters,
+            'Action' => $actions,
+        );
+        foreach ($hks as $class => $vals) {
+            foreach ($vals as $hook_name => $methods) {
+                yield $this->iHook($class, $hook_name, $methods);
+            }
         }
-        foreach ($actions as $hook_name => $methods) {
-            yield new Action($this, $hook_name, $methods);
+    }
+
+    /**
+     *  @since  ver. 0.11.1 (edit. Pierre)
+     */
+    protected function iHook($class, $hook_name, $methods): Int_Cast
+    {
+        $prio = 10;
+        $hc = __NAMESPACE__ . "\\$class";
+        if (strpos($hook_name, '@') !== false) {
+            $hs = explode('@', $hook_name);
+            $hook_name = $hs[0];
+            $prio = (int) $hs[1];
         }
+        $aa = Whip::$hook_aas[$hook_name] ?? 1;
+        $hooky = new $hc($this, $hook_name, $methods);
+        if ($prio != 10) {
+            $hooky->prior($prio);
+        }
+        if ($aa != 1) {
+            $hooky->accept($aa);
+        }
+        return $hooky;
     }
 
     /**
@@ -171,17 +179,26 @@ abstract class Abs_Scheme implements Int_Tuner
     }
 
     /**
-     *  @since  ver. 0.10.1 (edit. Pierre)
-     *  @update ver. 0.10.5 (edit. Pierre)
+     *  @return A label for $key
+     *  @since  ver. 0.11.1 (edit. Pierre)
      */
-    public function nice(string $key, bool $product = false): string
+    public function moniker(string $key, bool $is_product = false): string
     {
         $phase = 'system';
-        if ($product) {
+        if ($is_product) {
             $phase = 'product';
         }
         $prop = "{$phase}_labels";
-        return strtolower($this->$prop[$key]);
+        return $this->$prop[$key];
+    }
+
+    /**
+     *  @since  ver. 0.10.1 (edit. Pierre)
+     *  @update ver. 0.11.1 (edit. Pierre)
+     */
+    public function nice(string $key, bool $is_product = false): string
+    {
+        return strtolower($this->moniker($key, $is_product));
     }
 
     /**
@@ -223,7 +240,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
-     */
+     *
     protected function _screen(string $caller)
     {
         $matched = preg_match('/(Action|Filter)([A-Z][^A-Z]+)[A-Z]/', $caller, $matches);
@@ -443,6 +460,24 @@ abstract class Abs_Scheme implements Int_Tuner
         $abs = __NAMESPACE__ . '\Abs_' . ucfirst($scheme);
         return $this instanceof $abs;
     }
+
+    /**
+     *  @since  ver. 0.11.1 (edit. Pierre)
+     */
+    protected function svgB64Code($svg_file_name)
+    {
+        $svg = file_get_contents($this->productImgPath($svg_file_name));
+        $b64 = base64_encode($svg);
+        return Whip::$b64_prefix . $b64;
+    }
+
+    /**
+     *
+     */
+
+    /**
+     *
+     */
 
     /**
      *  Do test something
