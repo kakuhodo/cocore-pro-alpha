@@ -35,6 +35,7 @@ trait Tr_Violon {
 
     /**
      *
+     *  !!! DEPRECATE 240526    refine to reuse
      */
     public static function prefix($string, $glue = '_') {
         $brand = \Pedigree::ranker('brand');
@@ -43,6 +44,7 @@ trait Tr_Violon {
 
     /**
      *
+     *  !!! DEPRECATE 240526    refine to reuse
      */
     public static function deprefix($string) {
         $brand = \Pedigree::ranker('brand');

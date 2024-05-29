@@ -238,6 +238,7 @@ final class Whip
 
     /**
      *
+     *  !!! DEPRECATE 240526    refine to reuse
      */
     public static function wpx_menu_header($echo = true) {
         $brand = \Pedigree::ranker('brand');
@@ -269,7 +270,7 @@ final class Whip
     }
 
     /**
-     *
+     *  !!! DEPRECATE 240526    refine to reuse
      */
     public static function wpx_menu_footer($echo = true) {
         $brand = \Pedigree::ranker('brand');

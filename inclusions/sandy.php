@@ -10,17 +10,23 @@ use Pearlpuppy\CoCore\{
     SuperCal\Cal,
 };
 
-
-?>
-
-<pre><code><?php var_dump(get_metadata('post', 39)); ?></code>
-
-<?php
-
 /**
  *  @file   Sandy
  */
 global $cocore;
+
+$cocore->slap($cocore);
+
+$star = \Pearlpuppy\CoCore\Star::getInstance();
+
+$cocore->slap($star, 'Star');
+
+/**
+ *
+ *
+$star = \Pearlpuppy\CoCore\Star::getInstance();
+
+$cocore->slap($cocore->gaze(), 'Gazed');
 
 $mks = get_registered_meta_keys('cocore_type');
 
@@ -38,7 +44,6 @@ $cocore->slap(get_post_types());
 
 $cocore->slap(get_posts(['post_type' => 'cocore_type']));
 
-$cocore->slap($cocore);
 /**
  *
  *
@@ -52,7 +57,8 @@ $cocore->slap($a);
 
 /**
  *
- */
+ *
+<pre><code><?php var_dump(get_metadata('post', 39)); ?></code>
 
 /**
  *

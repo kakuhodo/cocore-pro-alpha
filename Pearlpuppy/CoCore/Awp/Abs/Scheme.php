@@ -1,6 +1,7 @@
 <?php
 namespace Pearlpuppy\CoCore\Awp;
 
+use Pearlpuppy\CoCore\Geny;
 use Pearlpuppy\CoCore\Myt\Tribune;
 
 /**
@@ -18,6 +19,7 @@ abstract class Abs_Scheme implements Int_Tuner
     /**
      *
      */
+    use Geny;
     use Tr_Enq;
     use Tr_SchemeHooks;
 
@@ -31,7 +33,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.4 (edit. Pierre)
-     */
+     *
     protected array $system_labels;
 
     /**
@@ -82,7 +84,7 @@ abstract class Abs_Scheme implements Int_Tuner
      */
     public function __construct(string $file)
     {
-        $this->bapt();
+#        $this->bapt();
         $this->assignProduct($file);
         $this->inform();
         $this->configure();
@@ -139,7 +141,7 @@ abstract class Abs_Scheme implements Int_Tuner
     /**
      *  @since  ver. 0.11.1 (edit. Pierre)
      */
-    protected function iHook($class, $hook_name, $methods): Int_Cast
+    protected function iHook($class, $hook_name, $methods): Int_Caster
     {
         $prio = 10;
         $hc = __NAMESPACE__ . "\\$class";
@@ -161,7 +163,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
-     */
+     *
     protected function bapt(): void
     {
         $this->system_labels = Tribune::typify(__NAMESPACE__);
@@ -239,31 +241,9 @@ abstract class Abs_Scheme implements Int_Tuner
     }
 
     /**
-     *  @since  ver. 0.10.5 (edit. Pierre)
-     *
-    protected function _screen(string $caller)
-    {
-        $matched = preg_match('/(Action|Filter)([A-Z][^A-Z]+)[A-Z]/', $caller, $matches);
-        if (!$matched) {
-            return $matched;
-        }
-        switch ($matches[2]) {
-            case 'Admin':
-                $screen = strtolower($matches[2]);
-                break;
-            case 'Wp':
-                $screen = 'front';
-                break;
-            default:
-                $screen = null;
-        }
-        return $screen;
-    }
-
-    /**
      *  @since  ver. 0.10.6 (edit. Pierre)
      */
-    protected function sound(string $prop)
+    protected function sound(string $prop): bool
     {
         return isset($this->awp_settings->$prop) && $this->awp_settings->$prop;
     }
@@ -284,14 +264,6 @@ abstract class Abs_Scheme implements Int_Tuner
         foreach ($this->hooks as $hook) {
             $hook->hook();
         }
-        // foreach ($this->filters as $hook_name => $methods) {
-        //     $filter = new Filter($this, $hook_name, $methods);
-        //     $filter->hook();
-        // }
-        // foreach ($this->actions as $hook_name => $methods) {
-        //     $action = new Action($this, $hook_name, $methods);
-        //     $action->hook();
-        // }
     }
 
     /**
@@ -301,21 +273,6 @@ abstract class Abs_Scheme implements Int_Tuner
     {
         foreach ($hooks as $hook_name => $meth) {
             
-        }
-    }
-
-    /**
-     *  @since  ver. 0.10.1 (edit. Pierre)
-     *
-    public function hook()
-    {
-        $iterator = Tribune::recursiveIterator(Whip::$hooks);
-        foreach ($iterator as $key => $value) {
-            if ($iterator->hasChildren()) {
-                $hook_type = $key;
-            } else {
-                $this->assignHook($hook_type, $value);
-            }
         }
     }
 
@@ -423,14 +380,6 @@ abstract class Abs_Scheme implements Int_Tuner
     }
 
     /**
-     *  @since  ver. 0.10.6 (edit. Pierre)
-     *
-    protected function dirJunction()
-    {
-        
-    }
-
-    /**
      *  @since  ver. 0.10.5 (edit. Pierre)
      */
     public function assetXtens(string $asset)
@@ -472,14 +421,6 @@ abstract class Abs_Scheme implements Int_Tuner
     }
 
     /**
-     *
-     */
-
-    /**
-     *
-     */
-
-    /**
      *  Do test something
      */
     public function doDyna($arg = null)
@@ -494,6 +435,14 @@ abstract class Abs_Scheme implements Int_Tuner
     {
         
     }
+
+    /**
+     *
+     */
+
+    /**
+     *
+     */
 
     /**
      *

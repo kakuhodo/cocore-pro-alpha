@@ -85,7 +85,7 @@ trait Tr_PluginHooks {
     public function sandyWidget()
     {
         $args = array(
-            'widget_id' => $this->nice('brand') . '-sandy',
+            'widget_id' => $this->gaze() . '-sandy',
             'widget_name' => 'Sandy',
             'callback' => [$this, 'wcbSandy'],
             'control_callback' => [$this, 'wcbSandyControl'],
@@ -149,14 +149,14 @@ trait Tr_PluginHooks {
     public function registerCoreTax()
     {
         $args = [];
-        $taxonomy = $this->nice('brand') . '_tax';
-        $object_type = $this->nice('brand') . '_type';
+        $taxonomy = $this->gaze() . '_tax';
+        $object_type = $this->gaze() . '_type';
         $singular_name = 'Tax';
-        $menu_name = $this->moniker('brand') . " Taxes";
+        $menu_name = $this->gaze(false) . " Taxes";
         $args['labels'] = Whip::taxLabels($singular_name, ['name' => $menu_name]);
         $args['show_ui'] = true;
         $args['show_in_rest'] = true;
-#        $args['show_in_menu'] = $this->nice('brand');
+#        $args['show_in_menu'] = $this->gaze();
 #        $args['public'] = true;
         register_taxonomy($taxonomy, $object_type, $args);
     }
@@ -169,9 +169,9 @@ trait Tr_PluginHooks {
     public function registerCoreType()
     {
         $args = [];
-        $post_type = $this->nice('brand') . '_type';
+        $post_type = $this->gaze() . '_type';
         $singular_name = 'Type';
-        $menu_name = $this->moniker('brand') . " Types";
+        $menu_name = $this->gaze(false) . " Types";
         $args['labels'] = Whip::ptLabels($singular_name, ['name' => $menu_name]);
         $args['show_ui'] = true;
         $args['show_in_rest'] = true;
@@ -196,7 +196,7 @@ trait Tr_PluginHooks {
      */
     public function registerCoreTypeMeta()
     {
-        $object_type = $this->nice('brand') . '_type';
+        $object_type = $this->gaze() . '_type';
         $labels_keys = array(
             'name',
             'singular_name',
@@ -226,7 +226,7 @@ trait Tr_PluginHooks {
      */
     public function mainMenu()
     {
-        $menu_slug = $this->nice('brand');
+        $menu_slug = $this->gaze();
         $svgb64 = $this->svgB64Code('icon-cocore.svg');
         add_menu_page('CoCore Settings', 'CoCore', 'manage_options', $menu_slug, [$this, 'wcbMainPage'], $svgb64);
     }
@@ -255,7 +255,7 @@ trait Tr_PluginHooks {
      */
     public function adminScreenCssClass($classes)
     {
-        $classes .= ' ' . $this->nice('brand');
+        $classes .= ' ' . $this->gaze();
         return $classes;
     }
 
@@ -273,7 +273,7 @@ trait Tr_PluginHooks {
      */
     public function boostTypes()
     {
-        $_post_type = $this->nice('brand') . '_type';
+        $_post_type = $this->gaze() . '_type';
         $_args['post_type'] = $_post_type;
         $ctypes = get_posts($_args);
         if (empty($ctypes)) {
