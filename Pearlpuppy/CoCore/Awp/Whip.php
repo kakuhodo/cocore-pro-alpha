@@ -165,10 +165,10 @@ final class Whip
         $func = "plugin_dir_$mode";
         $path_from_product_root = plugin_basename($file);        // no slash on head and toe, but end with exact file.ext.
         $full_version = $func($file);
-        $dirs = explode(DIRECTORY_SEPARATOR, $path_from_product_root);
+        $dirs = explode(D_S, $path_from_product_root);
         $product_dirname = array_shift($dirs);
         array_pop($dirs);        // just remove needless filename.
-        $too_much = implode(DIRECTORY_SEPARATOR, $dirs);
+        $too_much = implode(D_S, $dirs);
         if (!$too_much) {
             return $full_version;
         }
@@ -308,7 +308,7 @@ final class Whip
      *        If $in_detail, an array of scheme (indexed 0) and the name of folder (indexed 1) just under the scheme.
      */
     public static function oriented_from($file, $in_detail = false) {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = D_S;
         $wpcd = 'wp-content' . $ds;
         $pos = strpos($file, $wpcd);
         if ($pos === false) {
@@ -327,7 +327,7 @@ final class Whip
      *
      */
     public static function pathGetScheme($path) {
-        $dirs = explode(DIRECTORY_SEPARATOR, $path);
+        $dirs = explode(D_S, $path);
         $index = array_search('wp-content', $dirs);
         if ($index === false) {
             return false;

@@ -49,6 +49,7 @@ $multiDimArray = [
 ### Versions
 | version | updated | memo |
 |:---:|:---:|---|
+| 0.12.0 | 2024-05-31 | Indroducing PetitTrianon |
 | 0.11.2 | 2024-05-29 |  |
 | 0.11.1 | 2024-05-14 |  |
 | 0.11.0 | 2024-05-12 | Introducing Hook objects |
