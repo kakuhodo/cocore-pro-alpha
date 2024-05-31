@@ -23,6 +23,7 @@ final class Star implements Stellar
     /**
      *
      */
+    const STARFILE = __FILE__;
 
     // Properties
 

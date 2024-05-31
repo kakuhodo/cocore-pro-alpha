@@ -32,7 +32,7 @@ final class Tribune
 
     /**
      *
-     *
+     */
     const WHO = __NAMESPACE__;
     const WHERE = __DIR__;
 

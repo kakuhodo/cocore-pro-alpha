@@ -78,6 +78,61 @@ trait Tr_Survayor {
     }
 
     /**
+     *  Safe path for storing
+     *  @return path from directly under the brand root directory, started with slash
+     *      e.g. /Myt/Tribune.php
+     *  @since  ver. 0.12.0 (edit. Pierre)
+     */
+    public static function brandRootRelPath(string $file): string|false
+    {
+        return self::safePath(true, $file);
+    }
+
+    /**
+     *  @return full path to brand directory
+     *  @since  ver. 0.12.0 (edit. Pierre)
+     */
+    public static function brandDir(): string|false
+    {
+        return self::safePath(false);
+    }
+
+    /**
+     *  @since  ver. 0.12.0 (edit. Pierre)
+     */
+    public static function safePath(bool $safe = true, ?string $file = null): string|false
+    {
+        $fullpath = $file ?? __DIR__;
+        $names = explode('\\', __NAMESPACE__);
+        $needle = '/' . $names[1] . '/';
+        $rpos = strrpos($fullpath, $needle);
+        if ($rpos === false) {
+            return false;
+        }
+        $offset_length = $rpos + strlen($needle) - 1;
+        if (!$safe) {
+            return substr($fullpath, 0, $offset_length);
+        }
+        return substr($fullpath, $offset_length);
+    }
+
+    /**
+     *  @since  ver. 0.12.0 (edit. Pierre)
+     */
+    public static function unsafePath(string $safepath)
+    {
+        return self::brandDir() . $safepath;
+    }
+
+    /**
+     *
+     */
+
+    /**
+     *
+     */
+
+    /**
      *
      */
 

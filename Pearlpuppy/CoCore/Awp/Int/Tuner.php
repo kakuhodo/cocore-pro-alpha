@@ -36,12 +36,12 @@ interface Int_Tuner extends Gene
 
     /**
      *  @since  ver. 0.11.0 (edit. Pierre)
-     */
+     *
     public function roll();
 
     /**
      *
-     */
+     *
     public function vox(string $prop): mixed;
 
     /**

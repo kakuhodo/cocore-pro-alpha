@@ -354,6 +354,19 @@ final class Whip
     }
 
     /**
+     *  @return full path to CoCore directory
+     *  @since  ver. 0.12.0 (edit. Pierre)
+     *
+    public static function brandDir()
+    {
+        
+    }
+
+    /**
+     *
+     */
+
+    /**
      *
      */
 
