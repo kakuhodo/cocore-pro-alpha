@@ -21,6 +21,7 @@ namespace Pearlpuppy\NittyGritty;
  *
  */
 define('D_S', DIRECTORY_SEPARATOR);
+define('PRODUCTION_NS', __NAMESPACE__);
 
 /**
  *  ---------------------------
@@ -56,6 +57,37 @@ function loadie($class)
  *      for development use
  *  ---------------------------
  */
+
+/**
+ *
+ */
+if (defined('WP_DEBUG') && WP_DEBUG) {
+    add_action('wp_dashboard_setup', __NAMESPACE__ . '\sandyWidget');
+}
+
+/**
+ *
+ */
+function sandyWidget()
+{
+    wp_add_dashboard_widget(minId() . '-sandy', 'Sandy', __NAMESPACE__ . '\hcbSandyScreen');
+}
+
+/**
+ *
+ */
+function hcbSandyScreen()
+{
+    include_once(dirname(__DIR__) . '/inclusions/sandy.php');
+}
+
+/**
+ *
+ */
+function minId()
+{
+    return strtolower(str_replace('\\', '-', __NAMESPACE__));
+}
 
 /**
  *  ---------------------------

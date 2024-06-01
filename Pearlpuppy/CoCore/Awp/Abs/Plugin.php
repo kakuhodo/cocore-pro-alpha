@@ -49,7 +49,7 @@ abstract class Abs_Plugin extends Abs_Scheme implements Int_Wheeler
      */
     protected function inform()
     {
-        $this->info = new WpxPlugin(Whip::pregetPluginData($this->reflector->getFileName()));
+        $this->info = new WpxPlugin(Whip::pregetPluginData(static::$scheme_file));
     }
 
     /**

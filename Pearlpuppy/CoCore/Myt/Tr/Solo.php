@@ -16,6 +16,7 @@ trait Tr_Solo
     /**
      *
      */
+    use Tr_Inconstructible;
 
     // Constants
 
@@ -35,10 +36,6 @@ trait Tr_Solo
     /**
      *
      */
-    private function __construct()
-    {
-        // something initialise
-    }
 
     // Methods
 

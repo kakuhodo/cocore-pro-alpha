@@ -2,6 +2,7 @@
 namespace Pearlpuppy\CoCore\Awp;
 
 use Pearlpuppy\CoCore\Myt;
+use Pearlpuppy\CoCore\Myt\Tribune;
 
 /**
  *  @file   Whip
@@ -354,10 +355,37 @@ final class Whip
     }
 
     /**
+     *  Replaces a fullpath to relative path under WP installed directory (may not document root) starting with slash
+     *  @since  ver. 0.12.1 (edit. Pierre)
+     */
+    public static function iwpRrPath(string $file): string|false
+    {
+        return Tribune::breakPath('wp-content', $file, 1, true);
+    }
+
+    /**
+     *  Provides WP installed directory path, no trailing slash
+     *  @since  ver. 0.12.1 (edit. Pierre)
+     */
+    public static function iwpRoot(): string|false
+    {
+        return Tribune::breakPath('wp-content', __DIR__, 0, true);
+    }
+
+    /**
+     *  Reduces a fullpath
+     *  @since  ver. 0.12.1 (edit. Pierre)
+     */
+    public static function reFull(string $iwprr_path)
+    {
+        return self::iwpRoot() . $iwprr_path;
+    }
+
+    /**
      *  @return full path to CoCore directory
      *  @since  ver. 0.12.0 (edit. Pierre)
      *
-    public static function brandDir()
+    public static function brandRoot()
     {
         
     }
