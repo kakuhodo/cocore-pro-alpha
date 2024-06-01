@@ -92,7 +92,7 @@ trait Tr_Survayor {
      *  @return full path to brand directory
      *  @since  ver. 0.12.0 (edit. Pierre)
      */
-    public static function brandDir(): string|false
+    public static function brandRoot(): string|false
     {
         return self::safePath(false);
     }
@@ -100,28 +100,50 @@ trait Tr_Survayor {
     /**
      *  @since  ver. 0.12.0 (edit. Pierre)
      */
-    public static function safePath(bool $safe = true, ?string $file = null): string|false
+    public static function unsafePath(string $safepath)
     {
-        $fullpath = $file ?? __DIR__;
-        $names = explode('\\', __NAMESPACE__);
-        $needle = '/' . $names[1] . '/';
-        $rpos = strrpos($fullpath, $needle);
-        if ($rpos === false) {
-            return false;
-        }
-        $offset_length = $rpos + strlen($needle) - 1;
-        if (!$safe) {
-            return substr($fullpath, 0, $offset_length);
-        }
-        return substr($fullpath, $offset_length);
+        return self::brandRoot() . $safepath;
     }
 
     /**
      *  @since  ver. 0.12.0 (edit. Pierre)
+     *  @update ver. 0.12.1 (edit. Pierre)
      */
-    public static function unsafePath(string $safepath)
+    public static function safePath(bool $safe = true, ?string $file = null): string|false
     {
-        return self::brandDir() . $safepath;
+        $fullpath = $file ?? __DIR__;
+        $names = explode('\\', __NAMESPACE__);
+        return self::breakPath($names[1], $fullpath, (int) $safe);
+    }
+
+    /**
+     *  Separates a path-string into 2 parts
+     *  @return depends on $mode and $inset
+     *      -1: (array) both [0 => below_0, 1 => below_1]
+     *      0:  (string) former part, no trailing slash
+     *      1:  (string) latter part, start with slash
+     *      $inset to set the breakpoint in latter part.
+     *  @since  ver. 0.12.1 (edit. Pierre)
+     */
+    public static function breakPath(string $bpdir, string $path, int $mode = -1, $inset = false)
+    {
+        $needle = D_S . $bpdir . D_S;
+        $rpos = strrpos($path, $needle);
+        if ($rpos === false) {
+            return false;
+        }
+        $offset_length = $inset ? $rpos : $rpos + strlen($needle) - 1;
+        if ($mode <= 0) {
+            $former = substr($path, 0, $offset_length);
+            if ($mode == 0) {
+                return $former;
+            }
+        }
+        $latter = substr($path, $offset_length);
+        if ($mode == 1) {
+            return $latter;
+        }
+        return [$former, $latter];
     }
 
     /**
