@@ -52,13 +52,13 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
      */
-    protected function __construct()
+    public function __construct(string $file)
     {
-        // $this->substream = is_child_theme();
-        parent::__construct();
-        // $this->setDefaults();
-        // $this->assignSupports();
-        // $this->support();
+        $this->substream = is_child_theme();
+        parent::__construct($file);
+        $this->setDefaults();
+        $this->assignSupports();
+        $this->support();
     }
 
     /**

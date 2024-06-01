@@ -13,6 +13,11 @@ This edition based on edition Chic of CoCore (ver. 0.9.0).
 #### concept AC/DC
 リスト状に展開するコンテンツを、データ配列を基にHTML生成、出力する。
 
+#### concept _PetitTrianon_
+SHC (since Sovereign) の後継。
+Brand - Scheme (Product) - Hook の3者の整理（明確な棲み分け）と適切な連携を模索する。
+(0.12.x)
+
 ##### 概念
 - _Convertor_: 一次元配列から`ArrayIterator`を生成、これを`Generator`に変換して、HTML出力。
 - _Invertor_: 二(多)次元配列から`RecursiveArrayIterator`を生成、これを`RevursiveIteratorIterator`を介して`Generator`に変換、HTML出力。
@@ -44,6 +49,10 @@ $multiDimArray = [
 ### Versions
 | version | updated | memo |
 |:---:|:---:|---|
+| 0.12.1 | 2024-06-02 |  |
+| 0.12.0 | 2024-05-31 | Indroducing PetitTrianon |
+| 0.11.2 | 2024-05-29 |  |
+| 0.11.1 | 2024-05-14 |  |
 | 0.11.0 | 2024-05-12 | Introducing Hook objects |
 | 0.10.6 | 2024-05-10 | Begining of CoCore Entities |
 | 0.10.5 | 2024-03-06 | Connecting theme, assets autoload |
@@ -137,6 +146,14 @@ $multiDimArray = [
         - デコーダ、シングルトン
 - _Hook_ オブジェクト
     - `Filter` および `Action` を導入 (0.11.0)
+- dash widget _CoCore Spec_ の導入を検討 (0.12.x)
+    - CoCore の稼働 Scheme (Plugin | Theme)
+    - PHP ver.
+    - ...
+
+```
+this line is just for testing purpose
+```
 
 > [!NOTE]
 > `enqueue` の `deps` については、直系の Brand-Product 間のみ設定する。 

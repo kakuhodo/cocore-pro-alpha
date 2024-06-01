@@ -6,7 +6,7 @@ namespace Pearlpuppy\CoCore\Awp;
  */
 
 /**
- *
+ *  A informer
  */
 class WpxPlugin extends \ArrayIterator
 {

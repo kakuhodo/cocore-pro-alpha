@@ -2,6 +2,7 @@
 namespace Pearlpuppy\CoCore\Awp;
 
 use Pearlpuppy\CoCore\Myt;
+use Pearlpuppy\CoCore\Myt\Tribune;
 
 /**
  *  @file   Whip
@@ -165,10 +166,10 @@ final class Whip
         $func = "plugin_dir_$mode";
         $path_from_product_root = plugin_basename($file);        // no slash on head and toe, but end with exact file.ext.
         $full_version = $func($file);
-        $dirs = explode(DIRECTORY_SEPARATOR, $path_from_product_root);
+        $dirs = explode(D_S, $path_from_product_root);
         $product_dirname = array_shift($dirs);
         array_pop($dirs);        // just remove needless filename.
-        $too_much = implode(DIRECTORY_SEPARATOR, $dirs);
+        $too_much = implode(D_S, $dirs);
         if (!$too_much) {
             return $full_version;
         }
@@ -238,6 +239,7 @@ final class Whip
 
     /**
      *
+     *  !!! DEPRECATE 240526    refine to reuse
      */
     public static function wpx_menu_header($echo = true) {
         $brand = \Pedigree::ranker('brand');
@@ -269,7 +271,7 @@ final class Whip
     }
 
     /**
-     *
+     *  !!! DEPRECATE 240526    refine to reuse
      */
     public static function wpx_menu_footer($echo = true) {
         $brand = \Pedigree::ranker('brand');
@@ -307,7 +309,7 @@ final class Whip
      *        If $in_detail, an array of scheme (indexed 0) and the name of folder (indexed 1) just under the scheme.
      */
     public static function oriented_from($file, $in_detail = false) {
-        $ds = DIRECTORY_SEPARATOR;
+        $ds = D_S;
         $wpcd = 'wp-content' . $ds;
         $pos = strpos($file, $wpcd);
         if ($pos === false) {
@@ -326,7 +328,7 @@ final class Whip
      *
      */
     public static function pathGetScheme($path) {
-        $dirs = explode(DIRECTORY_SEPARATOR, $path);
+        $dirs = explode(D_S, $path);
         $index = array_search('wp-content', $dirs);
         if ($index === false) {
             return false;
@@ -351,6 +353,46 @@ final class Whip
     {
         return !empty($GLOBALS['admin_page_hooks'][$page_slug]);
     }
+
+    /**
+     *  Replaces a fullpath to relative path under WP installed directory (may not document root) starting with slash
+     *  @since  ver. 0.12.1 (edit. Pierre)
+     */
+    public static function iwpRrPath(string $file): string|false
+    {
+        return Tribune::breakPath('wp-content', $file, 1, true);
+    }
+
+    /**
+     *  Provides WP installed directory path, no trailing slash
+     *  @since  ver. 0.12.1 (edit. Pierre)
+     */
+    public static function iwpRoot(): string|false
+    {
+        return Tribune::breakPath('wp-content', __DIR__, 0, true);
+    }
+
+    /**
+     *  Reduces a fullpath
+     *  @since  ver. 0.12.1 (edit. Pierre)
+     */
+    public static function reFull(string $iwprr_path)
+    {
+        return self::iwpRoot() . $iwprr_path;
+    }
+
+    /**
+     *  @return full path to CoCore directory
+     *  @since  ver. 0.12.0 (edit. Pierre)
+     *
+    public static function brandRoot()
+    {
+        
+    }
+
+    /**
+     *
+     */
 
     /**
      *

@@ -1,6 +1,7 @@
 <?php
 namespace Pearlpuppy\CoCore\Awp;
 
+use Pearlpuppy\CoCore\Geny;
 use Pearlpuppy\CoCore\Myt\Tribune;
 
 /**
@@ -10,7 +11,7 @@ use Pearlpuppy\CoCore\Myt\Tribune;
 /**
  *  @since  ver. 0.11.0 (edit. Pierre)
  */
-abstract class Abs_Hook implements Int_Cast
+abstract class Abs_Hook implements Int_Caster
 {
 
 	// Mixins
@@ -18,6 +19,7 @@ abstract class Abs_Hook implements Int_Cast
     /**
      *
      */
+    use Geny;
 
     // Constants
 
