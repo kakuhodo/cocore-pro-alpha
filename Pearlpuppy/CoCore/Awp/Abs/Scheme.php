@@ -34,6 +34,12 @@ abstract class Abs_Scheme implements Int_Tuner
     // Properties
 
     /**
+     *  Brand root relative path to 
+     *  @since  ver. 0.12.0 (edit. Pierre)
+     */
+    public static string $scheme_file;
+
+    /**
      *  @since  ver. 0.10.5 (edit. Pierre)
      *      ex-name $product_labels
      *  @rename ver. 0.12.0 (edit. Pierre)
@@ -55,12 +61,6 @@ abstract class Abs_Scheme implements Int_Tuner
      */
     protected object $info;
 
-    /**
-     *  Brand root relative path to 
-     *  @since  ver. 0.12.0 (edit. Pierre)
-     */
-    public static string $scheme_file;
-
     // Constructor
 
     /**
@@ -80,6 +80,18 @@ abstract class Abs_Scheme implements Int_Tuner
      *  @since  ver. 0.10.5 (edit. Pierre)
      */
     abstract protected function inform();
+
+    /**
+     *
+     *  @since  ver. 0.12.1 (edit. Pierre)
+     */
+    public static function inst(string $file): static
+    {
+        if (empty(static::$scheme_file)) {
+            static::$scheme_file = $file;
+        }
+        return static::getInstance();
+    }
 
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
@@ -123,18 +135,6 @@ abstract class Abs_Scheme implements Int_Tuner
     public function productDir()
     {
         return dirname($this->productFile());
-    }
-
-    /**
-     *
-     *  @since  ver. 0.12.1 (edit. Pierre)
-     */
-    public static function inst(string $file): static
-    {
-        if (empty(static::$scheme_file)) {
-            static::$scheme_file = $file;
-        }
-        return static::getInstance();
     }
 
     /**

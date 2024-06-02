@@ -1,6 +1,11 @@
 <?php
 namespace Pearlpuppy\NittyGritty;
 
+use Pearlpuppy\CoCore\Myt\{
+    Consul,
+    Lime,
+};
+
 /**
  *  @file   Flashpoint
  *      Activates core.
@@ -61,6 +66,11 @@ function loadie($class)
 /**
  *
  */
+$console = new Consul();
+
+/**
+ *
+ */
 if (defined('WP_DEBUG') && WP_DEBUG) {
     add_action('wp_dashboard_setup', __NAMESPACE__ . '\sandyWidget');
 }
@@ -78,7 +88,9 @@ function sandyWidget()
  */
 function hcbSandyScreen()
 {
+    global $console;
     include_once(dirname(__DIR__) . '/inclusions/sandy.php');
+    $console->expose();
 }
 
 /**
