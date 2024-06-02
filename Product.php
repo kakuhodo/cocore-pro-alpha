@@ -1,7 +1,10 @@
 <?php
 namespace Kakuhodo\CoCore;
 
-use Pearlpuppy\CoCore\Awp\Abs_Plugin;
+use Pearlpuppy\CoCore\{
+    Awp\Abs_Plugin,
+    Myt,
+};
 
 /**
  *  @file   
@@ -16,6 +19,7 @@ class Product extends Abs_Plugin
     /**
      *
      */
+    use Myt\Tr_Soliste;
 
     // Constants
 
@@ -36,22 +40,6 @@ class Product extends Abs_Plugin
      */
 
     // Methods
-
-    /**
-     *
-     */
-    public function hookActionAdminNotices()
-    {
-        echo '<div class="notice notice-success is-dismissible"><p>OVERRIDEN via <code>' . __FUNCTION__ . '</code> of <code>' . __CLASS__ . '</code></p></div>';
-    }
-
-    /**
-     *
-     */
-    public function cpaActionAdminNotices()
-    {
-        echo '<div class="notice notice-info"><p>This info from <code>' . __CLASS__ . '</code></p></div>';
-    }
 
     /**
      *

@@ -40,6 +40,15 @@ abstract class Abs_PqIterator extends \ArrayIterator implements Int_PqPie
     }
 
     /**
+     *  Pushes data into the stream
+     *  @since  ver. 0.12.2 (edit. Pierre)
+     */
+    public function hop(mixed $output, string|int|null $label = null): void
+    {
+        $this[$label] = $output;
+    }
+
+    /**
      *
      */
 

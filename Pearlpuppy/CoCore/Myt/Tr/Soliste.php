@@ -2,13 +2,14 @@
 namespace Pearlpuppy\CoCore\Myt;
 
 /**
- *  @file   Solo
+ *  @file   Soliste
  */
 
 /**
  *  Singleton pattern
+ *      extendable version of Tr_Solo
  */
-trait Tr_Solo
+trait Tr_Soliste
 {
 
 	// Mixins
@@ -16,7 +17,7 @@ trait Tr_Solo
     /**
      *
      */
-    use Tr_Inconstructible;
+    use Tr_Solar;
 
     // Constants
 
@@ -29,26 +30,22 @@ trait Tr_Solo
     /**
      *
      */
-    private static ?object $instance = null;
 
     // Constructor
 
     /**
      *
      */
+    protected function __construct()
+    {
+        parent::__construct();
+    }
 
     // Methods
 
     /**
      *
      */
-    public static function getInstance(): object
-    {
-        if (self::$instance === null) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
 
     /**
      *
