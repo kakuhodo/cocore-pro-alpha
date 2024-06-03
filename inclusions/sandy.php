@@ -18,6 +18,7 @@ global $cocore, $console;
 
 $apath = '/Users/jeanpierre/Sites/localhost/pierre/centre/wp-content/plugins/cocore-pro-alpha/Pearlpuppy/CoCore/Awp/Whip.php';
 
+$console->hop(Awp\Trolley::$wheel, 'sp');
 $console->hop($cocore);
 $console->hop($apath, '_path');
 

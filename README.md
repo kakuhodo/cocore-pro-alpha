@@ -15,6 +15,7 @@ This edition based on edition Chic of CoCore (ver. 0.9.0).
 ### Versions
 | version | updated | memo |
 |:---:|:---:|---|
+| 0.12.2 | 2024-06-03 | PetitTrianon elemental implements |
 | 0.12.1 | 2024-06-02 |  |
 | 0.12.0 | 2024-05-31 | Indroducing PetitTrianon |
 | 0.11.2 | 2024-05-29 |  |

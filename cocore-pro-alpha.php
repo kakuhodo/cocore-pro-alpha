@@ -25,7 +25,7 @@ require_once('sesame.php');
  *
  */
 $cocore = Product::inst(__FILE__);
-#$cocore->roll();
+$cocore->roll();
 #$cocore->hook();
 
 

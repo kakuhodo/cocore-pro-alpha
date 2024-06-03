@@ -23,7 +23,7 @@ abstract class Abs_Scheme implements Int_Tuner
      *
      */
     use Geny;
-#    use Myt\Tr_Soliste;
+    use Tr_Passer;
 
     // Constants
 
@@ -32,6 +32,11 @@ abstract class Abs_Scheme implements Int_Tuner
      */
 
     // Properties
+
+    /**
+     *
+     */
+    public static Trooper $trooper;
 
     /**
      *  Brand root relative path to 
@@ -72,6 +77,7 @@ abstract class Abs_Scheme implements Int_Tuner
         $this->assignProduct();
         $this->inform();
         $this->configure();
+        static::$trooper = new Trooper();
     }
 
     // Methods
@@ -80,6 +86,11 @@ abstract class Abs_Scheme implements Int_Tuner
      *  @since  ver. 0.10.5 (edit. Pierre)
      */
     abstract protected function inform();
+
+    /**
+     *  @since  ver. 0.10.4 (edit. Pierre)
+     *
+    abstract public function productDir(bool $uri = false, ?string $dir = null, ?string $file = null): string;
 
     /**
      *
@@ -138,8 +149,12 @@ abstract class Abs_Scheme implements Int_Tuner
     }
 
     /**
-     *
+     *  @since  ver. 0.12.2 (edit. Pierre)
      */
+    public function roll()
+    {
+        static::$trooper->roll();
+    }
 
     /**
      *

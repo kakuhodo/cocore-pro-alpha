@@ -174,10 +174,12 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
      *  In case called from child theme, this returns the child theme object
      *      which contains parent object inside.
      *  @since  ver. 0.10.5 (edit. Pierre)
+     *  @update ver.0.12.2 (edit. Pierre)
      */
     protected function inform()
     {
         $this->info = wp_get_theme();
+        Trolley::$dress = $this;
     }
 
     /**

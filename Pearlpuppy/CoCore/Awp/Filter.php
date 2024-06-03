@@ -43,8 +43,9 @@ final class Filter extends Abs_Hook
     public function hook()
     {
         foreach ($this->callees as $method) {
-            call_user_func($this->funk, $this->hook_name, [$this->roller, $method]);
-        }
+#            call_user_func($this->funk, $this->hook_name, [$this->roller, $method]);
+            call_user_func($this->funk, $this->hook_name, [__NAMESPACE__ . '\Trolley', $method]);
+       }
     }
 
     /**
