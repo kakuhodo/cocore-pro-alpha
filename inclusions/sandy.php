@@ -16,6 +16,11 @@ use Pearlpuppy\CoCore\{
  */
 global $cocore, $console;
 
+$console->hop($cocore->trawler(), '_tr');
+
+/**
+ *
+ *
 $apath = '/Users/jeanpierre/Sites/localhost/pierre/centre/wp-content/plugins/cocore-pro-alpha/Pearlpuppy/CoCore/Awp/Whip.php';
 
 $console->hop(Awp\Trolley::$wheel, 'sp');

@@ -8,7 +8,7 @@ namespace Pearlpuppy\CoCore\Awp;
 /**
  *  @since  ver. 0.11.0 (edit. Pierre)
  */
-final class Action extends Abs_Hook
+class Action extends Abs_Hook
 {
 
 	// Mixins

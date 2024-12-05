@@ -19,7 +19,7 @@ abstract class Abs_Theme extends Abs_Scheme implements Int_Dresser
 
     /**
      *
-     */
+     *
     use Tr_ThemeHooks;
 
     // Constants

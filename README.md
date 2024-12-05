@@ -71,6 +71,9 @@ _CoCore_ 内部で、WordPress の Theme と Plugin を総称。 _Tuner_ イン�
 ### Product
 Scheme自身（主にプラグインを想定）の代名詞。当プラグインなら、cocore-pro-alpha を指す。
 
+### Robe
+_CoCore_ 対応のテーマ。(>= 0.12.3)
+
 ### Project
 Productに設定される案件（ユースケースや企画等）を指す。
 

@@ -58,47 +58,24 @@ function loadie($class)
 
 /**
  *  ---------------------------
- *  Minimal implements
- *      for development use
+ *  System requirements
  *  ---------------------------
  */
 
 /**
- *
+ *  Loads ALL CoCore/<Component>/essentials.php
  */
-$console = new Consul();
-
-/**
- *
- */
-if (defined('WP_DEBUG') && WP_DEBUG) {
-    add_action('wp_dashboard_setup', __NAMESPACE__ . '\sandyWidget');
-}
-
-/**
- *
- */
-function sandyWidget()
-{
-    wp_add_dashboard_widget(minId() . '-sandy', 'Sandy', __NAMESPACE__ . '\hcbSandyScreen');
-}
-
-/**
- *
- */
-function hcbSandyScreen()
-{
-    global $console;
-    include_once(dirname(__DIR__) . '/inclusions/sandy.php');
-    $console->expose();
-}
-
-/**
- *
- */
-function minId()
-{
-    return strtolower(str_replace('\\', '-', __NAMESPACE__));
+$dir = __DIR__ . D_S . 'CoCore';
+$scanned = scandir($dir);
+foreach ($scanned as $fd) {
+    if (strpos($fd, '.') !== false) {
+        continue;
+    }
+    $file = $dir . D_S . $fd . D_S . 'essentials.php';
+    if (!file_exists($file)) {
+        continue;
+    }
+    require_once($file);
 }
 
 /**

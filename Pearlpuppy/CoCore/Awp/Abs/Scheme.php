@@ -159,6 +159,14 @@ abstract class Abs_Scheme implements Int_Tuner
     /**
      *
      */
+    public function trawler()
+    {
+        return static::$trooper;
+    }
+
+    /**
+     *
+     */
 
 //[EOAC]*/
 }
