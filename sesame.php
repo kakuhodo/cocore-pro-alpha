@@ -18,6 +18,8 @@ require_once(__DIR__ . '/Pearlpuppy/flashpoint.php');
  */
 if (file_exists(__DIR__ . '/Product.php')) {
     require_once(__DIR__ . '/Product.php');
+    $cocore = Product::inst(PP_FILE);
+    $cocore->roll();
 }
 
 /**

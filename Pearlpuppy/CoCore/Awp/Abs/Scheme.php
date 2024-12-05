@@ -23,7 +23,7 @@ abstract class Abs_Scheme implements Int_Tuner
      *
      */
     use Geny;
-#    use Myt\Tr_Soliste;
+    use Tr_Passer;
 
     // Constants
 
@@ -32,6 +32,17 @@ abstract class Abs_Scheme implements Int_Tuner
      */
 
     // Properties
+
+    /**
+     *
+     */
+    public static Trooper $trooper;
+
+    /**
+     *  Brand root relative path to 
+     *  @since  ver. 0.12.0 (edit. Pierre)
+     */
+    public static string $scheme_file;
 
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
@@ -55,12 +66,6 @@ abstract class Abs_Scheme implements Int_Tuner
      */
     protected object $info;
 
-    /**
-     *  Brand root relative path to 
-     *  @since  ver. 0.12.0 (edit. Pierre)
-     */
-    public static string $scheme_file;
-
     // Constructor
 
     /**
@@ -72,6 +77,7 @@ abstract class Abs_Scheme implements Int_Tuner
         $this->assignProduct();
         $this->inform();
         $this->configure();
+        static::$trooper = new Trooper();
     }
 
     // Methods
@@ -80,6 +86,23 @@ abstract class Abs_Scheme implements Int_Tuner
      *  @since  ver. 0.10.5 (edit. Pierre)
      */
     abstract protected function inform();
+
+    /**
+     *  @since  ver. 0.10.4 (edit. Pierre)
+     *
+    abstract public function productDir(bool $uri = false, ?string $dir = null, ?string $file = null): string;
+
+    /**
+     *
+     *  @since  ver. 0.12.1 (edit. Pierre)
+     */
+    public static function inst(string $file): static
+    {
+        if (empty(static::$scheme_file)) {
+            static::$scheme_file = $file;
+        }
+        return static::getInstance();
+    }
 
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
@@ -126,20 +149,20 @@ abstract class Abs_Scheme implements Int_Tuner
     }
 
     /**
-     *
-     *  @since  ver. 0.12.1 (edit. Pierre)
+     *  @since  ver. 0.12.2 (edit. Pierre)
      */
-    public static function inst(string $file): static
+    public function roll()
     {
-        if (empty(static::$scheme_file)) {
-            static::$scheme_file = $file;
-        }
-        return static::getInstance();
+        static::$trooper->roll();
     }
 
     /**
      *
      */
+    public function trawler()
+    {
+        return static::$trooper;
+    }
 
     /**
      *

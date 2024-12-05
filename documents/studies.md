@@ -46,10 +46,7 @@ cocore-pro-alpha
     - CoCore の稼働 Scheme (Plugin | Theme)
     - PHP ver.
     - ...
-
-```
-this line is just for testing purpose
-```
+- ~~_Consulat_~~ renamed **_Consul_** and moved from _Awp_ to **_Myt_** (0.12.2)
 
 > [!NOTE]
 > `enqueue` の `deps` については、直系の Brand-Product 間のみ設定する。 

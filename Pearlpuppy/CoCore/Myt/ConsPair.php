@@ -1,13 +1,10 @@
 <?php
-namespace Pearlpuppy\CoCore\Awp;
-
-use Pearlpuppy\CoCore\Myt;
-use Pearlpuppy\CoCore\Myt\Lime;
+namespace Pearlpuppy\CoCore\Myt;
 
 /**
  *
  */
-class ConsPair extends Myt\DlPair {
+class ConsPair extends DlPair {
 
     // Properties
  

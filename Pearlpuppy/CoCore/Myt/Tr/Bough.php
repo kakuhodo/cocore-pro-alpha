@@ -1,6 +1,8 @@
 <?php
 namespace Pearlpuppy\CoCore\Myt;
 
+use Pearlpuppy\CoCore\Star;
+
 /**
  *  @file   Bough
  *  @since  ver. 0.1.0 (edit. Sovereign 117)
@@ -101,6 +103,15 @@ trait Tr_Bough {
     {
         $names = explode("\\", $namespace);
         return self::sliceArrayCombine(self::$name_sectors, $names);
+    }
+
+    /**
+     *  @since  ver. 0.12.2 (edit. Pierre)
+     */
+    public static function starGaze(bool $nice = true)
+    {
+        $star = Star::getInstance();
+        return $star->gaze($nice);
     }
 
     /**

@@ -8,7 +8,7 @@ namespace Pearlpuppy\CoCore\Awp;
 /**
  *  @since  ver. 0.11.0 (edit. Pierre)
  */
-final class Filter extends Abs_Hook
+class Filter extends Abs_Hook
 {
 
 	// Mixins
@@ -43,8 +43,9 @@ final class Filter extends Abs_Hook
     public function hook()
     {
         foreach ($this->callees as $method) {
-            call_user_func($this->funk, $this->hook_name, [$this->roller, $method]);
-        }
+#            call_user_func($this->funk, $this->hook_name, [$this->roller, $method]);
+            call_user_func($this->funk, $this->hook_name, [__NAMESPACE__ . '\Trolley', $method]);
+       }
     }
 
     /**

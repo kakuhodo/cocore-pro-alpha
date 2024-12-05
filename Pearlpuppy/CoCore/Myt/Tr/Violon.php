@@ -74,13 +74,14 @@ trait Tr_Violon {
     }
 
     /**
-     *    Refines a kebab-case to StudlyCaps.
+     *    Refines a kebab-case to PascalCase.
+     *  @update ver. 0.12.3 (edit. Pierre)
      */
-    public static function keb2stud($string) {
+    public static function keb2pasc($string) {
         $xp = explode('-', $string);
-        $studs = array_map('ucfirst', $xp);
-        $stud = implode('', $studs);
-        return $stud;
+        $pascs = array_map('ucfirst', $xp);
+        $pasc = implode('', $pascs);
+        return $pasc;
     }
 
     /**
@@ -291,13 +292,14 @@ trait Tr_Violon {
     /**
      *  Refines snake_case to StudlyCaps
      *  @since 0.10.0
+     *  @update ver. 0.12.3 (edit. Pierre)
      */
-    public static function snake2Stud(string $snake)
+    public static function snake2Pasc(string $snake)
     {
         $words = explode('_', $snake);
-        $studs = array_map('ucfirst', $words);
-        $stud = implode('', $studs);
-        return $stud;
+        $pascs = array_map('ucfirst', $words);
+        $pasc = implode('', $pascs);
+        return $pasc;
     }
 
     /**

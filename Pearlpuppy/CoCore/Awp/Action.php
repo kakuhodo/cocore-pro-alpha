@@ -8,7 +8,7 @@ namespace Pearlpuppy\CoCore\Awp;
 /**
  *  @since  ver. 0.11.0 (edit. Pierre)
  */
-final class Action extends Abs_Hook
+class Action extends Abs_Hook
 {
 
 	// Mixins
@@ -51,7 +51,8 @@ final class Action extends Abs_Hook
     public function crock(...$args)
     {
         foreach ($this->callees as $method) {
-            call_user_func([$this->roller, $method], ...$args);
+#            call_user_func([$this->roller, $method], ...$args);
+            call_user_func([__NAMESPACE__ . '\Trolley', $method], ...$args);
         }
     }
 

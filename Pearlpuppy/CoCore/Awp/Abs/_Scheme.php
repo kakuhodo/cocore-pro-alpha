@@ -97,68 +97,17 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.5 (edit. Pierre)
-     */
+     *
     abstract protected function inform();
 
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
      *  @update ver. 0.10.5 (edit. Pierre)
-     */
+     *
     protected function configure()
     {
         $dir = dirname($this->product_file);
         $this->awp_settings = Tribune::parseJsonFile("$dir/product.json");
-    }
-
-    /**
-     *  Assigns hooks generator
-     *  @since  ver. 0.11.0 (edit. Pierre)
-     */
-    protected function troop(): void
-    {
-        $this->hooks = $this->genHooks(static::$scheme_filters, static::$scheme_actions);
-    }
-
-    /**
-     *  Provides hooks generator
-     *  @since  ver. 0.11.0 (edit. Pierre)
-     */
-    protected function genHooks($filters, $actions): \Generator
-    {
-        Tribune::frankensteiner($filters, self::$universal_filters, true);
-        Tribune::frankensteiner($actions, self::$universal_actions, true);
-        $hks = array(
-            'Filter' => $filters,
-            'Action' => $actions,
-        );
-        foreach ($hks as $class => $vals) {
-            foreach ($vals as $hook_name => $methods) {
-                yield $this->iHook($class, $hook_name, $methods);
-            }
-        }
-    }
-
-    /**
-     *  @since  ver. 0.11.1 (edit. Pierre)
-     */
-    protected function iHook($class, $hook_name, $methods): Int_Caster
-    {
-        $prio = 10;
-        $hc = __NAMESPACE__ . "\\$class";
-        if (strpos($hook_name, '@') !== false) {
-            $hs = explode('@', $hook_name);
-            $hook_name = $hs[0];
-            $prio = (int) $hs[1];
-        }
-        $aa = Whip::$hook_aas[$hook_name] ?? 1;
-        $hooky = new $hc($this, $hook_name, $methods);
-        if ($prio != 10) {
-            $hooky->prior($prio);
-        }
-        if ($aa != 1) {
-            $hooky->accept($aa);
-        }
-        return $hooky;
     }
 
     /**
@@ -171,7 +120,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
-     */
+     *
     protected function assignProduct(string $file): void
     {
         $this->product_file = $file;
@@ -258,7 +207,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.11.0 (edit. Pierre)
-     */
+     *
     public function roll()
     {
         foreach ($this->hooks as $hook) {
@@ -278,12 +227,12 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.4 (edit. Pierre)
-     */
+     *
     abstract public function productDir(bool $uri = false, ?string $dir = null, ?string $file = null): string;
 
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
-     */
+     *
     public function productPath(): string
     {
         return $this->productDir();
@@ -291,7 +240,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.4 (edit. Pierre)
-     */
+     *
     public function productUri(): string
     {
         return $this->productDir(true);
@@ -300,7 +249,7 @@ abstract class Abs_Scheme implements Int_Tuner
     /**
      *  @since  ver. 0.10.1 (edit. Pierre)
      *  @update ver. 0.10.4 (edit. Pierre)
-     */
+     *
     public function productIncPath(string $file = null): string
     {
         return $this->productDir(false, 'inc', $file);
@@ -308,7 +257,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.6 (edit. Pierre)
-     */
+     *
     public function productImgPath(string $file = null): string
     {
         return $this->productDir(false, 'img', $file);
@@ -316,7 +265,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.4 (edit. Pierre)
-     */
+     *
     public function productAssetUri(string $file = null): string
     {
         return $this->productDir(true, 'asset', $file);
@@ -324,7 +273,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.4 (edit. Pierre)
-     */
+     *
     public function productStyleUri(string $file = null): string
     {
         return $this->productDir(true, 'css', $file);
@@ -333,7 +282,7 @@ abstract class Abs_Scheme implements Int_Tuner
     /**
      *  Pushes data into Consulat stream
      *  @since  ver. 0.10.2 (edit. Pierre)
-     */
+     *
     public function slap(mixed $output, string|int|null $label = null)
     {
         $this->console[$label] = $output;
@@ -341,7 +290,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.10.2 (edit. Pierre)
-     */
+     *
     public function consExpose()
     {
         $this->console->expose();
@@ -412,7 +361,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  @since  ver. 0.11.1 (edit. Pierre)
-     */
+     *
     protected function svgB64Code($svg_file_name)
     {
         $svg = file_get_contents($this->productImgPath($svg_file_name));
@@ -422,7 +371,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  Do test something
-     */
+     *
     public function doDyna($arg = null)
     {
         return $this->screen($arg);
@@ -430,7 +379,7 @@ abstract class Abs_Scheme implements Int_Tuner
 
     /**
      *  Do test something
-     */
+     *
     public static function doStat()
     {
         

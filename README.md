@@ -15,6 +15,7 @@ This edition based on edition Chic of CoCore (ver. 0.9.0).
 ### Versions
 | version | updated | memo |
 |:---:|:---:|---|
+| 0.12.2 | 2024-06-03 | PetitTrianon elemental implements |
 | 0.12.1 | 2024-06-02 |  |
 | 0.12.0 | 2024-05-31 | Indroducing PetitTrianon |
 | 0.11.2 | 2024-05-29 |  |
@@ -69,6 +70,9 @@ _CoCore_ 内部で、WordPress の Theme と Plugin を総称。 _Tuner_ イン�
 
 ### Product
 Scheme自身（主にプラグインを想定）の代名詞。当プラグインなら、cocore-pro-alpha を指す。
+
+### Robe
+_CoCore_ 対応のテーマ。(>= 0.12.3)
 
 ### Project
 Productに設定される案件（ユースケースや企画等）を指す。

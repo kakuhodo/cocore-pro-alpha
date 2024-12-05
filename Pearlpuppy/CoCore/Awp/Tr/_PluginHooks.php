@@ -232,6 +232,14 @@ trait Tr_PluginHooks {
     }
 
     /**
+     *
+     */
+    public function wcbMainPage()
+    {
+        
+    }
+
+    /**
      *  CoCore Entities: custom post type and custom taxonomy
      *  @since  ver. 0.10.6 (edit. Pierre)
      */
@@ -239,14 +247,6 @@ trait Tr_PluginHooks {
     {
         $menu_slug = 'edit-tags.php?taxonomy=cocore_type&post_type=cocore_dummy';
         add_submenu_page('cocore', 'CoCore Types', 'CoCore Type', 'manage_options', $menu_slug);
-    }
-
-    /**
-     *
-     */
-    public function wcbMainPage()
-    {
-        
     }
 
     /**

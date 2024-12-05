@@ -1,18 +1,15 @@
 <?php
-namespace Pearlpuppy\CoCore\Awp;
-
-use Pearlpuppy\CoCore\Myt;
-use Pearlpuppy\CoCore\Myt\Lime;
+namespace Pearlpuppy\CoCore\Myt;
 
 /**
- *  @file    Consulat
+ *  @file    Consul
  *
  */
 
 /**
  *
  */
-class Consulat extends Myt\Convertor
+class Consul extends Convertor
 {
 
     // Mixins
